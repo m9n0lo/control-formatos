@@ -89,25 +89,97 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Razon Social -->
                         <div class="form-floating">
-                            <input type="text" name="nombre_equipo" id="nombre_equipo" class="form-control" required />
-                            <label for="floatingInput">Nombre Equipo</label>
+                            <input type="text" name="razon_social" id="razon_social" class="form-control" required />
+                            <label for="floatingInput">Razon Social</label>
                         </div>
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Correo Contacto-->
                         <div class="form-floating">
-                            <input type="text" name="nombre_equipo" id="nombre_equipo" class="form-control" required />
-                            <label for="floatingInput">Nombre Equipo</label>
+                            <input type="text" name="correo_contacto" id="correo_contacto" class="form-control"
+                                required />
+                            <label for="floatingInput">Correo Contacto</label>
                         </div>
                     </div>
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Telefono Contacto -->
                         <div class="form-floating">
-                            <input type="text" name="nombre_equipo" id="nombre_equipo" class="form-control" required />
-                            <label for="floatingInput">Nombre Equipo</label>
+                            <input type="text" name="telefono_contacto" id="telefono_contacto" class="form-control"
+                                required />
+                            <label for="floatingInput">Telefono Contacto </label>
                         </div>
                     </div>
+
+                </div>
+            </div>
+
+            <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
+                <div class="card-title">
+                    <div class="row title"><span>Servicios</span></div>
+                </div>
+                <br>
+                <div class="d-flex justify-content-end">
+                    <a type="submit" type="button" class="btn btn-success" style="margin-bottom: 3px">
+                        <i class="fa-thin fa-plus"></i>
+                        <span class="nav-text">
+                            Agregar
+                        </span>
+                    </a>
+                </div>
+
+                <table id="tabla" class="table table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+
+                            <th >Descripcion</th>
+                            <th >Centro Costo</th>
+                            <th >Area</th>
+                            <th >Cantidad</th>
+                            <th >U.M.</th>
+                            <th >Observacion</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> prueba 1</td>
+                            <td> prueba 1</td>
+                            <td> prueba 1</td>
+                            <td> prueba 1</td>
+                            <td> prueba 1</td>
+                            <td> prueba 1</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+                <div class="row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
+                        <!-- Detalle Solicitud -->
+                        <div class="form-floating">
+                            <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"
+                                required />
+                            <label for="floatingInput">Detalle Solicitud</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
+                        <!-- Costo Estimado Total -->
+                        <div class="form-floating">
+                            <input type="text" name="costo_estimado" id="costo_estimado" class="form-control"
+                                required />
+                            <label for="floatingInput">Costo Estimado Total</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer d-flex justify-content-end" style="margin-top: 10px">
+                    <a type="submit" type="button" class="btn btn-success" style="margin-bottom: 3px">
+                        <i class="fa-thin fa-plus"> </i>
+                        <span class="nav-text">
+                            Solicitar RQS
+                        </span>
+                    </a>
 
                 </div>
             </div>

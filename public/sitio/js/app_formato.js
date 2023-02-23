@@ -3,7 +3,7 @@ const item=[];
 jQuery(document).ready(function ($) {
     $("#persona_id").select2({
         closeOnSelect: true,
-      
+
     })
 });
 
@@ -79,18 +79,19 @@ $(document).ready(function () {
                 render: function (data, type, full, meta) {
                     item[data.id] = data;
                     return (
-                        
+
                         "<button type='submit' id='" +
                         data.id +
                         "' class='form btn btn-primary btn-xs edit ' name='Edit'  > <i class='fa-regular fa-pen-to-square'></i></button>"
+
                     );
-                    
+
                 },
             },
         ],
         orderCol: 1,
         orderType: "asc",
-       
+
     });
 });
 
@@ -117,7 +118,7 @@ $(document).on("click", ".edit", function (event) {
         },
         dataType: "json",
         success: function (data) {
-            
+
             $("#nombre_equipo_m").val(data.result.nombre_equipo);
             $("#fecha_mant_est_m").val(data.result.fecha_mant_est);
             $("#fecha_retiro_m").val(data.result.fecha_retiro);
