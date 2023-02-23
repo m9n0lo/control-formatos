@@ -1,4 +1,4 @@
-{{-- <!doctype html>
+<!doctype html>
 <html lang="en">
   @include('layouts.includes.header')
 <body class="text-center">
@@ -11,4 +11,4 @@
     
 
 </body>
-</html> --}}
+</html> 

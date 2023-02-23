@@ -34,7 +34,7 @@
 
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('sitio/contextmenu/dist/jquery.contextMenu.min.css') }}">
-    
+
 
     {{-- Importar Js Datatables --}}
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
@@ -43,9 +43,9 @@
     <script src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
 
-    
 
-    
+
+
 
 
 
