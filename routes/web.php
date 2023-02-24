@@ -50,7 +50,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/Formato', 'FormatoController@index')->name('formato');
         Route::get('/Compras/solicitudRQS', 'ComprasController@solicitudRQS')->name('compras.solicitud');
         Route::get('/Compras/dashboard', 'ComprasController@dashboardRQS')->name('compras.dashboard');
-        
+        Route::get('/Compras/detalle', 'ComprasController@detalleRQS')->name('compras.detalle_rqs');
+
 
         /**
          * Routes Formato

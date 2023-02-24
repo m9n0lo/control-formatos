@@ -12,5 +12,10 @@ class ComprasController extends Controller
     }
     public function dashboardRQS()
     {
+        return view('menu.compras.dashboard');
+    }
+
+    public function detalleRQS(){
+        return view('menu.compras.detalle_rqc');
     }
 }

@@ -20,7 +20,7 @@
 
          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
              <li>
-                 <a  href="{{ route('compras.solicitud') }}">
+                 <a href="{{ route('compras.solicitud') }}">
                      <i class="fa fa-home fa-2x"></i>
                      <span class="nav-text">
                          Solicitud RQS
@@ -30,6 +30,9 @@
              <li>
                  <a class="dropdown-item" href="{{ route('compras.dashboard') }}">Dashboard</a>
              </li>
+             <li>
+                <a class="dropdown-item" href="{{ route('compras.detalle_rqs') }}">Detalle RQS</a>
+            </li>
          </ul>
      </li>
 

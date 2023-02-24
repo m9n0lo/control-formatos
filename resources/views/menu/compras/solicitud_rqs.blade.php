@@ -142,13 +142,14 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         <tr>
-                            <td> prueba 1</td>
-                            <td> prueba 1</td>
-                            <td> prueba 1</td>
-                            <td> prueba 1</td>
-                            <td> prueba 1</td>
-                            <td> prueba 1</td>
+                            <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"/></td>
+                            <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"/></td>
+                            <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"/></td>
+                            <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"/></td>
+                            <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"/></td>
+                            <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"/></td>
                         </tr>
 
                     </tbody>
@@ -173,7 +174,7 @@
                     </div>
                 </div>
 
-                <div class="card-footer d-flex justify-content-end" style="margin-top: 10px">
+                <div class="card-footer bg-transparent  d-flex justify-content-end" style="margin-top: 10px">
                     <a type="submit" type="button" class="btn btn-success" style="margin-bottom: 3px">
                         <i class="fa-thin fa-plus"> </i>
                         <span class="nav-text">
