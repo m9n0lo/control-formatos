@@ -9,7 +9,7 @@
             <thead>
                 <tr>
 
-                    <th >RQS</th>
+                    <th >RQS-1</th>
                     <th >Solicitante</th>
                     <th >Centro Operacion</th>
                     <th >Centro Costo</th>
@@ -24,14 +24,169 @@
             <tbody>
                 <tr>
 
-                    <td > <a href="">RQS</a></td>
+                    <td > <a href="">RQS-2</a></td>
                     <td >Solicitante</td>
                     <td >Centro Operacion</td>
                     <td >Centro Costo</td>
                     <td >Fecha Solicitud</td>
                     <td >Tipo Solicitud</td>
                     <td >Detalle</td>
-                    <td >Estado</td>
+
+                    @if ( 1)
+                        <td style="background-color: green" value="1">Estado</td>
+
+                    @else
+                        <td style="background-color: orange" value="0">Estado</td>
+
+                    @endif
+
+
+
+                </tr>
+                <tr>
+
+                    <td > <a href="">RQS-3</a></td>
+                    <td >Solicitante</td>
+                    <td >Centro Operacion</td>
+                    <td >Centro Costo</td>
+                    <td >Fecha Solicitud</td>
+                    <td >Tipo Solicitud</td>
+                    <td >Detalle</td>
+
+                    @if ( 1)
+                        <td style="background-color: green" value="1">Estado</td>
+
+                    @else
+                        <td style="background-color: orange" value="0">Estado</td>
+
+                    @endif
+
+
+
+                </tr>
+                <tr>
+
+                    <td > <a href="">RQS-4</a></td>
+                    <td >Solicitante</td>
+                    <td >Centro Operacion</td>
+                    <td >Centro Costo</td>
+                    <td >Fecha Solicitud</td>
+                    <td >Tipo Solicitud</td>
+                    <td >Detalle</td>
+
+                    @if ( 1)
+                        <td style="background-color: green" value="1">Estado</td>
+
+                    @else
+                        <td style="background-color: orange" value="0">Estado</td>
+
+                    @endif
+
+
+
+                </tr>
+                <tr>
+
+                    <td > <a href="">RQS-5</a></td>
+                    <td >Solicitante</td>
+                    <td >Centro Operacion</td>
+                    <td >Centro Costo</td>
+                    <td >Fecha Solicitud</td>
+                    <td >Tipo Solicitud</td>
+                    <td >Detalle</td>
+
+                    @if ( 0)
+                        <td style="background-color: green" value="1">Estado</td>
+
+                    @else
+                        <td style="background-color: orange" value="0">Estado</td>
+
+                    @endif
+
+
+
+                </tr>
+                <tr>
+
+                    <td > <a href="">RQS-6</a></td>
+                    <td >Solicitante</td>
+                    <td >Centro Operacion</td>
+                    <td >Centro Costo</td>
+                    <td >Fecha Solicitud</td>
+                    <td >Tipo Solicitud</td>
+                    <td >Detalle</td>
+
+                    @if ( 1)
+                        <td style="background-color: green" value="1">Estado</td>
+
+                    @else
+                        <td style="background-color: orange" value="0">Estado</td>
+
+                    @endif
+
+
+
+                </tr>
+                <tr>
+
+                    <td > <a href="">RQS-7</a></td>
+                    <td >Solicitante</td>
+                    <td >Centro Operacion</td>
+                    <td >Centro Costo</td>
+                    <td >Fecha Solicitud</td>
+                    <td >Tipo Solicitud</td>
+                    <td >Detalle</td>
+
+                    @if ( 1)
+                        <td style="background-color: green" value="1">Estado</td>
+
+                    @else
+                        <td style="background-color: orange" value="0">Estado</td>
+
+                    @endif
+
+
+
+                </tr>
+                <tr>
+
+                    <td > <a href="">RQS-8</a></td>
+                    <td >Solicitante</td>
+                    <td >Centro Operacion</td>
+                    <td >Centro Costo</td>
+                    <td >Fecha Solicitud</td>
+                    <td >Tipo Solicitud</td>
+                    <td >Detalle</td>
+
+                    @if ( 1)
+                        <td style="background-color: green" value="1">Estado</td>
+
+                    @else
+                        <td style="background-color: orange" value="0">Estado</td>
+
+                    @endif
+
+
+
+                </tr>
+                <tr>
+
+                    <td > <a href="">RQS-9</a></td>
+                    <td >Solicitante</td>
+                    <td >Centro Operacion</td>
+                    <td >Centro Costo</td>
+                    <td >Fecha Solicitud</td>
+                    <td >Tipo Solicitud</td>
+                    <td >Detalle</td>
+
+                    @if ( 0)
+                        <td style="background-color: green" value="1">Estado</td>
+
+                    @else
+                        <td style="background-color: orange" value="0">Estado</td>
+
+                    @endif
+
 
 
                 </tr>

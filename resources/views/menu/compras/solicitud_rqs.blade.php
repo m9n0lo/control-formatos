@@ -4,7 +4,7 @@
 
         <div class="card card-spacing">
             <div class="card-title">
-                <div class="row titulo title-background"><span>Solicitud RQS</span></div>
+                <div class="row titulo title-background"><span>REQUERIMIENTO DE CONTRATO DE SERVICIOS</span></div>
             </div>
             <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
                 <div class="card-title">
