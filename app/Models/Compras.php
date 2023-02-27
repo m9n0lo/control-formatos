@@ -15,9 +15,22 @@ class Compras extends Model
         'solicitado_por',
         'fecha_elaboracion',
         'jefe_inmediato',
-        'fecha_entrega',
-        'observaciones',
-        'firma'
+        'fecha_solicitud',
+        'fecha_esperada',
+        'tipo_solicitud',
+        'sede',
+        'razon_social',
+        'correo_electronico',
+        'telefono_contacto',
+        'servicios',
+        'cotizacion1',
+        'cotizacion2',
+        'cotizacion3',
+        'detalle_solicitud',
+        'costo_estimado',
+        'estado_gestion',
+        'estado',
+        'servicios',
     ];
 
     public function personas(){

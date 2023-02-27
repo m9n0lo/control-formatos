@@ -48,7 +48,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          * Routes Sidebar
          */
         Route::get('/Formato', 'FormatoController@index')->name('formato');
-        Route::get('/Compras/solicitudRQS', 'ComprasController@solicitudRQS')->name('compras.solicitud');
+        Route::get('/Compras/solicitudRQS', 'ComprasController@index')->name('compras.solicitud');
         Route::get('/Compras/dashboard', 'ComprasController@dashboardRQS')->name('compras.dashboard');
         Route::get('/Compras/detalle', 'ComprasController@detalleRQS')->name('compras.detalle_rqs');
 
@@ -62,5 +62,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/formato/datatable', 'FormatoController@datatable')->name('formato.data');
         Route::get('/formato/editar/{id}/', 'FormatoController@EditFormat');
         Route::post('/formato/update', 'FormatoController@UpdateFormat')->name('formato.update');
+
+        /*
+        * Routes Compras
+        */
+       Route::post('/Compras/solicitudRQS/insertar', 'ComprasController@solicitudRQS')->name('compras');
+
     });
 });

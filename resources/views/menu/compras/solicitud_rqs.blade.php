@@ -1,5 +1,6 @@
 @extends('home.home')
 @section('content')
+    <script src="{{ asset('sitio/js/app_compras.js') }}"></script>
     <section class="section">
 
         <div class="card card-spacing">
@@ -21,7 +22,8 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Solicitado_por: -->
                         <div class="form-floating">
-                            <input type="text" name="solicitado_por" id="solicitado_por" class="form-control" required />
+                            <input type="text" name="solicitado_por" id="solicitado_por" class="form-control"
+                                value="{{ auth()->user()->name }}" required />
                             <label for="floatingInput">Solicitado Por</label>
                         </div>
                     </div>
@@ -35,10 +37,13 @@
                     </div>
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Jefe_Inmediato -->
-                        <div class="form-floating">
-                            <input type="text" name="jefe_inmediato" id="jefe_inmediato" class="form-control" required />
-                            <label for="floatingInput">Jefe Inmediato</label>
-                        </div>
+                        <select class="js-example-basic-single" class="form-control" name="persona_id" id="persona_id"
+                            required>
+                            <option value="" disabled selected>-- Seleccione ...--</option>
+                            @foreach ($jefe as $jef)
+                                <option value="{{ $jef->id }}">{{ $jef->nombre_funcionario }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Fecha_Solicitud -->
@@ -120,39 +125,34 @@
                 </div>
                 <br>
                 <div class="d-flex justify-content-end">
-                    <a type="submit" type="button" class="btn btn-success" style="margin-bottom: 3px">
-                        <i class="fa-thin fa-plus"></i>
+                    <a type="submit" type="button" id="addRow"class="btn btn-success" style="margin-bottom: 3px">
+                        <i class="fa-sharp fa-solid fa-circle-plus"></i>
                         <span class="nav-text">
                             Agregar
                         </span>
                     </a>
+                    <a type="submit" type="button" id="removeRow"class="btn btn-danger" style="margin-bottom: 3px">
+                        <i class="fa-sharp fa-solid fa-circle-minus"></i>
+                        <span class="nav-text">
+                            Eliminar
+                        </span>
+                    </a>
                 </div>
 
-                <table id="tabla" class="table table-bordered" style="width:100%">
+                <table id="tabla_solicitudRQS" class="table table-bordered" style="width:100%">
                     <thead>
                         <tr>
 
-                            <th >Descripcion</th>
-                            <th >Centro Costo</th>
-                            <th >Area</th>
-                            <th >Cantidad</th>
-                            <th >U.M.</th>
-                            <th >Observacion</th>
+                            <th>Descripcion</th>
+                            <th>Centro Costo</th>
+                            <th>Area</th>
+                            <th>Cantidad</th>
+                            <th>U.M.</th>
+                            <th>Observacion</th>
 
                         </tr>
                     </thead>
-                    <tbody>
 
-                        <tr>
-                            <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"/></td>
-                            <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"/></td>
-                            <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"/></td>
-                            <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"/></td>
-                            <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"/></td>
-                            <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"/></td>
-                        </tr>
-
-                    </tbody>
 
                 </table>
                 <div class="row">
@@ -174,9 +174,40 @@
                     </div>
                 </div>
 
+
+            </div>
+            <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
+                <div class="card-title">
+                    <div class="row title"><span>Cotizaciones</span></div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4  mt-3">
+                        <!-- Detalle Solicitud -->
+                        <div class="form-floating">
+                            <input type="text" name="cotizacion1" id="cotizacion1" class="form-control" required />
+                            <label for="floatingInput">Cotizacion 1</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
+                        <!-- Costo Estimado Total -->
+                        <div class="form-floating">
+                            <input type="text" name="cotizacion1" id="cotizacion2" class="form-control" required />
+                            <label for="floatingInput">Cotizacion 2</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
+                        <!-- Costo Estimado Total -->
+                        <div class="form-floating">
+                            <input type="text" name="cotizacion1" id="cotizacion3" class="form-control" required />
+                            <label for="floatingInput">Cotizacion 3</label>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card-footer bg-transparent  d-flex justify-content-end" style="margin-top: 10px">
                     <a type="submit" type="button" class="btn btn-success" style="margin-bottom: 3px">
-                        <i class="fa-thin fa-plus"> </i>
+                        <i class="fa-sharp fa-solid fa-circle-plus"></i>
                         <span class="nav-text">
                             Solicitar RQS
                         </span>
@@ -184,6 +215,7 @@
 
                 </div>
             </div>
+
         </div>
 
     </section>

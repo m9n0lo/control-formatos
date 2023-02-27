@@ -12,8 +12,9 @@ class Persona extends Model
     protected $fillable = [
         'empresa',
         'nombre_funcionario',
+        'cargo',
         'area',
-        
+
     ];
 
     public function formato(){
