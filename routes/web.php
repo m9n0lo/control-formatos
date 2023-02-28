@@ -66,7 +66,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         /*
         * Routes Compras
         */
-       Route::post('/Compras/solicitudRQS/insertar', 'ComprasController@solicitudRQS')->name('compras');
+       Route::post('/Compras/solicitudRQS/insertar', 'ComprasController@solicitudRQS')->name('compras.solicitarrqs');
 
     });
 });
