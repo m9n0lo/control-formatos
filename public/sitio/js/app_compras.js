@@ -1,10 +1,13 @@
 $(document).ready(function () {
     var t = $("#tabla_solicitudRQS").DataTable({
         responsive: true,
-        scrollX: false,
+        scrollY: "250px",
+        scrollCollapse: true,
+        paging: false,
         autoWidth: false,
-
-
+        ordering: false,
+        info: false,
+        search: false,
     });
 
     /* var informacionCampo = t
@@ -35,8 +38,58 @@ $(document).ready(function () {
     });
     $("#removeRow").click();
 
-   /*  $("#addRQS").on("click", function () {
+    /*  $("#addRQS").on("click", function () {
         console.log(informacionCampo);
     }); */
     $("#addRQS").click();
+});
+
+$(document).ready(function () {
+    startDataTable({
+        idTable: "tabla_dashboard",
+        dataSource: dataformato,
+        responsive: true,
+        scrollX: false,
+        autoWidth: false,
+
+        columns: [
+            { data: "id" },
+            { data: "users.name" },
+            { data: "sede" },
+            { data: "area" },
+            { data: "fecha_solicitud" },
+            { data: "tipo_solicitud" },
+            { data: "detalle_solicitud" },
+            {
+                data: "estado",
+                render: function (estado) {
+                    if (estado == 1) {
+                        return "<td style='background-color: green' value='1'>Aprobado</td>";
+                    } else {
+                        return "<td style='background-color: green' value='1'>Pendiente</td>";
+                    }
+                },
+            },
+            {
+                data: "estado_gestion",
+                render: function (estado_gestion) {
+                    if (estado_gestion == 1) {
+                        return "<td style='background-color: green' value='1'>Aprobado</td>";
+                    } else {
+                        return "<td style='background-color: green' value='1'>Pendiente</td>";
+                    }
+                },
+            },
+            {
+                data: "estado_gestion",
+                render: function (estado_gestion) {
+                    if (estado_gestion == 1) {
+                        return "<td style='background-color: green' value='1'>Aprobado</td>";
+                    } else {
+                        return "<td style='background-color: green' value='1'>Pendiente</td>";
+                    }
+                },
+            },
+        ],
+    });
 });

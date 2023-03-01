@@ -8,7 +8,7 @@
 {{-- Importacion de archivos JS --}}
 <script src="{{ asset('sitio/js/globa.js') }}"></script>
 <script src="{{ asset('sitio/js/app.js') }}"></script>
-{{-- <script src="{{ asset('sitio/js/app_firma.js') }}"></script> --}}
+<script src="{{ asset('sitio/js/app_firma.js') }}"></script>
 <script src="{{ asset('sitio/js/app_formato.js') }}"></script>
 
 

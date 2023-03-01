@@ -11,7 +11,6 @@ class Compras extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'area',
-        'users_id',
         'solicitado_por',
         'fecha_elaboracion',
         'jefe_inmediato',
@@ -38,6 +37,6 @@ class Compras extends Model
       }
 
       public function users(){
-        return $this->belongsTo(User::class,'users_id');
+        return $this->belongsTo(User::class,'solicitado_por');
       }
 }

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\ComprasController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,7 +51,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/Compras/dashboard', 'ComprasController@dashboardRQS')->name('compras.dashboard');
         Route::get('/Compras/detalle', 'ComprasController@detalleRQS')->name('compras.detalle_rqs');
 
-
         /**
          * Routes Formato
          */
@@ -64,9 +62,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/formato/update', 'FormatoController@UpdateFormat')->name('formato.update');
 
         /*
-        * Routes Compras
-        */
-       Route::post('/Compras/solicitudRQS/insertar', 'ComprasController@solicitudRQS')->name('compras.solicitarrqs');
+         * Routes Compras
+         */
+        Route::post('/Compras/solicitudRQS/insertar', 'ComprasController@solicitudRQS')->name('compras.solicitarrqs');
+        Route::get('/Compras/dashboard/datatable', 'ComprasController@datatable')->name('compras.data');
 
     });
 });

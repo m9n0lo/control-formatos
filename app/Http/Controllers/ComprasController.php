@@ -49,22 +49,14 @@ class ComprasController extends Controller
                 'observacion_servicio' => $observacion_servicio[$i]
             ];
         }
-        $datosjson=json_encode($datos);
-        print_r ($datosjson);
-        $datosjson=json_decode($datosjson);
-        var_dump ($datosjson);
 
-        foreach ($datosjson as $key => $value) {
-            var_dump ($value["centro_servicio"]);
-        }
 
 
         $user_id = auth()->id();
 
         Compras::insert([
             'area' => $request->area,
-            'users_id' => $user_id,
-            'solicitado_por' => 1,
+            'solicitado_por' => $user_id,
             'fecha_elaboracion' => date('Y-m-d H:i:s', strtotime($request->fecha_elaboracion)),
             'jefe_inmediato' => $request->persona_id,
             'fecha_solicitud' => date('Y-m-d H:i:s', strtotime($request->fecha_solicitud)),
@@ -93,15 +85,33 @@ class ComprasController extends Controller
         }if ($request->hasFile('cotizacion3')) {
             $file3->move(public_path() . '/sitio/imagenes/cotizaciones/', $cotizacion3);
         }
-        return "";
-        /* return redirect()
+
+        return redirect()
             ->route('compras.solicitud')
-            ->with('mensaje', '¡Formato agregado correctamente!'); */
+            ->with('mensaje', '¡Formato agregado correctamente!');
     }
+
+    // Funcion que trae los datos de la compras de forma resumida  y lo muestra en el datatable
+    // SELECT c.id, u.name , AREA, fecha_solicitud, tipo_solicitud, detalle_solicitud, estado , estado_gestion  FROM compras c  JOIN users u ON c.id= u.id;
     public function dashboardRQS()
     {
+
         return view('menu.compras.dashboard');
+
+
+
+
     }
+
+    public function datatable(){
+
+        $data = Compras::with('users')->get();
+
+        return datatables()
+        ->collection($data)
+        ->toJson();
+    }
+
 
     public function detalleRQS()
     {

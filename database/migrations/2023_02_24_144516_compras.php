@@ -16,28 +16,26 @@ return new class extends Migration
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
             $table->string('area')->nullable(); //centro costo
-            $table->unsignedBigInteger('users_id')->nullable(); //persona logeada
-            $table->unsignedBigInteger('solicitado_por')->nullable(); //personal de la empresa
+            $table->unsignedBigInteger('solicitado_por'); //persona logeada//personal de la empresa
             $table->date('fecha_elaboracion')->nullable();
             $table->unsignedBigInteger('jefe_inmediato')->nullable(); //personal de la empresa
             $table->date('fecha_solicitud')->nullable();
-            $table->date('fecha_esperada');
+            $table->date('fecha_esperada')->nullable();
             $table->string('tipo_solicitud')->nullable();
             $table->string('sede')->nullable(); //centro operacion
-            $table->string('razon_social');
-            $table->string('correo_electronico');
-            $table->string('telefono_contacto');
+            $table->string('razon_social')->nullable();
+            $table->string('correo_electronico')->nullable();
+            $table->string('telefono_contacto')->nullable();
             $table->json('servicios')->nullable();
-            $table->string('cotizacion1');
-            $table->string('cotizacion2');
-            $table->string('cotizacion3');
+            $table->string('cotizacion3')->nullable();
+            $table->string('cotizacion2')->nullable();
+            $table->string('cotizacion1')->nullable();
             $table->string('detalle_solicitud')->nullable();
             $table->string('costo_estimado')->nullable();
             $table->string('estado_gestion')->nullable();
             $table->string('estado')->nullable();
             $table->timestamps();
-            $table->foreign('solicitado_por')->references('id')->on('personas');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('solicitado_por')->references('id')->on('users');
             $table->foreign('jefe_inmediato')->references('id')->on('personas');
 
         });
