@@ -263,3 +263,11 @@ nav.main-menu li.active > a,
 .card-spacing {
     padding: 30px;
 }
+
+.td-green{
+    background-color: green;
+}
+
+.td-blue{
+    background-color: blue;
+}

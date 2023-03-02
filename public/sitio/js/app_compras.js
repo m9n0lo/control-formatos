@@ -64,9 +64,9 @@ $(document).ready(function () {
                 data: "estado",
                 render: function (estado) {
                     if (estado == 1) {
-                        return "<td style='background-color: green' value='1'>Aprobado</td>";
+                        return "<td class='td-green'>Aprobado</td>";
                     } else {
-                        return "<td style='background-color: green' value='1'>Pendiente</td>";
+                        return "<td class='td-blue'>Pendiente</td>";
                     }
                 },
             },
