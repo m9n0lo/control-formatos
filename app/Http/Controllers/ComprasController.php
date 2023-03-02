@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Persona;
 use App\Models\Compras;
 use DB;
@@ -96,7 +97,10 @@ class ComprasController extends Controller
     public function dashboardRQS()
     {
 
-        return view('menu.compras.dashboard');
+        $us = Auth::user();
+        $nombreus= $us->username;
+
+        return view('menu.compras.dashboard',compact('nombreus'));
 
 
 
@@ -117,4 +121,20 @@ class ComprasController extends Controller
     {
         return view('menu.compras.detalle_rqc');
     }
+
+    public function edit_estado_RQS($id){
+
+        if (request()->ajax()) {
+            $data = Compras::find($id);
+
+            return response()->json(['result' => $data]);
+        }
+    }
+
+    public function update_estado_RQS(Request $request)
+    {
+        $estado = 'estado' =>
+
+    }
+
 }

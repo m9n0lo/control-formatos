@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     var t = $("#tabla_solicitudRQS").DataTable({
         responsive: true,
@@ -81,15 +82,25 @@ $(document).ready(function () {
                 },
             },
             {
-                data: "estado_gestion",
-                render: function (estado_gestion) {
-                    if (estado_gestion == 1) {
-                        return "<td style='background-color: green' value='1'>Aprobado</td>";
+                data: null,
+                name: "action",
+                render: function (data, type, full, meta) {
+
+                    if (us == "m9n0lo" || us == "ramiro.rojas") {
+                        return (
+                            "<button type='submit' id='" +
+                            data.id +
+                            "' class='form btn btn-success btn-xs edit ' name='aprobar_rqs_d'> <i class='fa-solid fa-thumbs-up'></i></button>"
+                        );
                     } else {
-                        return "<td style='background-color: green' value='1'>Pendiente</td>";
+                        return (
+                            "<button type='submit' class='form btn btn-secondary btn-xs edit ' disabled> <i class='fa-solid fa-thumbs-up'></i></button>"
+                        );;
                     }
                 },
             },
         ],
     });
 });
+
+
