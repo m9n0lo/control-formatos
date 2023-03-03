@@ -133,8 +133,13 @@ class ComprasController extends Controller
 
     public function update_estado_RQS(Request $request)
     {
-        $estado = 'estado' =>
+        $esta = [
+            'estado' => 1,
+        ];
 
+        Compras::whereId($request->hidden_id)->update($esta);
+
+        return view('menu.compras.dashboard');
     }
 
 }

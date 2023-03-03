@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     var t = $("#tabla_solicitudRQS").DataTable({
         responsive: true,
@@ -85,22 +84,22 @@ $(document).ready(function () {
                 data: null,
                 name: "action",
                 render: function (data, type, full, meta) {
-
                     if (us == "m9n0lo" || us == "ramiro.rojas") {
                         return (
                             "<button type='submit' id='" +
                             data.id +
-                            "' class='form btn btn-success btn-xs edit ' name='aprobar_rqs_d'> <i class='fa-solid fa-thumbs-up'></i></button>"
+                            "' class='form btn btn-primary btn-xs aprobar_rqs_d ' ><i class='fa-solid fa-eye'></i></button>"
                         );
                     } else {
-                        return (
-                            "<button type='submit' class='form btn btn-secondary btn-xs edit ' disabled> <i class='fa-solid fa-thumbs-up'></i></button>"
-                        );;
+                        return "<button type='submit' class='form btn btn-primary btn-xs edit ' disabled><i class='fa-solid fa-eye'></i></button>";
                     }
                 },
             },
         ],
     });
 });
+
+
+
 
 

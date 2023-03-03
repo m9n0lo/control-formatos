@@ -66,6 +66,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          */
         Route::post('/Compras/solicitudRQS/insertar', 'ComprasController@solicitudRQS')->name('compras.solicitarrqs');
         Route::get('/Compras/dashboard/datatable', 'ComprasController@datatable')->name('compras.data');
+        Route::get('/Compras/dashboard/editar/{id}/', 'ComprasController@edit_estado_RQS');
+        Route::post('/Compras/dashboard/update', 'ComprasController@update_estado_RQS')->name('compras.update');
 
     });
 });

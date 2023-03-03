@@ -31,8 +31,8 @@ class FormatoController extends Controller
         $users = Usuario::select('area', 'nombre_funcionario')
             ->groupBy('area', 'nombre_funcionario')
             ->get();
-        
-      
+
+
     } */
 
     // funcion que insertar los datos obtenidos en los campos a la BD.
@@ -76,7 +76,7 @@ class FormatoController extends Controller
             ->collection(Formato::with('personas','users')->get())
             ->toJson();
     }
- 
+
     public function EditFormat($id)
     {
         if (request()->ajax()) {
