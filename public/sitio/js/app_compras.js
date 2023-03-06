@@ -84,22 +84,42 @@ $(document).ready(function () {
                 data: null,
                 name: "action",
                 render: function (data, type, full, meta) {
-                    if (us == "m9n0lo" || us == "ramiro.rojas") {
-                        return (
-                            "<button type='submit' id='" +
-                            data.id +
-                            "' class='form btn btn-primary btn-xs aprobar_rqs_d ' ><i class='fa-solid fa-eye'></i></button>"
-                        );
-                    } else {
-                        return "<button type='submit' class='form btn btn-primary btn-xs edit ' disabled><i class='fa-solid fa-eye'></i></button>";
-                    }
+                    return (
+                        "<button type='submit' id='" +
+                        data.id +
+                        "' class='form btn btn-primary btn-xs view_rqs_d ' ><i class='fa-solid fa-eye'></i></button>"
+                    );
                 },
             },
         ],
     });
 });
 
+$(document).on("click", ".view_rqs_d", function (event) {
+    event.preventDefault();
+    var id = $(this).atrr("id");
 
+    $.ajax({
+        url: "/Compras/dashboard/editar/" + id + "/",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        dataType: "json",
+        success: function (dataRQS) {
+            $("#area_DRQS").
+            $("#solicitado_por_DRQS").
+            $("#fecha_elaboracion_DRQS").
+            $("#jefe_inmediato_DRQS").
+            $("#fecha_solicitud_DRQS").
+            $("#entrega_esperada_DRQS").
+            $("#tipo_solicitud_DRQS").
+            $("#razon_social_DRQS").
+            $("#correo_contacto_DRQS").
+            $("#telefono_contacto_DRQS").
+            $("#detalle_solicitud_DRQS").
+            $("#costo_estimado_DRQS").
+            $("#costo_estimado_DRQS").
 
-
-
+        },
+    });
+});

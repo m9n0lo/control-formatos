@@ -125,9 +125,10 @@ class ComprasController extends Controller
     public function edit_estado_RQS($id){
 
         if (request()->ajax()) {
-            $data = Compras::find($id);
+            $dataRQS = Compras::find($id);
 
-            return response()->json(['result' => $data]);
+            return view('menu.compras.detalle_rqc')
+            ->response()->json(['result' => $dataRQS]);
         }
     }
 

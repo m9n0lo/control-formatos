@@ -17,14 +17,14 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Area: -->
                         <div class="form-floating">
-                            <input type="text" name="area" id="area" class="form-control" required disabled />
+                            <input type="text" name="area" id="area_DRQS" class="form-control" required disabled />
                             <label for="floatingInput">Area</label>
                         </div>
                     </div>
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Solicitado_por: -->
                         <div class="form-floating">
-                            <input type="text" name="solicitado_por" id="solicitado_por" class="form-control" required
+                            <input type="text" name="solicitado_por" id="solicitado_por_DRQS" class="form-control" required
                                 disabled />
                             <label for="floatingInput">Solicitado Por</label>
                         </div>
@@ -32,7 +32,7 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Fecha_Elaboracion -->
                         <div class="form-floating">
-                            <input type="date" name="fecha_elaboracion" id="fecha_elaboracion" class="form-control"
+                            <input type="date" name="fecha_elaboracion" id="fecha_elaboracion_DRQS" class="form-control"
                                 required value="<?php echo date('Y-m-d'); ?>" disabled />
                             <label for="floatingInput">Fecha Elaboracion</label>
                         </div>
@@ -40,7 +40,7 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Jefe_Inmediato -->
                         <div class="form-floating">
-                            <input type="text" name="jefe_inmediato" id="jefe_inmediato" class="form-control" required
+                            <input type="text" name="jefe_inmediato" id="jefe_inmediato_DRQS" class="form-control" required
                                 disabled />
                             <label for="floatingInput">Jefe Inmediato</label>
                         </div>
@@ -48,7 +48,7 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Fecha_Solicitud -->
                         <div class="form-floating">
-                            <input type="date" name="fecha_solicitud" id="fecha_solicitud" class="form-control" required
+                            <input type="date" name="fecha_solicitud" id="fecha_solicitud_DRQS" class="form-control" required
                                 value="<?php echo date('Y-m-d'); ?>" disabled />
                             <label for="floatingInput">Fecha Solicitud</label>
                         </div>
@@ -62,7 +62,7 @@
                                 $nueva_fecha = $fecha_actual->addDays(8);
 
                             @endphp
-                            <input type="text" name="entrega_esperada" id="entrega_esperada" class="form-control"
+                            <input type="text" name="entrega_esperada" id="entrega_esperada_DRQS" class="form-control"
                                 required value="<?php echo $nueva_fecha->format('d / m / Y'); ?>" disabled />
                             <label for="floatingInput">Fecha Esperada</label>
                         </div>
@@ -70,7 +70,7 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Tipo_Solicitud -->
                         <div class="form-floating">
-                            <input type="text" name="tipo_solicitud" id="tipo_solicitud" class="form-control" required
+                            <input type="text" name="tipo_solicitud" id="tipo_solicitud_DRQS" class="form-control" required
                                 disabled />
                             <label for="floatingInput">Tipo Solicitud</label>
                         </div>
@@ -78,7 +78,7 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Sede -->
                         <div class="form-floating">
-                            <input type="text" name="sede" id="sede" class="form-control" required disabled />
+                            <input type="text" name="sede" id="sede_DRQS" class="form-control" required disabled />
                             <label for="floatingInput">Sede</label>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Razon Social -->
                         <div class="form-floating">
-                            <input type="text" name="razon_social" id="razon_social" class="form-control" required
+                            <input type="text" name="razon_social" id="razon_social_DRQS" class="form-control" required
                                 disabled />
                             <label for="floatingInput">Razon Social</label>
                         </div>
@@ -104,7 +104,7 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Correo Contacto-->
                         <div class="form-floating">
-                            <input type="text" name="correo_contacto" id="correo_contacto" class="form-control" required
+                            <input type="text" name="correo_contacto" id="correo_contacto_DRQS" class="form-control" required
                                 disabled />
                             <label for="floatingInput">Correo Contacto</label>
                         </div>
@@ -112,7 +112,7 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                         <!-- Telefono Contacto -->
                         <div class="form-floating">
-                            <input type="text" name="telefono_contacto" id="telefono_contacto" class="form-control"
+                            <input type="text" name="telefono_contacto" id="telefono_contacto_DRQS" class="form-control"
                                 required disabled />
                             <label for="floatingInput">Telefono Contacto </label>
                         </div>
@@ -172,7 +172,7 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
                         <!-- Detalle Solicitud -->
                         <div class="form-floating">
-                            <input type="text" name="detalle_solicitud" id="detalle_solicitud" class="form-control"
+                            <input type="text" name="detalle_solicitud" id="detalle_solicitud_DRQS" class="form-control"
                                 required disabled />
                             <label for="floatingInput">Detalle Solicitud</label>
                         </div>
@@ -180,12 +180,80 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
                         <!-- Costo Estimado Total -->
                         <div class="form-floating">
-                            <input type="text" name="costo_estimado" id="costo_estimado" class="form-control"
+                            <input type="text" name="costo_estimado" id="costo_estimado_DRQS" class="form-control"
                                 required disabled />
                             <label for="floatingInput">Costo Estimado Total</label>
                         </div>
                     </div>
                 </div>
+                <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
+                    <div class="card-title">
+                        <div class="row title"><span>Cotizaciones</span></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4  mt-3">
+                            <!-- Detalle Solicitud -->
+                            <div class="input-group">
+                                <span class="input-group-text">Firmar a continuación:</span>
+                                <div class="form-control Neon Neon-theme-dragdropbox">
+                                    <div class="Neon-input-dragDrop">
+                                        <input name="cotizacion1" id="filer_input2" class="form-control" type="file"
+                                            accept="image/jpeg,image/png" required>
+
+                                        <div class="Neon-input-inner">
+                                            <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
+                                            <div class="Neon-input-text">
+                                                <h3>Seleccione la firma</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
+                            <!-- Costo Estimado Total -->
+                            <div class="input-group">
+                                <span class="input-group-text">Firmar a continuación:</span>
+                                <div class="form-control Neon Neon-theme-dragdropbox">
+                                    <div class="Neon-input-dragDrop">
+                                        <input name="cotizacion2" id="filer_input2" class="form-control" type="file"
+                                            accept="image/jpeg,image/png" required>
+
+                                        <div class="Neon-input-inner">
+                                            <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
+                                            <div class="Neon-input-text">
+                                                <h3>Seleccione la firma</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
+                            <!-- Costo Estimado Total -->
+                            <div class="input-group">
+                                <span class="input-group-text">Firmar a continuación:</span>
+                                <div class="form-control Neon Neon-theme-dragdropbox">
+                                    <div class="Neon-input-dragDrop">
+                                        <input name="cotizacion3" id="filer_input2" class="form-control" type="file"
+                                            accept="image/jpeg,image/png" required>
+
+                                        <div class="Neon-input-inner">
+                                            <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
+                                            <div class="Neon-input-text">
+                                                <h3>Seleccione la firma</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
 
                 <div class="card-footer bg-transparent  d-flex justify-content-end" style="margin-top: 10px">
                     <a type="submit" type="button" class="btn btn-danger" style="margin-bottom: 3px">
