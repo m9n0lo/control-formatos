@@ -127,8 +127,7 @@ class ComprasController extends Controller
         if (request()->ajax()) {
             $dataRQS = Compras::find($id);
 
-            return view('menu.compras.detalle_rqc')
-            ->response()->json(['result' => $dataRQS]);
+            return response()->json(['result' => $dataRQS]);
         }
     }
 

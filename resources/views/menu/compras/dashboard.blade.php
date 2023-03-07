@@ -2,6 +2,7 @@
 
 @section('content')
     <script src="{{ asset('sitio/js/app_compras.js') }}"></script>
+
     <div class="card card-spacing">
 
         <div>

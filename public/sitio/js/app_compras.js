@@ -97,7 +97,7 @@ $(document).ready(function () {
 
 $(document).on("click", ".view_rqs_d", function (event) {
     event.preventDefault();
-    var id = $(this).atrr("id");
+    var id = 12;
 
     $.ajax({
         url: "/Compras/dashboard/editar/" + id + "/",
@@ -106,20 +106,25 @@ $(document).on("click", ".view_rqs_d", function (event) {
         },
         dataType: "json",
         success: function (dataRQS) {
-            $("#area_DRQS").
-            $("#solicitado_por_DRQS").
-            $("#fecha_elaboracion_DRQS").
-            $("#jefe_inmediato_DRQS").
-            $("#fecha_solicitud_DRQS").
-            $("#entrega_esperada_DRQS").
-            $("#tipo_solicitud_DRQS").
-            $("#razon_social_DRQS").
-            $("#correo_contacto_DRQS").
-            $("#telefono_contacto_DRQS").
-            $("#detalle_solicitud_DRQS").
-            $("#costo_estimado_DRQS").
-            $("#costo_estimado_DRQS").
-
+            $("#area_DRQS").val(dataRQS.result.area);
+            $("#solicitado_por_DRQS").val(dataRQS.result.solicitado_por);
+            $("#fecha_elaboracion_DRQS").val(dataRQS.result.fecha_elaboracion);
+            $("#jefe_inmediato_DRQS").val(dataRQS.result.jefe_inmediato);
+            $("#fecha_solicitud_DRQS").val(dataRQS.result.fecha_solicitud);
+            $("#entrega_esperada_DRQS").val(dataRQS.result.entrega_esperada);
+            $("#tipo_solicitud_DRQS").val(dataRQS.result.tipo_solicitud);
+            $("#razon_social_DRQS").val(dataRQS.result.razon_social);
+            $("#correo_contacto_DRQS").val(dataRQS.result.correo_contacto);
+            $("#telefono_contacto_DRQS").val(dataRQS.result.telefono_contacto);
+            $("#detalle_solicitud_DRQS").val(dataRQS.result.detalle_solicitud);
+            $("#costo_estimado_DRQS").val(dataRQS.result.costo_estimado);
+            $("#cotizacion1_DRQS").val(dataRQS.result.cotizacion1);
+            $("#cotizacion2_DRQS").val(dataRQS.result.cotizacion2);
+            $("#cotizacion3_DRQS").val(dataRQS.result.cotizacion3);
+        },
+        error: function (dataRQS) {
+            var errors = dataRQS.responseJSON;
+            console.log(errors);
         },
     });
 });

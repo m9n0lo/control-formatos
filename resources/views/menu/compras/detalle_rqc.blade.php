@@ -1,5 +1,6 @@
 @extends('home.home')
 @section('content')
+<script src="{{ asset('sitio/js/app_compras.js') }}"></script>
     <section class="section">
 
         <div class="card card-spacing">
@@ -198,7 +199,7 @@
                                 <span class="input-group-text">Firmar a continuación:</span>
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
-                                        <input name="cotizacion1" id="filer_input2" class="form-control" type="file"
+                                        <input name="cotizacion1" id="cotizacion1_DRQS" class="form-control filer_input2" type="file"
                                             accept="image/jpeg,image/png" required>
 
                                         <div class="Neon-input-inner">
@@ -218,7 +219,7 @@
                                 <span class="input-group-text">Firmar a continuación:</span>
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
-                                        <input name="cotizacion2" id="filer_input2" class="form-control" type="file"
+                                        <input name="cotizacion2" id="cotizacion2_DRQS" class="form-control filer_input2" type="file"
                                             accept="image/jpeg,image/png" required>
 
                                         <div class="Neon-input-inner">
@@ -238,7 +239,7 @@
                                 <span class="input-group-text">Firmar a continuación:</span>
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
-                                        <input name="cotizacion3" id="filer_input2" class="form-control" type="file"
+                                        <input name="cotizacion3" id="cotizacion3_DRQS" class="form-control filer_input2" type="file"
                                             accept="image/jpeg,image/png" required>
 
                                         <div class="Neon-input-inner">

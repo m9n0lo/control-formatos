@@ -97,6 +97,13 @@ footer {
     height: flex;
     position: absolute;
 }
+.filer_input2 {
+    z-index: 999;
+    opacity: 0;
+    /* width: auto; */
+    height: flex;
+    position: absolute;
+}
 
 .Neon {
     font-family: sans-serif;
