@@ -88,7 +88,7 @@ class ComprasController extends Controller
         }
 
         return redirect()
-            ->route('compras.solicitud')
+            ->route('compras.dashboard')
             ->with('mensaje', '¡Formato agregado correctamente!');
     }
 
@@ -126,6 +126,7 @@ class ComprasController extends Controller
 
         if (request()->ajax()) {
             $dataRQS = Compras::find($id);
+
 
             return response()->json(['result' => $dataRQS]);
         }
