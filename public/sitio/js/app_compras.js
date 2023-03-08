@@ -102,13 +102,13 @@ $(document).on("click", ".view_rqs_d", function (event) {
 
     $.ajax({
         url: "/Compras/dashboard/editar/" + id + "/",
-        headers: {
+       /*  headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
+        }, */
         dataType: "json",
         success: function (dataRQS) {
 
-            $("#area_DRQS").val(dataRQS.result.area);
+            $('#area_DRQS').val(dataRQS.result.area);
             $("#solicitado_por_DRQS").val(dataRQS.result.solicitado_por);
             $("#fecha_elaboracion_DRQS").val(dataRQS.result.fecha_elaboracion);
             $("#jefe_inmediato_DRQS").val(dataRQS.result.jefe_inmediato);
@@ -123,7 +123,7 @@ $(document).on("click", ".view_rqs_d", function (event) {
             $("#cotizacion1_DRQS").val(dataRQS.result.cotizacion1);
             $("#cotizacion2_DRQS").val(dataRQS.result.cotizacion2);
             $("#cotizacion3_DRQS").val(dataRQS.result.cotizacion3);
-            window.open('/Compras/detalle?datosRQS=' + encodeURIComponent(JSON.stringify(dataRQS)), '_blank', 'width=500,height=500');
+
             console.log(dataRQS);
         },
         error: function (dataRQS) {
