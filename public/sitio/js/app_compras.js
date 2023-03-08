@@ -82,33 +82,40 @@ $(document).ready(function () {
             },
             {
                 data: null,
-                name: "action",
-                render: function (data, type, full, meta) {
-                    return (
-                        "<button type='submit' id='" +
+                name:"action",
+                render: function (data, type, row) {
+                    return '<button class="btn btn-primary" onclick="redirectToEdit('+data.id+')"><i class="fa-solid fa-eye"></i></button>';
+                       /*  '<a href="' +
+                        route("compras.show", { id: row.id }) +
+                        '" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>' */
+
+                    /* "<button  id='mm" +
                         data.id +
                         "' class='form btn btn-primary btn-xs view_rqs_d ' ><i class='fa-solid fa-eye'></i></button>"
-                    );
-                },
+                        ); */
+                    },
             },
         ],
     });
-});
 
-$(document).on("click", ".view_rqs_d", function (event) {
+});function redirectToEdit(id) {
+    window.location.href ="/Compras/dashboard/detalle/"+id+"/" ;
+}
+
+
+/* $(document).on("click", ".view_rqs_d", function (event) {
     event.preventDefault();
     var id = $(this).attr("id");
     console.log(id);
 
     $.ajax({
         url: "/Compras/dashboard/editar/" + id + "/",
-       /*  headers: {
+         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        }, */
+        },
         dataType: "json",
         success: function (dataRQS) {
-
-            $('#area_DRQS').val(dataRQS.result.area);
+            $("#area_DRQS").val(dataRQS.result.area);
             $("#solicitado_por_DRQS").val(dataRQS.result.solicitado_por);
             $("#fecha_elaboracion_DRQS").val(dataRQS.result.fecha_elaboracion);
             $("#jefe_inmediato_DRQS").val(dataRQS.result.jefe_inmediato);
@@ -132,3 +139,4 @@ $(document).on("click", ".view_rqs_d", function (event) {
         },
     });
 });
+ */

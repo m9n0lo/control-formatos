@@ -21,14 +21,16 @@
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Area: -->
                             <div class="form-floating">
-                                <input type="text" name="area" id="area_DRQS" class="form-control" />
+                                <input type="text" name="area" id="area_DRQS" class="form-control"
+                                    value="{{ $compra->area }}" />
                                 <label for="floatingInput">Area</label>
                             </div>
                         </div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Solicitado_por: -->
                             <div class="form-floating">
-                                <input type="text" name="solicitado_por" id="solicitado_por_DRQS" class="form-control" />
+                                <input type="text" name="solicitado_por" id="solicitado_por_DRQS"
+                                    value="{{ $compra->solicitado_por }}" class="form-control" />
                                 <label for="floatingInput">Solicitado Por</label>
                             </div>
                         </div>
@@ -36,14 +38,15 @@
                             <!-- Fecha_Elaboracion -->
                             <div class="form-floating">
                                 <input type="date" name="fecha_elaboracion" id="fecha_elaboracion_DRQS"
-                                    class="form-control" value="<?php echo date('Y-m-d'); ?>" />
+                                    class="form-control" value="{{ $compra->fecha_elaboracion }}" />
                                 <label for="floatingInput">Fecha Elaboracion</label>
                             </div>
                         </div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Jefe_Inmediato -->
                             <div class="form-floating">
-                                <input type="text" name="jefe_inmediato" id="jefe_inmediato_DRQS" class="form-control" />
+                                <input type="text" name="jefe_inmediato" id="jefe_inmediato_DRQS"
+                                    value="{{ $compraNombre }}" class="form-control" />
                                 <label for="floatingInput">Jefe Inmediato</label>
                             </div>
                         </div>
@@ -51,35 +54,31 @@
                             <!-- Fecha_Solicitud -->
                             <div class="form-floating">
                                 <input type="date" name="fecha_solicitud" id="fecha_solicitud_DRQS" class="form-control"
-                                    value="<?php echo date('Y-m-d'); ?>" />
+                                    value="{{ $compra->fecha_solicitud }}" />
                                 <label for="floatingInput">Fecha Solicitud</label>
                             </div>
                         </div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Entrega_Esperada -->
                             <div class="form-floating">
-                                @php
-                                    $fecha_actual = \Carbon\Carbon::now();
-                                    // sumar 8 días a la fecha actual
-                                    $nueva_fecha = $fecha_actual->addDays(8);
-
-                                @endphp
-                                <input type="text" name="entrega_esperada" id="entrega_esperada_DRQS"
-                                    class="form-control" value="<?php echo $nueva_fecha->format('d / m / Y'); ?>" />
+                                <input type="date" name="entrega_esperada" id="entrega_esperada_DRQS"
+                                    class="form-control" value="{{ $compra->fecha_esperada }}" />
                                 <label for="floatingInput">Fecha Esperada</label>
                             </div>
                         </div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Tipo_Solicitud -->
                             <div class="form-floating">
-                                <input type="text" name="tipo_solicitud" id="tipo_solicitud_DRQS" class="form-control" />
+                                <input type="text" name="tipo_solicitud" id="tipo_solicitud_DRQS"
+                                    value="{{ $compra->tipo_solicitud }}" class="form-control" />
                                 <label for="floatingInput">Tipo Solicitud</label>
                             </div>
                         </div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Sede -->
                             <div class="form-floating">
-                                <input type="text" name="sede" id="sede_DRQS" class="form-control" />
+                                <input type="text" name="sede" id="sede_DRQS" value="{{ $compra->sede }}"
+                                    class="form-control" />
                                 <label for="floatingInput">Sede</label>
                             </div>
                         </div>
@@ -96,7 +95,8 @@
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Razon Social -->
                             <div class="form-floating">
-                                <input type="text" name="razon_social" id="razon_social_DRQS" class="form-control" />
+                                <input type="text" name="razon_social" id="razon_social_DRQS"
+                                    value="{{ $compra->razon_social }}" class="form-control" />
                                 <label for="floatingInput">Razon Social</label>
                             </div>
                         </div>
@@ -104,16 +104,16 @@
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Correo Contacto-->
                             <div class="form-floating">
-                                <input type="text" name="correo_contacto" id="correo_contacto_DRQS"
-                                    class="form-control" />
+                                <input type="text" name="correo_contacto" value="{{ $compra->correo_electronico }}"
+                                    id="correo_contacto_DRQS" class="form-control" />
                                 <label for="floatingInput">Correo Contacto</label>
                             </div>
                         </div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Telefono Contacto -->
                             <div class="form-floating">
-                                <input type="text" name="telefono_contacto" id="telefono_contacto_DRQS"
-                                    class="form-control" />
+                                <input type="text" name="telefono_contacto" value="{{ $compra->telefono_contacto }}"
+                                    id="telefono_contacto_DRQS" class="form-control" />
                                 <label for="floatingInput">Telefono Contacto </label>
                             </div>
                         </div>
@@ -173,7 +173,7 @@
                             <!-- Detalle Solicitud -->
                             <div class="form-floating">
                                 <input type="text" name="detalle_solicitud" id="detalle_solicitud_DRQS"
-                                    class="form-control" />
+                                    class="form-control" value="{{ $compra->detalle_solicitud }}" />
                                 <label for="floatingInput">Detalle Solicitud</label>
                             </div>
                         </div>
@@ -181,7 +181,7 @@
                             <!-- Costo Estimado Total -->
                             <div class="form-floating">
                                 <input type="text" name="costo_estimado" id="costo_estimado_DRQS"
-                                    class="form-control" />
+                                    class="form-control" value="{{ $compra->costo_estimado }}" />
                                 <label for="floatingInput">Costo Estimado Total</label>
                             </div>
                         </div>

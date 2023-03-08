@@ -23,14 +23,12 @@ class ComprasController extends Controller
 
     public function solicitudRQS(Request $request)
     {
-
-        $file1 = !empty(request()->file('cotizacion1'))?request()->file('cotizacion1'):"";
-        $cotizacion1 = empty($file1)?$request->cotizacion1:$file1->getClientOriginalName();
-        $file2 = !empty(request()->file('cotizacion2'))?request()->file('cotizacion2'):"";
-        $cotizacion2 = empty($file2)?$request->cotizacion2:$file2->getClientOriginalName();
-        $file3 = !empty(request()->file('cotizacion3'))?request()->file('cotizacion3'):"";
-        $cotizacion3 = empty($file3)?$request->cotizacion3:$file3->getClientOriginalName();
-
+        $file1 = !empty(request()->file('cotizacion1')) ? request()->file('cotizacion1') : '';
+        $cotizacion1 = empty($file1) ? $request->cotizacion1 : $file1->getClientOriginalName();
+        $file2 = !empty(request()->file('cotizacion2')) ? request()->file('cotizacion2') : '';
+        $cotizacion2 = empty($file2) ? $request->cotizacion2 : $file2->getClientOriginalName();
+        $file3 = !empty(request()->file('cotizacion3')) ? request()->file('cotizacion3') : '';
+        $cotizacion3 = empty($file3) ? $request->cotizacion3 : $file3->getClientOriginalName();
 
         $descripcion_servicio = $request->input('descripcion_servicio');
         $centro_servicio = $request->input('centro_servicio');
@@ -41,17 +39,15 @@ class ComprasController extends Controller
 
         $datos = [];
         for ($i = 0; $i < count($descripcion_servicio); $i++) {
-            $datos [] = [
+            $datos[] = [
                 'descripcion_servicio' => $descripcion_servicio[$i],
-                'centro_servicio' =>   $centro_servicio[$i],
+                'centro_servicio' => $centro_servicio[$i],
                 'area_servicio' => $area_servicio[$i],
                 'cantidad_servicio' => $cantidad_servicio[$i],
                 'um_servicio' => $um_servicio[$i],
-                'observacion_servicio' => $observacion_servicio[$i]
+                'observacion_servicio' => $observacion_servicio[$i],
             ];
         }
-
-
 
         $user_id = auth()->id();
 
@@ -81,9 +77,11 @@ class ComprasController extends Controller
 
         if ($request->hasFile('cotizacion1')) {
             $file1->move(public_path() . '/sitio/imagenes/cotizaciones/', $cotizacion1);
-        }if ($request->hasFile('cotizacion2')) {
+        }
+        if ($request->hasFile('cotizacion2')) {
             $file2->move(public_path() . '/sitio/imagenes/cotizaciones/', $cotizacion2);
-        }if ($request->hasFile('cotizacion3')) {
+        }
+        if ($request->hasFile('cotizacion3')) {
             $file3->move(public_path() . '/sitio/imagenes/cotizaciones/', $cotizacion3);
         }
 
@@ -96,37 +94,30 @@ class ComprasController extends Controller
     // SELECT c.id, u.name , AREA, fecha_solicitud, tipo_solicitud, detalle_solicitud, estado , estado_gestion  FROM compras c  JOIN users u ON c.id= u.id;
     public function dashboardRQS()
     {
-
         $us = Auth::user();
-        $nombreus= $us->username;
+        $nombreus = $us->username;
 
-        return view('menu.compras.dashboard',compact('nombreus'));
-
-
-
-
+        return view('menu.compras.dashboard', compact('nombreus'));
     }
 
-    public function datatable(){
-
+    public function datatable()
+    {
         $data = Compras::with('users')->get();
 
         return datatables()
-        ->collection($data)
-        ->toJson();
+            ->collection($data)
+            ->toJson();
     }
-
 
     public function detalleRQS()
     {
         return view('menu.compras.detalle_rqc');
     }
 
-    public function edit_estado_RQS($id){
-
+    public function edit_estado_RQS($id)
+    {
         if (request()->ajax()) {
             $dataRQS = Compras::find($id);
-
 
             return response()->json(['result' => $dataRQS]);
         }
@@ -143,4 +134,14 @@ class ComprasController extends Controller
         return view('menu.compras.dashboard');
     }
 
+    public function show($id)
+    {
+
+
+        $compra = Compras::with('personas:id,nombre_funcionario')->find($id);
+        $compraNombre = $compra->personas->nombre_funcionario;
+        //dd($compra);
+
+        return view('menu.compras.detalle_rqc', compact('compra','compraNombre'));
+    }
 }

@@ -33,7 +33,7 @@ class Compras extends Model
     ];
 
     public function personas(){
-        return $this->belongsTo(Persona::class,'persona_id');
+        return $this->belongsTo(Persona::class,'jefe_inmediato');
       }
 
       public function users(){

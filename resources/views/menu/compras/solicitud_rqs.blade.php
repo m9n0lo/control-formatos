@@ -65,7 +65,7 @@
                                     $nueva_fecha = $fecha_actual->addDays(8);
 
                                 @endphp
-                                <input type="text" name="fecha_esperada" id="fecha_esperada" class="form-control"
+                                <input type="date" name="fecha_esperada" id="fecha_esperada" class="form-control"
                                     required value="<?php echo $nueva_fecha->format('d / m / Y'); ?>" disabled />
                                 <label for="floatingInput">Fecha Esperada</label>
                             </div>

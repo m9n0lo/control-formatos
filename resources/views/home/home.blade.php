@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <html>
 
 <head>
@@ -16,9 +17,9 @@
 
     </div>
     <nav class="main-menu">
-       
+
         @include('layouts.partials.sidebar')
-        
+
     </nav>
 
 
