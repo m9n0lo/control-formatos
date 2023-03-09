@@ -10,7 +10,17 @@
                 </div>
                 <div class="card-title d-flex justify-content-end">
                     <div class="row title  " style="margin-bottom: 5px">
+                        @if ($compra->estado == 1)
                         <h3 style="background-color: yellow">Pendiente</h3>
+                        @elseif ($compra->estado == 2)
+
+                        <h3 style="background-color: green">{{'Aprobado - '. $compraNombreU }}</h3>
+                        @elseif ($compra->estado == 3)
+
+                        <h3 style="background-color: red">{{'Rechazado - '. $compraNombreU }}</h3>
+                        @endif
+
+
                     </div>
                 </div>
                 <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
@@ -30,7 +40,7 @@
                             <!-- Solicitado_por: -->
                             <div class="form-floating">
                                 <input type="text" name="solicitado_por" id="solicitado_por_DRQS"
-                                    value="{{ $compra->solicitado_por }}" class="form-control" />
+                                    value="{{ $compraNombreU }}" class="form-control" />
                                 <label for="floatingInput">Solicitado Por</label>
                             </div>
                         </div>
@@ -46,7 +56,7 @@
                             <!-- Jefe_Inmediato -->
                             <div class="form-floating">
                                 <input type="text" name="jefe_inmediato" id="jefe_inmediato_DRQS"
-                                    value="{{ $compraNombre }}" class="form-control" />
+                                    value="{{ $compraNombreP }}" class="form-control" />
                                 <label for="floatingInput">Jefe Inmediato</label>
                             </div>
                         </div>
@@ -149,19 +159,23 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            @php
+                            $datos = json_decode($datosJson, true);
+                        @endphp
                             <tr>
-                                <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud"
+
+
+                                <td> <input type="text" name="descripcion_servicio" id="detalle_solicitud"
+                                        class="form-control" value="{{ $datos['descripcion_servicio'] }}" /></td>
+                                <td> <input type="text" name="centro_servicio" id="detalle_solicitud"
                                         class="form-control" value="prueba" /></td>
-                                <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud"
+                                <td> <input type="text" name="area_servicio" id="detalle_solicitud"
                                         class="form-control" value="prueba" /></td>
-                                <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud"
+                                <td> <input type="text" name="cantidad_servicio" id="detalle_solicitud"
                                         class="form-control" value="prueba" /></td>
-                                <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud"
+                                <td> <input type="text" name="um_servicio" id="detalle_solicitud"
                                         class="form-control" value="prueba" /></td>
-                                <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud"
-                                        class="form-control" value="prueba" /></td>
-                                <td> <input type="text" name="detalle_solicitud" id="detalle_solicitud"
+                                <td> <input type="text" name="observacion_servicio" id="detalle_solicitud"
                                         class="form-control" value="prueba" /></td>
                             </tr>
 

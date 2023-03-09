@@ -52,21 +52,16 @@
                             <!-- Fecha_Solicitud -->
                             <div class="form-floating">
                                 <input type="date" name="fecha_solicitud" id="fecha_solicitud" class="form-control"
-                                    required value="<?php echo date('Y-m-d'); ?>" disabled />
+                                    required disabled value="<?php echo date('Y-m-d'); ?>"/>
                                 <label for="floatingInput">Fecha Solicitud</label>
                             </div>
                         </div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Entrega_Esperada -->
                             <div class="form-floating">
-                                @php
-                                    $fecha_actual = \Carbon\Carbon::now();
-                                    // sumar 8 días a la fecha actual
-                                    $nueva_fecha = $fecha_actual->addDays(8);
 
-                                @endphp
                                 <input type="date" name="fecha_esperada" id="fecha_esperada" class="form-control"
-                                    required value="<?php echo $nueva_fecha->format('d / m / Y'); ?>" disabled />
+                                    required />
                                 <label for="floatingInput">Fecha Esperada</label>
                             </div>
                         </div>
@@ -195,7 +190,7 @@
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
                                         <input name="cotizacion1" id="filer_input2" class="form-control" type="file"
-                                            accept="image/jpeg,image/png" required>
+                                            accept="image/jpeg,image/png" >
 
                                         <div class="Neon-input-inner">
                                             <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
@@ -215,7 +210,7 @@
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
                                         <input name="cotizacion2" id="filer_input2" class="form-control" type="file"
-                                            accept="image/jpeg,image/png" required>
+                                            accept="image/jpeg,image/png" >
 
                                         <div class="Neon-input-inner">
                                             <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
@@ -235,7 +230,7 @@
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
                                         <input name="cotizacion3" id="filer_input2" class="form-control" type="file"
-                                            accept="image/jpeg,image/png" required>
+                                            accept="image/jpeg,image/png" >
 
                                         <div class="Neon-input-inner">
                                             <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>

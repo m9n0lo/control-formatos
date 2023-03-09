@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Persona;
 use App\Models\Compras;
 use DB;
+use Carbon\Carbon;
 
 class ComprasController extends Controller
 {
@@ -50,13 +51,13 @@ class ComprasController extends Controller
         }
 
         $user_id = auth()->id();
-
+        $logDate = Carbon::now();
         Compras::insert([
             'area' => $request->area,
             'solicitado_por' => $user_id,
-            'fecha_elaboracion' => date('Y-m-d H:i:s', strtotime($request->fecha_elaboracion)),
+            'fecha_elaboracion' => $logDate->format('Y-m-d H:i:s'),
             'jefe_inmediato' => $request->persona_id,
-            'fecha_solicitud' => date('Y-m-d H:i:s', strtotime($request->fecha_solicitud)),
+            'fecha_solicitud' => $logDate->format('Y-m-d H:i:s'),
             'fecha_esperada' => date('Y-m-d H:i:s', strtotime($request->fecha_esperada)),
             'tipo_solicitud' => $request->tipo_solicitud,
             'sede' => $request->sede,
@@ -138,10 +139,12 @@ class ComprasController extends Controller
     {
 
 
-        $compra = Compras::with('personas:id,nombre_funcionario')->find($id);
-        $compraNombre = $compra->personas->nombre_funcionario;
+        $compra = Compras::with('personas:id,nombre_funcionario','users:id,name')->find($id);
+        $compraNombreP = $compra->personas->nombre_funcionario;
+        $compraNombreU = $compra->users->name;
+        $datosJson = $compra->servicios;
         //dd($compra);
 
-        return view('menu.compras.detalle_rqc', compact('compra','compraNombre'));
+        return view('menu.compras.detalle_rqc', compact('compra','compraNombreP','compraNombreU','datosJson'));
     }
 }
