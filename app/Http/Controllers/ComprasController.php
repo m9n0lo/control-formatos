@@ -8,6 +8,7 @@ use App\Models\Persona;
 use App\Models\Compras;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 
 class ComprasController extends Controller
 {
@@ -76,7 +77,7 @@ class ComprasController extends Controller
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        if ($request->hasFile('cotizacion1')) {
+       /*  if ($request->hasFile('cotizacion1')) {
             $file1->move(public_path() . '/sitio/imagenes/cotizaciones/', $cotizacion1);
         }
         if ($request->hasFile('cotizacion2')) {
@@ -84,6 +85,32 @@ class ComprasController extends Controller
         }
         if ($request->hasFile('cotizacion3')) {
             $file3->move(public_path() . '/sitio/imagenes/cotizaciones/', $cotizacion3);
+        } */
+
+        $new_folder_name = $request->razon_social;
+
+        if ($request->hasFile('cotizacion1')) {
+            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0777, true);
+            }
+            $file1->move($directory, $cotizacion1);
+        }
+
+        if ($request->hasFile('cotizacion2')) {
+            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0777, true);
+            }
+            $file2->move($directory, $cotizacion2);
+        }
+
+        if ($request->hasFile('cotizacion3')) {
+            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0777, true);
+            }
+            $file3->move($directory, $cotizacion3);
         }
 
         return redirect()

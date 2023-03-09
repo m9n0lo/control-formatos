@@ -190,7 +190,7 @@
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
                                         <input name="cotizacion1" id="filer_input2" class="form-control" type="file"
-                                            accept="image/jpeg,image/png" >
+                                            accept="image/jpeg,image/png/,.pdf" >
 
                                         <div class="Neon-input-inner">
                                             <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
@@ -210,7 +210,7 @@
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
                                         <input name="cotizacion2" id="filer_input2" class="form-control" type="file"
-                                            accept="image/jpeg,image/png" >
+                                            accept="image/jpeg,image/png/,.pdf" >
 
                                         <div class="Neon-input-inner">
                                             <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
@@ -230,7 +230,7 @@
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
                                         <input name="cotizacion3" id="filer_input2" class="form-control" type="file"
-                                            accept="image/jpeg,image/png" >
+                                            accept="image/jpeg,image/png/,.pdf" >
 
                                         <div class="Neon-input-inner">
                                             <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>

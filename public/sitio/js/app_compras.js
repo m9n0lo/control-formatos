@@ -109,3 +109,18 @@ $(document).ready(function () {
 function redirectToEdit(id) {
     window.location.href = "/Compras/dashboard/detalle/" + id + "/";
 }
+
+function showFile(id){
+    $.ajax({
+        url: "{{ asset('/imagenes/cotizaciones/') }}/"+id,
+        type: "get",
+        dataType: "html",
+        contentType: false,
+        processData: false
+    }).done(function(res){
+        url = JSON.parse(res).response.url
+        window.open('storage/'+url,'_blank');
+    }).fail(function(res){
+        console.log(res)
+    });
+}

@@ -11,13 +11,11 @@
                 <div class="card-title d-flex justify-content-end">
                     <div class="row title  " style="margin-bottom: 5px">
                         @if ($compra->estado == 1)
-                        <h3 style="background-color: yellow">Pendiente</h3>
+                            <h3 style="background-color: yellow">Pendiente</h3>
                         @elseif ($compra->estado == 2)
-
-                        <h3 style="background-color: green">{{'Aprobado - '. $compraNombreU }}</h3>
+                            <h3 style="background-color: green">{{ 'Aprobado - ' . $compraNombreU }}</h3>
                         @elseif ($compra->estado == 3)
-
-                        <h3 style="background-color: red">{{'Rechazado - '. $compraNombreU }}</h3>
+                            <h3 style="background-color: red">{{ 'Rechazado - ' . $compraNombreU }}</h3>
                         @endif
 
 
@@ -160,24 +158,26 @@
                         </thead>
                         <tbody>
                             @php
-                            $datos = json_decode($datosJson, true);
-                        @endphp
-                            <tr>
+                                $datos = json_decode($datosJson, true);
+                            @endphp
 
+                            @foreach ($datos as $servicio)
+                                <tr>
 
-                                <td> <input type="text" name="descripcion_servicio" id="detalle_solicitud"
-                                        class="form-control" value="{{ $datos['descripcion_servicio'] }}" /></td>
-                                <td> <input type="text" name="centro_servicio" id="detalle_solicitud"
-                                        class="form-control" value="prueba" /></td>
-                                <td> <input type="text" name="area_servicio" id="detalle_solicitud"
-                                        class="form-control" value="prueba" /></td>
-                                <td> <input type="text" name="cantidad_servicio" id="detalle_solicitud"
-                                        class="form-control" value="prueba" /></td>
-                                <td> <input type="text" name="um_servicio" id="detalle_solicitud"
-                                        class="form-control" value="prueba" /></td>
-                                <td> <input type="text" name="observacion_servicio" id="detalle_solicitud"
-                                        class="form-control" value="prueba" /></td>
-                            </tr>
+                                    <td> <input type="text" name="descripcion_servicio" id="detalle_solicitud"
+                                            class="form-control" value="{{ $servicio['descripcion_servicio'] }}" /></td>
+                                    <td> <input type="text" name="centro_servicio" id="detalle_solicitud"
+                                            class="form-control" value="{{ $servicio['centro_servicio'] }}" /></td>
+                                    <td> <input type="text" name="area_servicio" id="detalle_solicitud"
+                                            class="form-control" value="{{ $servicio['area_servicio'] }}" /></td>
+                                    <td> <input type="text" name="cantidad_servicio" id="detalle_solicitud"
+                                            class="form-control" value="{{ $servicio['cantidad_servicio'] }}" /></td>
+                                    <td> <input type="text" name="um_servicio" id="detalle_solicitud"
+                                            class="form-control" value="{{ $servicio['um_servicio'] }}" /></td>
+                                    <td> <input type="text" name="observacion_servicio" id="detalle_solicitud"
+                                            class="form-control" value="{{ $servicio['observacion_servicio'] }}" /></td>
+                                </tr>
+                            @endforeach
 
                         </tbody>
 
@@ -206,7 +206,13 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4  mt-3">
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
+                            <a  href="{{$compra->cotizacion1}}" onclick="showFile('{{ $compra->id }}') target="_blank" style="color:black; text-decoration:none">
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </a>
+                            </div>
+
+                            {{-- <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4  mt-3">
                                 <!-- Detalle Solicitud -->
                                 <div class="input-group">
                                     <span class="input-group-text">Firmar a continuación:</span>
@@ -226,7 +232,7 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                                 <!-- Costo Estimado Total -->
                                 <div class="input-group">
