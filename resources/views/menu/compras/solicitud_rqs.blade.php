@@ -52,7 +52,7 @@
                             <!-- Fecha_Solicitud -->
                             <div class="form-floating">
                                 <input type="date" name="fecha_solicitud" id="fecha_solicitud" class="form-control"
-                                    required disabled value="<?php echo date('Y-m-d'); ?>"/>
+                                    required disabled value="<?php echo date('Y-m-d'); ?>" />
                                 <label for="floatingInput">Fecha Solicitud</label>
                             </div>
                         </div>
@@ -126,14 +126,14 @@
                     <div class="d-flex justify-content-end">
                         <a type="submit" type="button" id="addRow"class="btn btn-success"
                             style="margin-bottom: 3px">
-                            <i class="fa-sharp fa-solid fa-circle-plus"></i>
+                            <i class="fa-sharp fa-solid fa-circle-plus fa-lg"></i>
                             <span class="nav-text">
                                 Agregar
                             </span>
                         </a>
                         <a type="submit" type="button" id="removeRow"class="btn btn-danger"
                             style="margin-bottom: 3px">
-                            <i class="fa-sharp fa-solid fa-circle-minus"></i>
+                            <i class="fa-sharp fa-solid fa-circle-minus fa-lg"></i>
                             <span class="nav-text">
                                 Eliminar
                             </span>
@@ -190,7 +190,7 @@
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
                                         <input name="cotizacion1" id="filer_input2" class="form-control" type="file"
-                                            accept="image/jpeg,image/png/,.pdf" >
+                                            accept="image/jpeg,image/png/,.pdf">
 
                                         <div class="Neon-input-inner">
                                             <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
@@ -210,7 +210,7 @@
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
                                         <input name="cotizacion2" id="filer_input2" class="form-control" type="file"
-                                            accept="image/jpeg,image/png/,.pdf" >
+                                            accept="image/jpeg,image/png/,.pdf">
 
                                         <div class="Neon-input-inner">
                                             <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
@@ -230,7 +230,7 @@
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
                                         <input name="cotizacion3" id="filer_input2" class="form-control" type="file"
-                                            accept="image/jpeg,image/png/,.pdf" >
+                                            accept="image/jpeg,image/png/,.pdf">
 
                                         <div class="Neon-input-inner">
                                             <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
@@ -254,7 +254,12 @@
                                 Solicitar RQS
                             </span>
                         </a> --}}
-                        <input type="submit" class="btn btn-success" value="Agregar">
+                        <button type="submit" class="btn btn-success" value="Agregar" style="margin-bottom: 3px">
+                            <i class="fa-solid fa-cart-plus fa-lg"></i>
+                            <span class="nav-text">
+                                Agregar RQS
+                            </span>
+                        </button>
 
                     </div>
                 </div>

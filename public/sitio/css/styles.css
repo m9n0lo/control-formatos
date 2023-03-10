@@ -271,3 +271,30 @@ nav.main-menu li.active > a,
 .td-blue{
     background-color: blue;
 }
+
+.buttons_d{
+    margin-left: 3px;
+    margin-right: 3px;
+
+}
+.ssss {
+
+    border-radius: 30px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    padding: 10px 20px;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    right: -10px;
+    bottom: -20px;
+    cursor: pointer;
+    transition: all .25s ease;
+    box-shadow: -5px 6px 20px 0px rgba(26, 26, 26, 0.4);
+  }
+
+ /* .ssss:hover {
+    background-color: #07013d;
+    box-shadow: -5px 6px 20px 0px rgba(88, 88, 88, 0.569);
+  } */

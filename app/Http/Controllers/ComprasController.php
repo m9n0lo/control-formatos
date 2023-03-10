@@ -77,17 +77,9 @@ class ComprasController extends Controller
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-       /*  if ($request->hasFile('cotizacion1')) {
-            $file1->move(public_path() . '/sitio/imagenes/cotizaciones/', $cotizacion1);
-        }
-        if ($request->hasFile('cotizacion2')) {
-            $file2->move(public_path() . '/sitio/imagenes/cotizaciones/', $cotizacion2);
-        }
-        if ($request->hasFile('cotizacion3')) {
-            $file3->move(public_path() . '/sitio/imagenes/cotizaciones/', $cotizacion3);
-        } */
-
-        $new_folder_name = $request->razon_social;
+        $cod_area = $request->area;
+        $date=date('Ymd');
+        $new_folder_name='RQS'.'_'.$cod_area.'_'.$date;
 
         if ($request->hasFile('cotizacion1')) {
             $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
@@ -142,24 +134,32 @@ class ComprasController extends Controller
         return view('menu.compras.detalle_rqc');
     }
 
-    public function edit_estado_RQS($id)
+  /*   public function edit_estado_RQS($id)
     {
         if (request()->ajax()) {
             $dataRQS = Compras::find($id);
 
             return response()->json(['result' => $dataRQS]);
         }
-    }
+    } */
 
-    public function update_estado_RQS(Request $request)
+
+
+    public function estado_RQS($id, Request $request)
     {
-        $esta = [
-            'estado' => 1,
-        ];
 
-        Compras::whereId($request->hidden_id)->update($esta);
+        $compra=Compras::find($id);
+        $action = $request->input('apr_decl_rqs');
 
-        return view('menu.compras.dashboard');
+        if ($action == '3') {
+            $compra->update(['estado'=>'3']);
+        } elseif ($action == '2') {
+            $compra->update(['estado'=>'2']);
+        }
+
+        return redirect()
+            ->route('compras.dashboard');
+
     }
 
     public function show($id)

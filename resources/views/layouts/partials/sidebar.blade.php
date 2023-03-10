@@ -18,8 +18,8 @@
              </span>
          </a>
 
-         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-             <li>
+         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" >
+             <li class="dropdown-item">
                  <a href="{{ route('compras.solicitud') }}">
                      <i class="fa fa-home fa-2x"></i>
                      <span class="nav-text">
@@ -27,12 +27,10 @@
                      </span>
                  </a>
              </li>
-             <li>
+             <li class="dropdown-item">
                  <a class="dropdown-item" href="{{ route('compras.dashboard') }}">Dashboard</a>
              </li>
-             <li>
-                <a class="dropdown-item" href="{{ route('compras.detalle_rqs') }}">Detalle RQS</a>
-            </li>
+
          </ul>
      </li>
 
