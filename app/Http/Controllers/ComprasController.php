@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\UploadedFile;
 use App\Models\Persona;
 use App\Models\Compras;
 use DB;
@@ -25,7 +26,7 @@ class ComprasController extends Controller
 
     public function solicitudRQS(Request $request)
     {
-        $file1 = !empty(request()->file('cotizacion1')) ? request()->file('cotizacion1') : '';
+        $file1 = !empty(request()->file('cotizacion1')->store('public/imagenes')) ? request()->file('cotizacion1') : '';
         $cotizacion1 = empty($file1) ? $request->cotizacion1 : $file1->getClientOriginalName();
         $file2 = !empty(request()->file('cotizacion2')) ? request()->file('cotizacion2') : '';
         $cotizacion2 = empty($file2) ? $request->cotizacion2 : $file2->getClientOriginalName();
@@ -53,6 +54,8 @@ class ComprasController extends Controller
 
         $user_id = auth()->id();
         $logDate = Carbon::now();
+
+
         Compras::insert([
             'area' => $request->area,
             'solicitado_por' => $user_id,
@@ -66,7 +69,7 @@ class ComprasController extends Controller
             'correo_electronico' => $request->correo_contacto,
             'telefono_contacto' => $request->telefono_contacto,
             'servicios' => json_encode($datos),
-            'cotizacion1' => $cotizacion1,
+            'cotizacion1' => ruta = $cotizacion1,
             'cotizacion2' => $cotizacion2,
             'cotizacion3' => $cotizacion3,
             'detalle_solicitud' => $request->detalle_solicitud,

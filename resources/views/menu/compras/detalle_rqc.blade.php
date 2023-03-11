@@ -216,7 +216,7 @@
                 <br>
                 <div class="row">
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
-                        <a href="{{ $compra->cotizacion1 }}" onclick="showFile('{{ $compra->id }}') target="_blank"
+                        <a href="{{ asset($compra->cotizacion1) }}" target="_blank"
                             style="color:black; text-decoration:none">
                             <i class="fa-solid fa-file-pdf"></i>
                         </a>
