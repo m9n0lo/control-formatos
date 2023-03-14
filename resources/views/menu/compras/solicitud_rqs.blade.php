@@ -247,14 +247,8 @@
                     </div>
 
                     <div class="card-footer bg-transparent  d-flex justify-content-end" style="margin-top: 10px">
-                        {{-- <a type="submit" type="button" class="btn btn-success" id="addRQS href="{{ route('compras.solicitarrqs') }}"
-                            style="margin-bottom: 3px">
-                            <i class="fa-sharp fa-solid fa-circle-plus"></i>
-                            <span class="nav-text">
-                                Solicitar RQS
-                            </span>
-                        </a> --}}
-                        <button type="submit" class="btn btn-success" value="Agregar" style="margin-bottom: 3px">
+
+                        <button  class="btn btn-success" id="guardar_RQS" name="guardar_RQS" value="Agregar" style="margin-bottom: 3px">
                             <i class="fa-solid fa-cart-plus fa-lg"></i>
                             <span class="nav-text">
                                 Agregar RQS

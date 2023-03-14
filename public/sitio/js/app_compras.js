@@ -10,10 +10,7 @@ $(document).ready(function () {
         search: false,
     });
 
-    /* var informacionCampo = t
-    .column('descripcion_servicio')
-    .data()
-    .toArray(); */
+
 
     $("#addRow").on("click", function () {
         t.row
@@ -43,71 +40,44 @@ $(document).ready(function () {
     }); */
     $("#addRQS").click();
 });
+/* VALIDACION DE QUE TODOS LOS CAMPOS ESTEN LLENOS Y ARROJA EL MENSAJE DE GUARDADO */
+document.getElementById("guardar_RQS").addEventListener("click", function () {
+    let area = $("#area").val();
+    let solicitado_por = $("#solicitado_por").val();
+    let persona_id = $("#persona_id").val();
+    //let fecha_solicitud = $("#fecha_solicitud").val();
+    let fecha_esperada = $("#fecha_esperada").val();
+    let tipo_solicitud = $("#tipo_solicitud").val();
+    let razon_social = $("#razon_social").val();
+    let correo_contacto = $("#correo_contacto").val();
+    let telefono_contacto = $("#telefono_contacto").val();
+    let detalle_solicitud = $("#detalle_solicitud").val();
+    let costo_estimado = $("#costo_estimado").val();
+   /*  let cotizacion1 = $("#filer_input2").val(); */
 
-$(document).ready(function () {
-    startDataTable({
-        idTable: "tabla_dashboard",
-        dataSource: dataformato,
-        responsive: true,
-        scrollX: false,
-        autoWidth: false,
-
-        columns: [
-            { data: "id" },
-            { data: "users.name" },
-            { data: "sede" },
-            { data: "area" },
-            { data: "fecha_solicitud" },
-            { data: "tipo_solicitud" },
-            { data: "detalle_solicitud" },
-            {
-                data: "estado",
-                render: function (estado) {
-                    if (estado == 1) {
-                        return "<td class='td-blue'>Pendiente</td>";
-                    }
-                    if (estado == 2) {
-                        return "<td class='td-green'>Aprobado</td>";
-                    }
-                    if (estado == 3) {
-                        return "<td class='td-blue'>Rechazado</td>";
-                    }
-                },
-            },
-            {
-                data: "estado_gestion",
-                render: function (estado_gestion) {
-                    if (estado_gestion == 1) {
-                        return "<td style='background-color: green' value='1'>Pendiente</td>";
-                    } else {
-                        return "<td style='background-color: green' value='1'>En Gestion</td>";
-                    }
-                },
-            },
-            {
-                data: null,
-                name: "action",
-                render: function (data, type, row) {
-                    return (
-                        '<button class="btn btn-primary" onclick="redirectToEdit(' +
-                        data.id +
-                        ')"><i class="fa-solid fa-eye"></i></button>'
-                    );
-                    /*  '<a href="' +
-                        route("compras.show", { id: row.id }) +
-                        '" class="btn btn-info"><i class="fa-solid fa-eye"></i></a>' */
-
-                    /* "<button  id='mm" +
-                        data.id +
-                        "' class='form btn btn-primary btn-xs view_rqs_d ' ><i class='fa-solid fa-eye'></i></button>"
-                        ); */
-                },
-            },
-        ],
-    });
+    if (
+        area === "" ||
+        solicitado_por === "" ||
+        fecha_elaboracion === "" ||
+        persona_id === "" ||
+        fecha_solicitud === "" ||
+        fecha_esperada === "" ||
+        tipo_solicitud === "" ||
+        razon_social === "" ||
+        correo_contacto === "" ||
+        telefono_contacto === "" ||
+        detalle_solicitud === "" ||
+        costo_estimado === "" ||
+        cotizacion1 === ""
+    ) {
+    } else {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Guardado Exitosamente!",
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    }
 });
-function redirectToEdit(id) {
-    window.location.href = "/Compras/dashboard/detalle/" + id + "/";
-}
-
 

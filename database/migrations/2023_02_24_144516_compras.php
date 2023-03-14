@@ -34,9 +34,11 @@ return new class extends Migration
             $table->string('costo_estimado')->nullable();
             $table->string('estado_gestion')->nullable();
             $table->string('estado')->nullable();
+            $table->unsignedBigInteger('autorizado_por')->nullable(); //persona logeada//personal de la empresa
             $table->timestamps();
             $table->foreign('solicitado_por')->references('id')->on('users');
             $table->foreign('jefe_inmediato')->references('id')->on('personas');
+            $table->foreign('autorizado_por')->references('id')->on('users');
 
         });
     }

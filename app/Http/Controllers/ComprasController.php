@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\UploadedFile;
 use App\Models\Persona;
 use App\Models\Compras;
+use App\Models\User;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
@@ -26,7 +27,7 @@ class ComprasController extends Controller
 
     public function solicitudRQS(Request $request)
     {
-        $file1 = !empty(request()->file('cotizacion1')->store('public/imagenes')) ? request()->file('cotizacion1') : '';
+        $file1 = !empty(request()->file('cotizacion1')->store('public/imagenes/cotizaciones')) ? request()->file('cotizacion1') : '';
         $cotizacion1 = empty($file1) ? $request->cotizacion1 : $file1->getClientOriginalName();
         $file2 = !empty(request()->file('cotizacion2')) ? request()->file('cotizacion2') : '';
         $cotizacion2 = empty($file2) ? $request->cotizacion2 : $file2->getClientOriginalName();
@@ -69,7 +70,7 @@ class ComprasController extends Controller
             'correo_electronico' => $request->correo_contacto,
             'telefono_contacto' => $request->telefono_contacto,
             'servicios' => json_encode($datos),
-            'cotizacion1' => ruta = $cotizacion1,
+            'cotizacion1' => $cotizacion1,
             'cotizacion2' => $cotizacion2,
             'cotizacion3' => $cotizacion3,
             'detalle_solicitud' => $request->detalle_solicitud,
@@ -132,33 +133,42 @@ class ComprasController extends Controller
             ->toJson();
     }
 
-    public function detalleRQS()
+    public function detalle_cotizaciones($id)
     {
-        return view('menu.compras.detalle_rqc');
+        $cotizacion = Compras::find($id);
+        return response()->file(public_path(''.$cotizacion1));
+
     }
-
-  /*   public function edit_estado_RQS($id)
-    {
-        if (request()->ajax()) {
-            $dataRQS = Compras::find($id);
-
-            return response()->json(['result' => $dataRQS]);
-        }
-    } */
-
-
 
     public function estado_RQS($id, Request $request)
     {
 
         $compra=Compras::find($id);
+        $us = Auth::user();
+        $nombreus = $us->id;
         $action = $request->input('apr_decl_rqs');
 
         if ($action == '3') {
-            $compra->update(['estado'=>'3']);
+            $compra->update(['estado'=>'3' ,
+            'autorizado_por' => $nombreus
+        ]);
         } elseif ($action == '2') {
-            $compra->update(['estado'=>'2']);
+            $compra->update(['estado'=>'2',
+            'autorizado_por' => $nombreus]);
         }
+
+        return redirect()
+            ->route('compras.dashboard');
+
+    }
+
+    public function gestion_RQS($id)
+    {
+
+        $compra=Compras::find($id);
+        $compra->estado_gestion = 2;
+        $compra->save();
+
 
         return redirect()
             ->route('compras.dashboard');
@@ -168,10 +178,14 @@ class ComprasController extends Controller
     public function show($id)
     {
 
+        $user= Compras::join('users','compras.autorizado_por', '=', 'users.id')
+                        ->select('users.id','users.name')
+                        ->get();
 
         $compra = Compras::with('personas:id,nombre_funcionario','users:id,name')->find($id);
         $compraNombreP = $compra->personas->nombre_funcionario;
         $compraNombreU = $compra->users->name;
+
         $datosJson = $compra->servicios;
         //dd($compra);
 

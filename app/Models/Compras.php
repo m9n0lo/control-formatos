@@ -30,6 +30,7 @@ class Compras extends Model
         'estado_gestion',
         'estado',
         'servicios',
+        'autorizado_por',
     ];
 
     public function personas(){
@@ -38,5 +39,8 @@ class Compras extends Model
 
       public function users(){
         return $this->belongsTo(User::class,'solicitado_por');
+      }
+      public function users_autorizado(){
+        return $this->belongsTo(User::class,'autorizado_por');
       }
 }

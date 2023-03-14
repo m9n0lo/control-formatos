@@ -1,7 +1,7 @@
 @extends('home.home')
 
 @section('content')
-    <script src="{{ asset('sitio/js/app_compras.js') }}"></script>
+    <script src="{{ asset('sitio/js/app_dahsboardRQS.js') }}"></script>
 
     <div class="card card-spacing">
 

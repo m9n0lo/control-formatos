@@ -68,6 +68,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/Compras/dashboard/datatable', 'ComprasController@datatable')->name('compras.data');
         /* Route::get('/Compras/dashboard/editar/{id}/', 'ComprasController@edit_estado_RQS'); */
         Route::put('/Compras/dashboard/detalle/{id}', 'ComprasController@estado_RQS')->name('compras.estado');
+        Route::post('/Compras/dashboard/detalle/{id}', 'ComprasController@gestion_RQS')->name('compras.gestion');
         Route::get('/Compras/dashboard/detalle/{id}/', 'ComprasController@show')->name('compras.show');
 
 

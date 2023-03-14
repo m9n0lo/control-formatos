@@ -5,16 +5,18 @@
 
         <div class="card card-spacing">
             <div class="card-title">
-                <div class="row titulo title-background"><span>Solicitud RQS</span></div>
+                <div class="row titulo title-background"><span>{{'Detalle RQS - '. $compra->id}}</span></div>
             </div>
             <div class="card-title d-flex justify-content-end">
                 <div class="row title " style="margin-bottom: 5px">
                     @if ($compra->estado == 1)
                         <h3 class="ssss " style="background-color: #e6c317">Pendiente</h3>
                     @elseif ($compra->estado == 2)
-                        <h3 class="ssss "style="background-color: green">{{ 'Aprobado - ' . $compraNombreU }}</h3>
+                        <h3 class="ssss "style="background-color: green">
+                            {{ 'Aprobado - ' . $compra->users_autorizado->name }}</h3>
                     @elseif ($compra->estado == 3)
-                        <h3 class="ssss "style="background-color: #e9003d">{{ 'Rechazado - ' . $compraNombreU }}</h3>
+                        <h3 class="ssss "style="background-color: #e9003d">
+                            {{ 'Rechazado - ' . $compra->users_autorizado->name }}</h3>
                     @endif
 
 
@@ -133,23 +135,26 @@
                     <div class="row title"><span>Servicios</span></div>
                 </div>
                 <br>
-                <div class="d-flex justify-content-end">
-                    <a type="submit" type="button" id="addRow"class="btn btn-success"
-                        style="margin-bottom: 3px">
-                        <i class="fa-sharp fa-solid fa-circle-plus fa-lg"></i>
-                        <span class="nav-text">
-                            Agregar
-                        </span>
-                    </a>
-                    <a type="submit" type="button" id="removeRow"class="btn btn-danger"
-                        style="margin-bottom: 3px">
-                        <i class="fa-sharp fa-solid fa-circle-minus fa-lg"></i>
-                        <span class="nav-text">
-                            Eliminar
-                        </span>
-                    </a>
-                </div>
-                <table id="tabla" class="table table-bordered" style="width:100%">
+                @if ($compra->estado == 2 || $compra->estado == 3)
+                @else
+                    <div class="d-flex justify-content-end">
+                        <a type="submit" type="button" id="addRow"class="btn btn-success"
+                            style="margin-bottom: 3px">
+                            <i class="fa-sharp fa-solid fa-circle-plus fa-lg"></i>
+                            <span class="nav-text">
+                                Agregar
+                            </span>
+                        </a>
+                        <a type="submit" type="button" id="removeRow"class="btn btn-danger"
+                            style="margin-bottom: 3px">
+                            <i class="fa-sharp fa-solid fa-circle-minus fa-lg"></i>
+                            <span class="nav-text">
+                                Eliminar
+                            </span>
+                        </a>
+                    </div>
+                @endif
+                <table id="tabla_detalleRQS" class="table table-bordered" style="width:100%">
                     <thead>
                         <tr>
 
@@ -170,17 +175,17 @@
                         @foreach ($datos as $servicio)
                             <tr>
 
-                                <td> <input type="text" name="descripcion_servicio" id="detalle_solicitud"
+                                <td> <input type="text" name="descripcion_servicio[]" id="detalle_solicitud"
                                         class="form-control" value="{{ $servicio['descripcion_servicio'] }}" /></td>
-                                <td> <input type="text" name="centro_servicio" id="detalle_solicitud"
+                                <td> <input type="text" name="centro_servicio[]" id="detalle_solicitud"
                                         class="form-control" value="{{ $servicio['centro_servicio'] }}" /></td>
-                                <td> <input type="text" name="area_servicio" id="detalle_solicitud"
+                                <td> <input type="text" name="area_servicio[]" id="detalle_solicitud"
                                         class="form-control" value="{{ $servicio['area_servicio'] }}" /></td>
-                                <td> <input type="text" name="cantidad_servicio" id="detalle_solicitud"
+                                <td> <input type="text" name="cantidad_servicio[]" id="detalle_solicitud"
                                         class="form-control" value="{{ $servicio['cantidad_servicio'] }}" /></td>
-                                <td> <input type="text" name="um_servicio" id="detalle_solicitud"
+                                <td> <input type="text" name="um_servicio[]" id="detalle_solicitud"
                                         class="form-control" value="{{ $servicio['um_servicio'] }}" /></td>
-                                <td> <input type="text" name="observacion_servicio" id="detalle_solicitud"
+                                <td> <input type="text" name="observacion_servicio[]" id="detalle_solicitud"
                                         class="form-control" value="{{ $servicio['observacion_servicio'] }}" /></td>
                             </tr>
                         @endforeach
@@ -216,7 +221,7 @@
                 <br>
                 <div class="row">
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
-                        <a href="{{ asset($compra->cotizacion1) }}" target="_blank"
+                        <a href="{{ asset('./sitio/imagenes/cotizaciones/RQS_asd_20230314'.$compra->cotizacion1) }}" target="_blank"
                             style="color:black; text-decoration:none">
                             <i class="fa-solid fa-file-pdf"></i>
                         </a>
@@ -265,42 +270,68 @@
 
                     </div>
                 </div>
+                @if ($compra->estado == 2 || $compra->estado == 3)
+                @else
+                    <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
 
-                <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
+                        <div class=" buttons_d">
+                            <a type="submit" type="button" class="btn btn-warning" style="margin-bottom: 3px">
+                                <i class="fa-solid fa-file-pen fa-lg"></i>
+                                <span class="nav-text">
+                                    Editar RQS
+                                </span>
+                            </a>
+                        </div>
 
-                    <div class=" buttons_d">
-                        <a type="submit" type="button" class="btn btn-warning" style="margin-bottom: 3px">
-                            <i class="fa-solid fa-file-pen fa-lg"></i>
-                            <span class="nav-text">
-                                Editar RQS
-                            </span>
-                        </a>
+                        <form class="d-inline-flex " method="POST"
+                            action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}">
+                            @csrf
+                            @method('PUT')
+                            <div class="buttons_d">
+                                <button type="submit" class="btn btn-danger" name="apr_decl_rqs" value="3"
+                                    style="margin-bottom: 3px">
+                                    <i class="fa-solid fa-rectangle-xmark fa-lg"></i>
+                                    <span class="nav-text">
+                                        Rechazar RQS
+                                    </span>
+                                </button>
+                            </div>
+
+                            <div class="buttons_d">
+                                <button type="submit" class="btn btn-success " name="apr_decl_rqs" value="2"
+                                    style="margin-bottom: 3px">
+                                    <i class="fa-solid fa-circle-check fa-lg"></i>
+                                    <span class="nav-text">
+                                        Aprobar RQS
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+
+
                     </div>
-                    <form class="d-inline-flex " method="POST"
-                        action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}">
-                        @csrf
-                        @method('PUT')
-                        <div class="buttons_d">
-                            <button type="submit" class="btn btn-danger" name="apr_decl_rqs" value="3"
-                                style="margin-bottom: 3px">
-                                <i class="fa-solid fa-rectangle-xmark fa-lg"></i>
-                                <span class="nav-text">
-                                    Rechazar RQS
-                                </span>
-                            </button>
-                        </div>
+                @endif
 
-                        <div class="buttons_d">
-                            <button type="submit" class="btn btn-success " name="apr_decl_rqs" value="2"
-                                style="margin-bottom: 3px">
-                                <i class="fa-solid fa-circle-check fa-lg"></i>
-                                <span class="nav-text">
-                                    Aprobar RQS
-                                </span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                @if ($compra->estado == 2)
+                    <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
+                        <form class="d-inline-flex" method="POST"
+                            action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}">
+                            @csrf
+                            @method('POST')
+
+                            <div class=" buttons_d">
+                                <button type="submit" class="btn btn-primary" name="gestion_rqs"
+                                    style="margin-bottom: 3px">
+                                    <span class="nav-text">
+                                        Continuar
+                                    </span>
+                                    <i class="fa-sharp fa-solid fa-circle-arrow-right fa-lg"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                @else
+                @endif
 
             </div>
 
