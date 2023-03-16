@@ -27,12 +27,17 @@ class ComprasController extends Controller
 
     public function solicitudRQS(Request $request)
     {
-        $file1 = !empty(request()->file('cotizacion1')->store('public/imagenes/cotizaciones')) ? request()->file('cotizacion1') : '';
+        /* $file1 = !empty(request()->file('cotizacion1')->store('public/imagenes/cotizaciones')) ? request()->file('cotizacion1') : '';
         $cotizacion1 = empty($file1) ? $request->cotizacion1 : $file1->getClientOriginalName();
         $file2 = !empty(request()->file('cotizacion2')) ? request()->file('cotizacion2') : '';
         $cotizacion2 = empty($file2) ? $request->cotizacion2 : $file2->getClientOriginalName();
         $file3 = !empty(request()->file('cotizacion3')) ? request()->file('cotizacion3') : '';
-        $cotizacion3 = empty($file3) ? $request->cotizacion3 : $file3->getClientOriginalName();
+        $cotizacion3 = empty($file3) ? $request->cotizacion3 : $file3->getClientOriginalName(); */
+
+        if ($request->hasFile('cotizacion1')) {
+            $archivo = $request->file('cotizacion1');
+            $archivo -> move(public_path() . '/sitio/imagenes/cotizaciones/', $archivo->getClientOriginalName());
+        }
 
         $descripcion_servicio = $request->input('descripcion_servicio');
         $centro_servicio = $request->input('centro_servicio');
@@ -70,9 +75,9 @@ class ComprasController extends Controller
             'correo_electronico' => $request->correo_contacto,
             'telefono_contacto' => $request->telefono_contacto,
             'servicios' => json_encode($datos),
-            'cotizacion1' => $cotizacion1,
-            'cotizacion2' => $cotizacion2,
-            'cotizacion3' => $cotizacion3,
+            'cotizacion1' => $archivo,
+            'cotizacion2' => 1,
+            'cotizacion3' => 1,
             'detalle_solicitud' => $request->detalle_solicitud,
             'costo_estimado' => $request->costo_estimado,
             'estado_gestion' => 1,
@@ -85,7 +90,7 @@ class ComprasController extends Controller
         $date=date('Ymd');
         $new_folder_name='RQS'.'_'.$cod_area.'_'.$date;
 
-        if ($request->hasFile('cotizacion1')) {
+       /*  if ($request->hasFile('cotizacion1')) {
             $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
             if (!File::exists($directory)) {
                 File::makeDirectory($directory, 0777, true);
@@ -107,7 +112,7 @@ class ComprasController extends Controller
                 File::makeDirectory($directory, 0777, true);
             }
             $file3->move($directory, $cotizacion3);
-        }
+        } */
 
         return redirect()
             ->route('compras.dashboard')
