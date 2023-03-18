@@ -37,6 +37,7 @@ class ComprasController extends Controller
         if ($request->hasFile('cotizacion1')) {
             $archivo = $request->file('cotizacion1');
             $archivo -> move(public_path() . '/sitio/imagenes/cotizaciones/', $archivo->getClientOriginalName());
+            $cotizacion1= $archivo->getClientOriginalName();
         }
 
         $descripcion_servicio = $request->input('descripcion_servicio');
@@ -75,7 +76,7 @@ class ComprasController extends Controller
             'correo_electronico' => $request->correo_contacto,
             'telefono_contacto' => $request->telefono_contacto,
             'servicios' => json_encode($datos),
-            'cotizacion1' => $archivo,
+            'cotizacion1' => $cotizacion1,
             'cotizacion2' => 1,
             'cotizacion3' => 1,
             'detalle_solicitud' => $request->detalle_solicitud,
