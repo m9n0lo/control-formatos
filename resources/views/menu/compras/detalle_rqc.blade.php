@@ -5,17 +5,17 @@
 
         <div class="card card-spacing">
             <div class="card-title">
-                <div class="row titulo title-background"><span>{{'Detalle RQS - '. $compra->id}}</span></div>
+                <div class="row titulo title-background"><span>{{ 'Detalle RQS - ' . $compra->id }}</span></div>
             </div>
             <div class="card-title d-flex justify-content-end">
                 <div class="row title " style="margin-bottom: 5px">
                     @if ($compra->estado == 1)
-                        <h3 class="ssss " style="background-color: #e6c317">Pendiente</h3>
+                        <h3 class="estado_rqs " style="background-color: #e6c317">Pendiente</h3>
                     @elseif ($compra->estado == 2)
-                        <h3 class="ssss "style="background-color: green">
+                        <h3 class="estado_rqs"style="background-color: green">
                             {{ 'Aprobado - ' . $compra->users_autorizado->name }}</h3>
                     @elseif ($compra->estado == 3)
-                        <h3 class="ssss "style="background-color: #e9003d">
+                        <h3 class="estado_rqs"style="background-color: #e9003d">
                             {{ 'Rechazado - ' . $compra->users_autorizado->name }}</h3>
                     @endif
 
@@ -219,56 +219,33 @@
                     <div class="row title"><span>Cotizaciones</span></div>
                 </div>
                 <br>
+
                 <div class="row">
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
-                        <a href="{{ asset('./sitio/imagenes/cotizaciones/'.$compra->cotizacion1) }}" target="_blank"
-                            style="color:black; text-decoration:none">
+
+
+                        <a class="button" href="{{ asset($compra->cotizacion1) }}" target="_blank"
+                            style="color:black; text-decoration:none; margin: 10px 10px 10px 0;">
                             <i class="fa-solid fa-file-pdf"></i>
+                            <span class="nav-text">Visualizar PDF</span>
+                        </a>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
+                        <a class="button" href="{{ asset($compra->cotizacion2) }}" target="_blank"
+                            style="color:black; text-decoration:none; margin: 10px 10px 0;">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span class="nav-text">Visualizar PDF</span>
+                        </a>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
+                        <a class="button" href="{{ asset($compra->cotizacion3) }}" target="_blank"
+                            style="color:black; text-decoration:none; margin: 510x  10px 10px 0;">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span class="nav-text">Visualizar PDF</span>
                         </a>
                     </div>
 
 
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
-                        <!-- Costo Estimado Total -->
-                        <div class="input-group">
-                            <span class="input-group-text">Firmar a continuación:</span>
-                            <div class="form-control Neon Neon-theme-dragdropbox">
-                                <div class="Neon-input-dragDrop">
-                                    <input name="cotizacion2" id="cotizacion2_DRQS" class="form-control filer_input2"
-                                        type="file" accept="image/jpeg,image/png">
-
-                                    <div class="Neon-input-inner">
-                                        <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
-                                        <div class="Neon-input-text">
-                                            <h3>Seleccione la firma</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
-                        <!-- Costo Estimado Total -->
-                        <div class="input-group">
-                            <span class="input-group-text">Firmar a continuación:</span>
-                            <div class="form-control Neon Neon-theme-dragdropbox">
-                                <div class="Neon-input-dragDrop">
-                                    <input name="cotizacion3" id="cotizacion3_DRQS" class="form-control filer_input2"
-                                        type="file" accept="image/jpeg,image/png">
-
-                                    <div class="Neon-input-inner">
-                                        <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
-                                        <div class="Neon-input-text">
-                                            <h3>Seleccione la firma</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
                 </div>
                 @if ($compra->estado == 2 || $compra->estado == 3)
                 @else

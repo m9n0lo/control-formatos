@@ -27,17 +27,44 @@ class ComprasController extends Controller
 
     public function solicitudRQS(Request $request)
     {
-        /* $file1 = !empty(request()->file('cotizacion1')->store('public/imagenes/cotizaciones')) ? request()->file('cotizacion1') : '';
-        $cotizacion1 = empty($file1) ? $request->cotizacion1 : $file1->getClientOriginalName();
-        $file2 = !empty(request()->file('cotizacion2')) ? request()->file('cotizacion2') : '';
-        $cotizacion2 = empty($file2) ? $request->cotizacion2 : $file2->getClientOriginalName();
-        $file3 = !empty(request()->file('cotizacion3')) ? request()->file('cotizacion3') : '';
-        $cotizacion3 = empty($file3) ? $request->cotizacion3 : $file3->getClientOriginalName(); */
+
+
+        $cod_area = $request->area;
+        $date = date('Ymdh');
+        $new_folder_name = 'RQS' . '_' . $cod_area . '_' . $date;
 
         if ($request->hasFile('cotizacion1')) {
             $archivo = $request->file('cotizacion1');
-            $archivo -> move(public_path() . '/sitio/imagenes/cotizaciones/', $archivo->getClientOriginalName());
-            $cotizacion1= $archivo->getClientOriginalName();
+            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
+            $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
+            /* $archivo->move(public_path() . $url, $archivo->getClientOriginalName()); */
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0777, true);
+            }
+            $archivo->move($directory, $archivo->getClientOriginalName());
+            $cotizacion1 = $url . $archivo->getClientOriginalName();
+        }
+        if ($request->hasFile('cotizacion2')) {
+            $archivo = $request->file('cotizacion2');
+            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
+            $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
+            /* $archivo->move(public_path() . $url, $archivo->getClientOriginalName()); */
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0777, true);
+            }
+            $archivo->move($directory, $archivo->getClientOriginalName());
+            $cotizacion2 = $url . $archivo->getClientOriginalName();
+        }
+        if ($request->hasFile('cotizacion3')) {
+            $archivo = $request->file('cotizacion3');
+            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
+            $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
+            /* $archivo->move(public_path() . $url, $archivo->getClientOriginalName()); */
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0777, true);
+            }
+            $archivo->move($directory, $archivo->getClientOriginalName());
+            $cotizacion3 = $url . $archivo->getClientOriginalName();
         }
 
         $descripcion_servicio = $request->input('descripcion_servicio');
@@ -62,7 +89,6 @@ class ComprasController extends Controller
         $user_id = auth()->id();
         $logDate = Carbon::now();
 
-
         Compras::insert([
             'area' => $request->area,
             'solicitado_por' => $user_id,
@@ -77,8 +103,8 @@ class ComprasController extends Controller
             'telefono_contacto' => $request->telefono_contacto,
             'servicios' => json_encode($datos),
             'cotizacion1' => $cotizacion1,
-            'cotizacion2' => 1,
-            'cotizacion3' => 1,
+            'cotizacion2' => $cotizacion2,
+            'cotizacion3' => $cotizacion3,
             'detalle_solicitud' => $request->detalle_solicitud,
             'costo_estimado' => $request->costo_estimado,
             'estado_gestion' => 1,
@@ -87,33 +113,7 @@ class ComprasController extends Controller
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-        $cod_area = $request->area;
-        $date=date('Ymd');
-        $new_folder_name='RQS'.'_'.$cod_area.'_'.$date;
 
-       /*  if ($request->hasFile('cotizacion1')) {
-            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
-            if (!File::exists($directory)) {
-                File::makeDirectory($directory, 0777, true);
-            }
-            $file1->move($directory, $cotizacion1);
-        }
-
-        if ($request->hasFile('cotizacion2')) {
-            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
-            if (!File::exists($directory)) {
-                File::makeDirectory($directory, 0777, true);
-            }
-            $file2->move($directory, $cotizacion2);
-        }
-
-        if ($request->hasFile('cotizacion3')) {
-            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
-            if (!File::exists($directory)) {
-                File::makeDirectory($directory, 0777, true);
-            }
-            $file3->move($directory, $cotizacion3);
-        } */
 
         return redirect()
             ->route('compras.dashboard')
@@ -142,59 +142,47 @@ class ComprasController extends Controller
     public function detalle_cotizaciones($id)
     {
         $cotizacion = Compras::find($id);
-        return response()->file(public_path(''.$cotizacion1));
-
+        return response()->file(public_path('' . $cotizacion1));
     }
 
     public function estado_RQS($id, Request $request)
     {
-
-        $compra=Compras::find($id);
+        $compra = Compras::find($id);
         $us = Auth::user();
         $nombreus = $us->id;
         $action = $request->input('apr_decl_rqs');
 
         if ($action == '3') {
-            $compra->update(['estado'=>'3' ,
-            'autorizado_por' => $nombreus
-        ]);
+            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus]);
         } elseif ($action == '2') {
-            $compra->update(['estado'=>'2',
-            'autorizado_por' => $nombreus]);
+            $compra->update(['estado' => '2', 'autorizado_por' => $nombreus]);
         }
 
-        return redirect()
-            ->route('compras.dashboard');
-
+        return redirect()->route('compras.dashboard');
     }
 
     public function gestion_RQS($id)
     {
-
-        $compra=Compras::find($id);
+        $compra = Compras::find($id);
         $compra->estado_gestion = 2;
         $compra->save();
 
-
-        return redirect()
-            ->route('compras.dashboard');
-
+        return redirect()->route('compras.dashboard');
     }
 
     public function show($id)
     {
+        $user = Compras::join('users', 'compras.autorizado_por', '=', 'users.id')
+            ->select('users.id', 'users.name')
+            ->get();
 
-        $user= Compras::join('users','compras.autorizado_por', '=', 'users.id')
-                        ->select('users.id','users.name')
-                        ->get();
-
-        $compra = Compras::with('personas:id,nombre_funcionario','users:id,name')->find($id);
+        $compra = Compras::with('personas:id,nombre_funcionario', 'users:id,name')->find($id);
         $compraNombreP = $compra->personas->nombre_funcionario;
         $compraNombreU = $compra->users->name;
 
         $datosJson = $compra->servicios;
         //dd($compra);
 
-        return view('menu.compras.detalle_rqc', compact('compra','compraNombreP','compraNombreU','datosJson'));
+        return view('menu.compras.detalle_rqc', compact('compra', 'compraNombreP', 'compraNombreU', 'datosJson'));
     }
 }
