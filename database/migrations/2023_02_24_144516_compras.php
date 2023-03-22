@@ -34,6 +34,9 @@ return new class extends Migration
             $table->string('costo_estimado')->nullable();
             $table->string('estado_gestion')->nullable();
             $table->string('estado')->nullable();
+            $table->string('motivo_cancelacion')->nullable();
+            $table->date('fecha_estado')->nullable();
+            $table->string('cod_rqs')->nullable();
             $table->unsignedBigInteger('autorizado_por')->nullable(); //persona logeada//personal de la empresa
             $table->timestamps();
             $table->foreign('solicitado_por')->references('id')->on('users');

@@ -151,11 +151,12 @@ class ComprasController extends Controller
         $us = Auth::user();
         $nombreus = $us->id;
         $action = $request->input('apr_decl_rqs');
+        $fecha_actual = Carbon::now();
 
         if ($action == '3') {
-            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus]);
+            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual]);
         } elseif ($action == '2') {
-            $compra->update(['estado' => '2', 'autorizado_por' => $nombreus]);
+            $compra->update(['estado' => '2', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual]);
         }
 
         return redirect()->route('compras.dashboard');

@@ -31,6 +31,9 @@ class Compras extends Model
         'estado',
         'servicios',
         'autorizado_por',
+        'motivo_cancelacion',
+        'fecha_estado',
+        'cod_rqs',
     ];
 
     public function personas(){
