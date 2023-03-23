@@ -30,4 +30,5 @@
     @include('layouts.includes.footer')
 </footer>
 
+
 </html>

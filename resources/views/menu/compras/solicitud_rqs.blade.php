@@ -1,6 +1,5 @@
 @extends('home.home')
 @section('content')
-    <script src="{{ asset('sitio/js/app_compras.js') }}"></script>
     <section class="section">
 
         <div class="card card-spacing">
@@ -248,12 +247,52 @@
 
                     <div class="card-footer bg-transparent  d-flex justify-content-end" style="margin-top: 10px">
 
-                        <button  class="btn btn-success" id="guardar_RQS" name="guardar_RQS" value="Agregar" style="margin-bottom: 3px">
+                        <button class="btn btn-success" id="guardar_RQS" name="guardar_RQS" style="margin-bottom: 3px">
                             <i class="fa-solid fa-cart-plus fa-lg"></i>
                             <span class="nav-text">
                                 Agregar RQS
                             </span>
                         </button>
+
+                        <script>
+                            /* VALIDACION DE QUE TODOS LOS CAMPOS ESTEN LLENOS Y ARROJA EL MENSAJE DE GUARDADO */
+                            document.getElementById("guardar_RQS").addEventListener("click", function() {
+                                let area = $("#area").val();
+                                let solicitado_por = $("#solicitado_por").val();
+                                let persona_id = $("#persona_id").val();
+                                let fecha_esperada = $("#fecha_esperada").val();
+                                let tipo_solicitud = $("#tipo_solicitud").val();
+                                let razon_social = $("#razon_social").val();
+                                let correo_contacto = $("#correo_contacto").val();
+                                let telefono_contacto = $("#telefono_contacto").val();
+                                let detalle_solicitud = $("#detalle_solicitud").val();
+                                let costo_estimado = $("#costo_estimado").val();
+
+
+
+                                if (
+                                    area === "" ||
+                                    solicitado_por === "" ||
+                                    fecha_elaboracion === "" ||
+                                    persona_id === "" ||
+                                    fecha_esperada === "" ||
+                                    tipo_solicitud === "" ||
+                                    razon_social === "" ||
+                                    correo_contacto === "" ||
+                                    telefono_contacto === "" ||
+                                    detalle_solicitud === "" ||
+                                    costo_estimado === ""
+                                ) {} else {
+                                    Swal.fire({
+                                        position: "center",
+                                        icon: "success",
+                                        title: "Guardado Exitosamente!",
+                                        showConfirmButton: false,
+                                        timer: 1500,
+                                    });
+                                }
+                            });
+                        </script>
 
                     </div>
                 </div>
