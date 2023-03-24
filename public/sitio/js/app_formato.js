@@ -1,44 +1,45 @@
-const item=[];
+const item = [];
 
 jQuery(document).ready(function ($) {
     $("#persona_id").select2({
         closeOnSelect: true,
-
-    })
+    });
 });
 
-/* VALIDACION DE QUE TODOS LOS CAMPOS ESTEN LLENOS Y ARROJA EL MENSAJE DE GUARDADO */
-document.getElementById("guardar_mant").addEventListener("click", function () {
-    let nombre_funci = $("#persona_id").val();
-    let name_equi = $("#nombre_equipo").val();
-    let fecha_mant_est = $("#fecha_mant_est").val();
-    let fecha_entrega = $("#fecha_entrega").val();
-    let fecha_retiro = $("#fecha_retiro").val();
-    let observaciones = $("#observaciones").val();
-    let firma = $("#filer_input2").val();
+let elemento = document.getElementById("guardar_mant");
+if (elemento) {
+    /* VALIDACION DE QUE TODOS LOS CAMPOS ESTEN LLENOS Y ARROJA EL MENSAJE DE GUARDADO */
+    elemento.addEventListener("click", function () {
+        let nombre_funci = $("#persona_id").val();
+        let name_equi = $("#nombre_equipo").val();
+        let fecha_mant_est = $("#fecha_mant_est").val();
+        let fecha_entrega = $("#fecha_entrega").val();
+        let fecha_retiro = $("#fecha_retiro").val();
+        let observaciones = $("#observaciones").val();
+        let firma = $("#filer_input2").val();
 
-    if (
-        nombre_funci === "" ||
-        name_equi === "" ||
-        observaciones === "" ||
-        fecha_mant_est === "" ||
-        fecha_entrega === "" ||
-        fecha_retiro === "" ||
-        firma === ""
-    ) {
-    } else {
-        Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Guardado Exitosamente!",
-            showConfirmButton: false,
-            timer: 1500,
-        });
-    }
-});
+        if (
+            nombre_funci === "" ||
+            name_equi === "" ||
+            observaciones === "" ||
+            fecha_mant_est === "" ||
+            fecha_entrega === "" ||
+            fecha_retiro === "" ||
+            firma === ""
+        ) {
+        } else {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Guardado Exitosamente!",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
+    });
+}
 
 /* let dataformato = "{{route('formato.data')}}"; */
-
 $(document).ready(function () {
     startDataTable({
         idTable: "tabla",
@@ -79,22 +80,17 @@ $(document).ready(function () {
                 render: function (data, type, full, meta) {
                     item[data.id] = data;
                     return (
-
                         "<button type='submit' id='" +
                         data.id +
                         "' class='form btn btn-primary btn-xs edit ' name='Edit'  > <i class='fa-regular fa-pen-to-square'></i></button>"
-
                     );
-
                 },
             },
         ],
         orderCol: 1,
         orderType: "asc",
-
     });
 });
-
 
 $("#create_record").click(function () {
     $(".modal-title").text("Add New Record");
@@ -118,7 +114,6 @@ $(document).on("click", ".edit", function (event) {
         },
         dataType: "json",
         success: function (data) {
-
             $("#nombre_equipo_m").val(data.result.nombre_equipo);
             $("#fecha_mant_est_m").val(data.result.fecha_mant_est);
             $("#fecha_retiro_m").val(data.result.fecha_retiro);
@@ -169,9 +164,7 @@ $("#sample_form").on("submit", function (event) {
                     "</div>";
                 $("#sample_form")[0].reset();
                 $("#tabla").DataTable().ajax.reload();
-                $("#formModal").modal('hide');
-
-
+                $("#formModal").modal("hide");
             }
             $("#form_result").html(html);
         },

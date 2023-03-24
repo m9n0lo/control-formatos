@@ -27,8 +27,6 @@ class ComprasController extends Controller
 
     public function solicitudRQS(Request $request)
     {
-
-
         $cod_area = $request->area;
         $date = date('Ymdh');
         $new_folder_name = 'RQS' . '_' . $cod_area . '_' . $date;
@@ -113,8 +111,6 @@ class ComprasController extends Controller
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
-
-
         return redirect()
             ->route('compras.dashboard')
             ->with('mensaje', '¡Formato agregado correctamente!');
@@ -151,10 +147,11 @@ class ComprasController extends Controller
         $us = Auth::user();
         $nombreus = $us->id;
         $action = $request->input('apr_decl_rqs');
+        $motivo = $request->motivo_rechazo;
         $fecha_actual = Carbon::now();
 
         if ($action == '3') {
-            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual]);
+            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual, 'motivo_cancelacion'=>$motivo]);
         } elseif ($action == '2') {
             $compra->update(['estado' => '2', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual]);
         }

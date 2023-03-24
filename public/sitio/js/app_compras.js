@@ -38,35 +38,75 @@ $(document).ready(function () {
     }); */
     $("#addRQS").click();
 });
+let load_rqs = document.getElementById("guardar_RQS");
+if (load_rqs) {
+    load_rqs.addEventListener("click", function () {
+        let area = $("#area").val();
+        let solicitado_por = $("#solicitado_por").val();
+        let persona_id = $("#persona_id").val();
+        let fecha_esperada = $("#fecha_esperada").val();
+        let tipo_solicitud = $("#tipo_solicitud").val();
+        let razon_social = $("#razon_social").val();
+        let correo_contacto = $("#correo_contacto").val();
+        let telefono_contacto = $("#telefono_contacto").val();
+        let detalle_solicitud = $("#detalle_solicitud").val();
+        let costo_estimado = $("#costo_estimado").val();
 
-/*
-Swal.fire({
-    title: "Submit your Github username",
-    input: "text",
-    inputAttributes: {
-        autocapitalize: "off",
-    },
-    showCancelButton: true,
-    confirmButtonText: "Look up",
-    showLoaderOnConfirm: true,
-    preConfirm: (login) => {
-        return fetch(`//api.github.com/users/${login}`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(response.statusText);
-                }
-                return response.json();
-            })
-            .catch((error) => {
-                Swal.showValidationMessage(`Request failed: ${error}`);
+        if (
+            area === "" ||
+            solicitado_por === "" ||
+            fecha_elaboracion === "" ||
+            persona_id === "" ||
+            fecha_esperada === "" ||
+            tipo_solicitud === "" ||
+            razon_social === "" ||
+            correo_contacto === "" ||
+            telefono_contacto === "" ||
+            detalle_solicitud === "" ||
+            costo_estimado === ""
+        ) {
+        } else {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Guardado Exitosamente!",
+                showConfirmButton: false,
+                timer: 1500,
             });
-    },
-    allowOutsideClick: () => !Swal.isLoading(),
-}).then((result) => {
-    if (result.isConfirmed) {
-        Swal.fire({
-            title: `${result.value.login}'s avatar`,
-            imageUrl: result.value.avatar_url,
-        });
-    }
+        }
+    });
+}
+
+/* document.getElementById("apr_decl_rqs").addEventListener("click", function () {
+    Swal.fire({
+        title: "¿Desea Rechazar la RQS?",
+        input: "text",
+        inputAttributes: {
+            autocapitalize: "off",
+        },
+        showCancelButton: true,
+        confirmButtonText: "Aceptar",
+        cancelButtonText: 'Cancelar',
+        showLoaderOnConfirm: true,
+        preConfirm: (login) => {
+            return fetch(`//api.github.com/users/${login}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(response.statusText);
+                    }
+                    return response.json();
+                })
+                .catch((error) => {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                });
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: `${result.value.login}'s avatar`,
+                imageUrl: result.value.avatar_url,
+            });
+        }
+    });
 }); */
