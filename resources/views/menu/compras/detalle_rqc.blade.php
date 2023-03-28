@@ -277,7 +277,7 @@
                         {{--  --}}
                         <div class="buttons_d">
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                style="margin-bottom: 3px" data-bs-target="#exampleModal">
+                                style="margin-bottom: 3px" data-bs-target="#RechazarRQS">
                                 <i class="fa-solid fa-rectangle-xmark fa-lg"></i>
                                 <span class="nav-text">
                                     Rechazar RQS
@@ -290,58 +290,84 @@
 
                 @if ($compra->estado == 2)
                     <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
-                        <form class="d-inline-flex" method="POST"
-                            action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}">
-                            @csrf
-                            @method('POST')
-
-                            <div class=" buttons_d">
-                                <button type="submit" class="btn btn-primary" name="gestion_rqs"
-                                    style="margin-bottom: 3px">
-                                    <span class="nav-text">
-                                        Continuar
-                                    </span>
-                                    <i class="fa-sharp fa-solid fa-circle-arrow-right fa-lg"></i>
-                                </button>
-                            </div>
-                        </form>
+                        <div class=" buttons_d">
+                            <button type="submit" class="btn btn-primary" name="gestion_rqs" style="margin-bottom: 3px"
+                                data-bs-toggle="modal" data-bs-target="#continuarRQS">
+                                <span class="nav-text">
+                                    Continuar
+                                </span>
+                                <i class="fa-sharp fa-solid fa-circle-arrow-right fa-lg"></i>
+                            </button>
+                        </div>
                     </div>
                 @else
                 @endif
+                {{-- MODAL DE CONTINUAR RQS --}}
+                <div class="modal fade" id="continuarRQS" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">¿Desea continuar con la RQS?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
 
-            </div>
-            {{-- MODAL DE RECHAZO RQS --}}
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">¿Desea Cancelar la RQS</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <form method="POST"action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}">
-                            @csrf
-                            @method('PUT')
-                            <div class="modal-body">
+                            <form method="POST"action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}">
+                                @csrf
+                                @method('POST')
+                                <div class="modal-body">
 
-                                <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Motivo:</label>
-                                    <input type="text" class="form-control" id="motivo_rechazo"
-                                        name="motivo_rechazo" required>
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">RQS:</label>
+                                        <input type="text" class="form-control" id="RQS_continuar"
+                                            name="RQS_continuar" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" id="apr_decl_rqs" name="apr_decl_rqs" class="btn btn-danger"
-                                    value="3">Confirmar</button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-succes">Continuar</button>
 
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                {{-- MODAL DE RECHAZO RQS --}}
+                <div class="modal fade" id="RechazarRQS" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">¿Desea Cancelar la RQS</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
-                        </form>
+                            <form method="POST"action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}">
+                                @csrf
+                                @method('PUT')
+                                <div class="modal-body">
+
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Motivo:</label>
+                                        <input type="text" class="form-control" id="motivo_rechazo"
+                                            name="motivo_rechazo" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" id="apr_decl_rqs" name="apr_decl_rqs" class="btn btn-danger"
+                                        value="3">Confirmar</button>
+
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
     </section>
 @endsection

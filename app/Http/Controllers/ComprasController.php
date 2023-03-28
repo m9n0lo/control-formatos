@@ -159,11 +159,11 @@ class ComprasController extends Controller
         return redirect()->route('compras.dashboard');
     }
 
-    public function gestion_RQS($id)
+    public function gestion_RQS($id, Request $request)
     {
         $compra = Compras::find($id);
-        $compra->estado_gestion = 2;
-        $compra->save();
+        $RQS = $request->input('RQS_continuar');
+        $compra->update(['estado_gestion' => '2', 'cod_rqs' => $RQS]);
 
         return redirect()->route('compras.dashboard');
     }
