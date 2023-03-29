@@ -220,8 +220,7 @@
                 <br>
 
                 <div class="row">
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
-
+                    <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4 mt-3">
 
                         <a class="button" href="{{ asset($compra->cotizacion1) }}" target="_blank"
                             style="color:black; text-decoration:none; margin: 10px 10px 10px 0;">
@@ -229,14 +228,14 @@
                             <span class="nav-text">Visualizar PDF</span>
                         </a>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
+                    <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4 mt-3">
                         <a class="button" href="{{ asset($compra->cotizacion2) }}" target="_blank"
                             style="color:black; text-decoration:none; margin: 10px 10px 0;">
                             <i class="fa-solid fa-file-pdf"></i>
                             <span class="nav-text">Visualizar PDF</span>
                         </a>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
+                    <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4 mt-3">
                         <a class="button" href="{{ asset($compra->cotizacion3) }}" target="_blank"
                             style="color:black; text-decoration:none; margin: 510x  10px 10px 0;">
                             <i class="fa-solid fa-file-pdf"></i>
@@ -260,9 +259,9 @@
                         </div>
 
                         <form class="d-inline-flex " method="POST"
-                            action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}">
+                            action="{{ url("/Compras/dashboard/{$compra->id}/detalle/") }}">
                             @csrf
-                            @method('PUT')
+                            @method('POST')
 
                             <div class="buttons_d">
                                 <button type="submit" class="btn btn-success " name="apr_decl_rqs" value="2"
@@ -289,18 +288,19 @@
                 @endif
 
                 @if ($compra->estado == 2)
-                    <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
-                        <div class=" buttons_d">
-                            <button type="submit" class="btn btn-primary" name="gestion_rqs" style="margin-bottom: 3px"
-                                data-bs-toggle="modal" data-bs-target="#continuarRQS">
-                                <span class="nav-text">
-                                    Continuar
-                                </span>
-                                <i class="fa-sharp fa-solid fa-circle-arrow-right fa-lg"></i>
-                            </button>
-                        </div>
-                    </div>
+
                 @else
+                <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
+                    <div class=" buttons_d">
+                        <button type="submit" class="btn btn-primary" name="gestion_rqs" style="margin-bottom: 3px"
+                            data-bs-toggle="modal" data-bs-target="#continuarRQS">
+                            <span class="nav-text">
+                                Continuar
+                            </span>
+                            <i class="fa-sharp fa-solid fa-circle-arrow-right fa-lg"></i>
+                        </button>
+                    </div>
+                </div>
                 @endif
                 {{-- MODAL DE CONTINUAR RQS --}}
                 <div class="modal fade" id="continuarRQS" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -345,9 +345,9 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <form method="POST"action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}">
+                            <form method="POST"action="{{ url("/Compras/dashboard/{$compra->id}/detalle/") }}">
                                 @csrf
-                                @method('PUT')
+                                @method('POST')
                                 <div class="modal-body">
 
                                     <div class="mb-3">
@@ -369,5 +369,22 @@
                 </div>
             </div>
 
+            <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
+                <table class="table table-bordered " style="width:100%">
+                <thead>
+                    <tr>
+
+                        <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 mt-3">#</th>
+                        <th class="col-xs-3 col-sm-3 col-md-3 col-lg-4 mt-3">Estado</th>
+                        <th class="col-xs-3 col-sm-3 col-md-3 col-lg-4 mt-3">Descripcion</th>
+                        <th class="col-xs-3 col-sm-3 col-md-3 col-lg-4 mt-3">Responsable y Fecha</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    </tbody>
+                </table>
+            </div>
     </section>
 @endsection

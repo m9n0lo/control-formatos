@@ -8,6 +8,7 @@ use Illuminate\Http\UploadedFile;
 use App\Models\Persona;
 use App\Models\Compras;
 use App\Models\User;
+use App\Models\C_histories;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
@@ -87,7 +88,7 @@ class ComprasController extends Controller
         $user_id = auth()->id();
         $logDate = Carbon::now();
 
-        Compras::insert([
+        $compra = Compras::create([
             'area' => $request->area,
             'solicitado_por' => $user_id,
             'fecha_elaboracion' => $logDate->format('Y-m-d H:i:s'),
@@ -110,6 +111,11 @@ class ComprasController extends Controller
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
+
+        $id = $compra->id;
+        $responsable = auth()->name();
+        $fecha_actual = Carbon::now();
+        C_histories::create(['compra_id' => $id, 'estado' => '1', 'descripcion' => 'Se creo la solicitud RQS', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
 
         return redirect()
             ->route('compras.dashboard')
@@ -135,12 +141,6 @@ class ComprasController extends Controller
             ->toJson();
     }
 
-    public function detalle_cotizaciones($id)
-    {
-        $cotizacion = Compras::find($id);
-        return response()->file(public_path('' . $cotizacion1));
-    }
-
     public function estado_RQS($id, Request $request)
     {
         $compra = Compras::find($id);
@@ -150,10 +150,18 @@ class ComprasController extends Controller
         $motivo = $request->motivo_rechazo;
         $fecha_actual = Carbon::now();
 
+        $fecha_f = Carbon::createFromFormat('Y-m-d', $compra->fecha_esperada);
+        $fecha_espe = $fecha_f->addDays(8);
+
+        $compraid = $compra->id;
+        $responsable = $us->name;
+
         if ($action == '3') {
-            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual, 'motivo_cancelacion'=>$motivo]);
+            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual, 'motivo_cancelacion' => $motivo]);
+            C_histories::create(['compra_id' => $compraid, 'estado' => '3', 'descripcion' => $motivo, 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
         } elseif ($action == '2') {
-            $compra->update(['estado' => '2', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual]);
+            $compra->update(['estado' => '2', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual, 'fecha_esperada' => $fecha_espe]);
+            C_histories::create(['compra_id' => $compraid, 'estado' => '2', 'descripcion' => 'Aprobado sin problema', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
         }
 
         return redirect()->route('compras.dashboard');
@@ -162,9 +170,13 @@ class ComprasController extends Controller
     public function gestion_RQS($id, Request $request)
     {
         $compra = Compras::find($id);
+        $us = Auth::user();
         $RQS = $request->input('RQS_continuar');
+        $fecha_actual = Carbon::now();
+        $compraid = $compra->id;
+        $responsable = $us->name;
         $compra->update(['estado_gestion' => '2', 'cod_rqs' => $RQS]);
-
+        C_histories::create(['compra_id' => $compraid, 'estado' => '2', 'descripcion' => 'Su orden de compra es ' . $RQS, 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
         return redirect()->route('compras.dashboard');
     }
 
