@@ -182,6 +182,12 @@ class ComprasController extends Controller
 
     public function show($id)
     {
+        $c_history = DB::table('compras')
+            ->join('c_histories', 'compras.id', '=', 'c_histories.compra_id')
+            ->select('c_histories.estado', 'c_histories.descripcion', 'responsable','fecha_cambio')
+            ->where('compras.id' , '=',$id)
+            ->get();
+
         $user = Compras::join('users', 'compras.autorizado_por', '=', 'users.id')
             ->select('users.id', 'users.name')
             ->get();
@@ -191,8 +197,9 @@ class ComprasController extends Controller
         $compraNombreU = $compra->users->name;
 
         $datosJson = $compra->servicios;
-        //dd($compra);
 
-        return view('menu.compras.detalle_rqc', compact('compra', 'compraNombreP', 'compraNombreU', 'datosJson'));
+
+        return view('menu.compras.detalle_rqc', compact('compra', 'compraNombreP', 'compraNombreU', 'datosJson','c_history'));
     }
+
 }

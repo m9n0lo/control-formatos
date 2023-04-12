@@ -288,19 +288,18 @@
                 @endif
 
                 @if ($compra->estado == 2)
-
                 @else
-                <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
-                    <div class=" buttons_d">
-                        <button type="submit" class="btn btn-primary" name="gestion_rqs" style="margin-bottom: 3px"
-                            data-bs-toggle="modal" data-bs-target="#continuarRQS">
-                            <span class="nav-text">
-                                Continuar
-                            </span>
-                            <i class="fa-sharp fa-solid fa-circle-arrow-right fa-lg"></i>
-                        </button>
+                    <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
+                        <div class=" buttons_d">
+                            <button type="submit" class="btn btn-primary" name="gestion_rqs" style="margin-bottom: 3px"
+                                data-bs-toggle="modal" data-bs-target="#continuarRQS">
+                                <span class="nav-text">
+                                    Continuar
+                                </span>
+                                <i class="fa-sharp fa-solid fa-circle-arrow-right fa-lg"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 @endif
                 {{-- MODAL DE CONTINUAR RQS --}}
                 <div class="modal fade" id="continuarRQS" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -371,18 +370,34 @@
 
             <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
                 <table class="table table-bordered " style="width:100%">
-                <thead>
-                    <tr>
+                    <thead>
+                        <tr>
 
-                        <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 mt-3">#</th>
-                        <th class="col-xs-3 col-sm-3 col-md-3 col-lg-4 mt-3">Estado</th>
-                        <th class="col-xs-3 col-sm-3 col-md-3 col-lg-4 mt-3">Descripcion</th>
-                        <th class="col-xs-3 col-sm-3 col-md-3 col-lg-4 mt-3">Responsable y Fecha</th>
+                            <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 mt-3">#</th>
+                            <th class="col-xs-3 col-sm-2 col-md-2 col-lg-2 mt-3">Estado</th>
+                            <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 mt-3">Descripcion</th>
+                            <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 mt-3">Responsable y Fecha</th>
 
-                    </tr>
-                </thead>
-                <tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $contador = 1;
+                        @endphp
+                        @foreach ($c_history as $ch)
+                            <tr>
 
+                                <td> {{ $contador }}</td>
+                                <td> {{ $ch->estado }}</td>
+                                <td> {{ $ch->descripcion }}</td>
+                                <td> {{ $ch->responsable }} - {{ $ch->fecha_cambio }}</td>
+
+
+                            </tr>
+                            @php
+                                $contador++;
+                            @endphp
+                        @endforeach
                     </tbody>
                 </table>
             </div>
