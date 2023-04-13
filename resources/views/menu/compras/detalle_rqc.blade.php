@@ -287,8 +287,7 @@
                     </div>
                 @endif
 
-                @if ($compra->estado == 2)
-                @else
+                @if ($compra->estado == 2 && $compra->estado_gestion == 1)
                     <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
                         <div class=" buttons_d">
                             <button type="submit" class="btn btn-primary" name="gestion_rqs" style="margin-bottom: 3px"
@@ -300,7 +299,11 @@
                             </button>
                         </div>
                     </div>
+                @else
                 @endif
+
+
+
                 {{-- MODAL DE CONTINUAR RQS --}}
                 <div class="modal fade" id="continuarRQS" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -351,8 +354,16 @@
 
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Motivo:</label>
-                                        <input type="text" class="form-control" id="motivo_rechazo"
-                                            name="motivo_rechazo" required>
+                                        <select class="form-select" aria-label="Default select example"
+                                            id="motivo_rechazo" name="motivo_rechazo" required>
+                                            <option>Seleccione una opcion </option>
+                                            <option value="1">SE ANULA POR ERROR DE DIGITACION</option>
+                                            <option value="2">SE ANULA POR DUPLICADO</option>
+                                            <option value="3">SE ANULA POR PROBLEMAS DE CONFIGURACION</option>
+                                            <option value="4">SE ANULA POR PROBLEMAS DE CONSECUTIVO</option>
+                                            <option value="5">RECLASIFICACION DE BANCO</option>
+                                            <option value="6">PAGO NO APLICADO POR EL BANCO</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -388,8 +399,30 @@
                             <tr>
 
                                 <td> {{ $contador }}</td>
-                                <td> {{ $ch->estado }}</td>
-                                <td> {{ $ch->descripcion }}</td>
+
+                                @if ($ch->estado == 1)
+                                    <td>RQS Aprobado</td>
+                                @elseif ($ch->estado == 2)
+                                    <td>RQS Rechazada</td>
+                                @elseif ($ch->estado == 3)
+                                    <td>En gestion - compras</td>
+                                @endif
+
+                                @if ($ch->descripcion == 1)
+                                    <td> SE ANULA POR ERROR DE DIGITACION</td>
+                                @elseif ($ch->descripcion == 2)
+                                    <td> SE ANULA POR DUPLICADO</td>
+                                @elseif ($ch->descripcion == 3)
+                                    <td> SE ANULA POR PROBLEMAS DE CONFIGURACION</td>
+                                @elseif ($ch->descripcion == 4)
+                                    <td> SE ANULA POR PROBLEMAS DE CONSECUTIVO</td>
+                                @elseif ($ch->descripcion == 5)
+                                    <td> RECLASIFICACION DE BANCO</td>
+                                @elseif ($ch->descripcion == 6)
+                                    <td> PAGO NO APLICADO POR EL BANCO</td>
+                                @else
+                                <td>{{$ch->descripcion}}</td>
+                                @endif
                                 <td> {{ $ch->responsable }} - {{ $ch->fecha_cambio }}</td>
 
 

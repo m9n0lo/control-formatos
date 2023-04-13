@@ -70,8 +70,10 @@ class ComprasController extends Controller
         $centro_servicio = $request->input('centro_servicio');
         $area_servicio = $request->input('area_servicio');
         $cantidad_servicio = $request->input('cantidad_servicio');
+        $cantidad_aprobada = '';
         $um_servicio = $request->input('um_servicio');
         $observacion_servicio = $request->input('observacion_servicio');
+
 
         $datos = [];
         for ($i = 0; $i < count($descripcion_servicio); $i++) {
@@ -80,13 +82,14 @@ class ComprasController extends Controller
                 'centro_servicio' => $centro_servicio[$i],
                 'area_servicio' => $area_servicio[$i],
                 'cantidad_servicio' => $cantidad_servicio[$i],
+                'cantidad_aprobada' => $cantidad_aprobada,
                 'um_servicio' => $um_servicio[$i],
                 'observacion_servicio' => $observacion_servicio[$i],
             ];
         }
 
         $user_id = auth()->id();
-        $logDate = Carbon::now();
+        $logDate = Carbon::now()->setTimezone('America/Bogota');
 
         $compra = Compras::create([
             'area' => $request->area,
@@ -113,8 +116,8 @@ class ComprasController extends Controller
         ]);
 
         $id = $compra->id;
-        $responsable = auth()->name();
-        $fecha_actual = Carbon::now();
+        $responsable = auth()->getName();
+        $fecha_actual = Carbon::now()->setTimezone('America/Bogota');
         C_histories::create(['compra_id' => $id, 'estado' => '1', 'descripcion' => 'Se creo la solicitud RQS', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
 
         return redirect()
@@ -148,7 +151,7 @@ class ComprasController extends Controller
         $nombreus = $us->id;
         $action = $request->input('apr_decl_rqs');
         $motivo = $request->motivo_rechazo;
-        $fecha_actual = Carbon::now();
+        $fecha_actual = Carbon::now()->setTimezone('America/Bogota')->format('Y-m-d H:i:s');
 
         $fecha_f = Carbon::createFromFormat('Y-m-d', $compra->fecha_esperada);
         $fecha_espe = $fecha_f->addDays(8);
@@ -158,10 +161,10 @@ class ComprasController extends Controller
 
         if ($action == '3') {
             $compra->update(['estado' => '3', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual, 'motivo_cancelacion' => $motivo]);
-            C_histories::create(['compra_id' => $compraid, 'estado' => '3', 'descripcion' => $motivo, 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
+            C_histories::create(['compra_id' => $compraid, 'estado' => '2', 'descripcion' => $motivo, 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
         } elseif ($action == '2') {
             $compra->update(['estado' => '2', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual, 'fecha_esperada' => $fecha_espe]);
-            C_histories::create(['compra_id' => $compraid, 'estado' => '2', 'descripcion' => 'Aprobado sin problema', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
+            C_histories::create(['compra_id' => $compraid, 'estado' => '1', 'descripcion' => 'Aprobado sin problema', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
         }
 
         return redirect()->route('compras.dashboard');
@@ -172,11 +175,11 @@ class ComprasController extends Controller
         $compra = Compras::find($id);
         $us = Auth::user();
         $RQS = $request->input('RQS_continuar');
-        $fecha_actual = Carbon::now();
+        $fecha_actual = Carbon::now()->setTimezone('America/Bogota')->format('Y-m-d H:i:s');
         $compraid = $compra->id;
         $responsable = $us->name;
         $compra->update(['estado_gestion' => '2', 'cod_rqs' => $RQS]);
-        C_histories::create(['compra_id' => $compraid, 'estado' => '2', 'descripcion' => 'Su orden de compra es ' . $RQS, 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
+        C_histories::create(['compra_id' => $compraid, 'estado' => '3', 'descripcion' => 'Su orden de compra es ' . $RQS, 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
         return redirect()->route('compras.dashboard');
     }
 
