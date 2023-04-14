@@ -28,6 +28,9 @@ class ComprasController extends Controller
 
     public function solicitudRQS(Request $request)
     {
+        dd($request->all());
+
+        /*
         $cod_area = $request->area;
         $date = date('Ymdh');
         $new_folder_name = 'RQS' . '_' . $cod_area . '_' . $date;
@@ -36,7 +39,6 @@ class ComprasController extends Controller
             $archivo = $request->file('cotizacion1');
             $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
             $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
-            /* $archivo->move(public_path() . $url, $archivo->getClientOriginalName()); */
             if (!File::exists($directory)) {
                 File::makeDirectory($directory, 0777, true);
             }
@@ -47,7 +49,6 @@ class ComprasController extends Controller
             $archivo = $request->file('cotizacion2');
             $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
             $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
-            /* $archivo->move(public_path() . $url, $archivo->getClientOriginalName()); */
             if (!File::exists($directory)) {
                 File::makeDirectory($directory, 0777, true);
             }
@@ -58,7 +59,6 @@ class ComprasController extends Controller
             $archivo = $request->file('cotizacion3');
             $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
             $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
-            /* $archivo->move(public_path() . $url, $archivo->getClientOriginalName()); */
             if (!File::exists($directory)) {
                 File::makeDirectory($directory, 0777, true);
             }
@@ -73,7 +73,6 @@ class ComprasController extends Controller
         $cantidad_aprobada = '';
         $um_servicio = $request->input('um_servicio');
         $observacion_servicio = $request->input('observacion_servicio');
-
 
         $datos = [];
         for ($i = 0; $i < count($descripcion_servicio); $i++) {
@@ -116,13 +115,14 @@ class ComprasController extends Controller
         ]);
 
         $id = $compra->id;
-        $responsable = auth()->getName();
+        $user = Auth::user();
+        $responsable = $user->name;
         $fecha_actual = Carbon::now()->setTimezone('America/Bogota');
         C_histories::create(['compra_id' => $id, 'estado' => '1', 'descripcion' => 'Se creo la solicitud RQS', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
 
         return redirect()
             ->route('compras.dashboard')
-            ->with('mensaje', '¡Formato agregado correctamente!');
+            ->with('mensaje', '¡Formato agregado correctamente!'); */
     }
 
     // Funcion que trae los datos de la compras de forma resumida  y lo muestra en el datatable
@@ -151,7 +151,9 @@ class ComprasController extends Controller
         $nombreus = $us->id;
         $action = $request->input('apr_decl_rqs');
         $motivo = $request->motivo_rechazo;
-        $fecha_actual = Carbon::now()->setTimezone('America/Bogota')->format('Y-m-d H:i:s');
+        $fecha_actual = Carbon::now()
+            ->setTimezone('America/Bogota')
+            ->format('Y-m-d H:i:s');
 
         $fecha_f = Carbon::createFromFormat('Y-m-d', $compra->fecha_esperada);
         $fecha_espe = $fecha_f->addDays(8);
@@ -175,7 +177,9 @@ class ComprasController extends Controller
         $compra = Compras::find($id);
         $us = Auth::user();
         $RQS = $request->input('RQS_continuar');
-        $fecha_actual = Carbon::now()->setTimezone('America/Bogota')->format('Y-m-d H:i:s');
+        $fecha_actual = Carbon::now()
+            ->setTimezone('America/Bogota')
+            ->format('Y-m-d H:i:s');
         $compraid = $compra->id;
         $responsable = $us->name;
         $compra->update(['estado_gestion' => '2', 'cod_rqs' => $RQS]);
@@ -185,10 +189,14 @@ class ComprasController extends Controller
 
     public function show($id)
     {
+        $jefe = Persona::where('cargo', 'LIKE', '%JEFE%')
+            ->orwhere('cargo', 'LIKE', '%DIRECTOR%')
+            ->get();
+
         $c_history = DB::table('compras')
             ->join('c_histories', 'compras.id', '=', 'c_histories.compra_id')
-            ->select('c_histories.estado', 'c_histories.descripcion', 'responsable','fecha_cambio')
-            ->where('compras.id' , '=',$id)
+            ->select('c_histories.estado', 'c_histories.descripcion', 'responsable', 'fecha_cambio')
+            ->where('compras.id', '=', $id)
             ->get();
 
         $user = Compras::join('users', 'compras.autorizado_por', '=', 'users.id')
@@ -201,8 +209,42 @@ class ComprasController extends Controller
 
         $datosJson = $compra->servicios;
 
-
-        return view('menu.compras.detalle_rqc', compact('compra', 'compraNombreP', 'compraNombreU', 'datosJson','c_history'));
+        return view('menu.compras.detalle_rqc', compact('compra', 'compraNombreP', 'compraNombreU', 'datosJson', 'c_history', 'jefe'));
     }
 
+    public function update_RQS(Request $request, $id)
+    {
+
+        dd($request->all());
+      /*   $compra = Compras::find($id);
+
+        $servicios = json_decode($compra->servicios, true);
+
+        foreach ($servicios as $servicio) {
+            $servicio['descripcion_servicio'] = $request->input('descripcion_servicio');
+            $servicio['centro_servicio'] = $request->input('centro_servicio');
+            $servicio['area_servicio'] = $request->input('area_servicio');
+            $servicio['cantidad_servicio'] = $request->input('cantidad_servicio');
+            $servicio['cantidad_aprobada'] = '';
+            $servicio['um_servicio'] = $request->input('um_servicio');
+            $servicio['observacion_servicio'] = $request->input('observacion_servicio');
+        }
+        $compra->area = $request->input('area');
+        $compra->fecha_esperada = date('Y-m-d H:i:s', strtotime($request->input('fecha_esperada')));
+        $compra->tipo_solicitud = $request->input('tipo_solicitud');
+        $compra->sede = $request->input('sede');
+        $compra->razon_social = $request->input('razon_social');
+        $compra->correo_electronico = $request->input('correo_contacto');
+        $compra->telefono_contacto = $request->input('telefono_contacto');
+        $compra->servicios = json_encode($servicios);
+        $compra->detalle_solicitud = $request->input('detalle_solicitud');
+        $compra->costo_estimado = $request->input('costo_estimado');
+        $compra->cotizacion1 = $request->input('cotizacion1');
+        $compra->cotizacion2 = $request->input('cotizacion2');
+        $compra->cotizacion3 = $request->input('cotizacion3');
+        $compra->save();
+
+
+        return response()->json(['success' => 'Formato actualizado correctamente!!']); */
+    }
 }

@@ -180,21 +180,21 @@
                     <div class="card-title">
                         <div class="row title"><span>Cotizaciones</span></div>
                     </div>
-                    <br>
+
                     <div class="row">
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4  mt-3">
                             <!-- Detalle Solicitud -->
                             <div class="input-group">
-                                <span class="input-group-text">Firmar a continuación:</span>
+                                <span class="input-group-text">Cotizacion 1:</span>
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
                                         <input name="cotizacion1" id="filer_input2" class="form-control" type="file"
                                             accept="image/jpeg,image/png/,.pdf">
 
                                         <div class="Neon-input-inner">
-                                            <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
+                                            <div class="Neon-input-icon"></div>
                                             <div class="Neon-input-text">
-                                                <h3>Seleccione la firma</h3>
+                                                <h3>Seleccione la cotizacion</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -205,16 +205,16 @@
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Costo Estimado Total -->
                             <div class="input-group">
-                                <span class="input-group-text">Firmar a continuación:</span>
+                                <span class="input-group-text">Cotizacion 2:</span>
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
                                         <input name="cotizacion2" id="filer_input2" class="form-control" type="file"
                                             accept="image/jpeg,image/png/,.pdf">
 
                                         <div class="Neon-input-inner">
-                                            <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
+                                            <div class="Neon-input-icon"></div>
                                             <div class="Neon-input-text">
-                                                <h3>Seleccione la firma</h3>
+                                                <h3>Seleccione la cotizacion</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -225,16 +225,16 @@
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Costo Estimado Total -->
                             <div class="input-group">
-                                <span class="input-group-text">Firmar a continuación:</span>
+                                <span class="input-group-text">Cotizacion 3:</span>
                                 <div class="form-control Neon Neon-theme-dragdropbox">
                                     <div class="Neon-input-dragDrop">
                                         <input name="cotizacion3" id="filer_input2" class="form-control" type="file"
                                             accept="image/jpeg,image/png/,.pdf">
 
                                         <div class="Neon-input-inner">
-                                            <div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div>
+                                            <div class="Neon-input-icon"></div>
                                             <div class="Neon-input-text">
-                                                <h3>Seleccione la firma</h3>
+                                                <h3>Seleccione la cotizacion</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -256,7 +256,6 @@
 
                         <script>
                             /* VALIDACION DE QUE TODOS LOS CAMPOS ESTEN LLENOS Y ARROJA EL MENSAJE DE GUARDADO */
-
                         </script>
 
                     </div>

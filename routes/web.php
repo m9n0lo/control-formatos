@@ -69,6 +69,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/Compras/dashboard/{id}/detalle/', 'ComprasController@estado_RQS')->name('compras.estado');
         Route::post('/Compras/dashboard/detalle/{id}', 'ComprasController@gestion_RQS')->name('compras.gestion');
         Route::get('/Compras/dashboard/detalle/{id}/', 'ComprasController@show')->name('compras.show');
+        Route::post('/Compras/dashboard/detalle/{id}/update', 'ComprasController@update_RQS')->name('compras.update');
 
 
     });
