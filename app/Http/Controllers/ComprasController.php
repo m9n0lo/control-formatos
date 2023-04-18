@@ -43,6 +43,8 @@ class ComprasController extends Controller
             }
             $archivo->move($directory, $archivo->getClientOriginalName());
             $cotizacion1 = $url . $archivo->getClientOriginalName();
+        } else {
+            $cotizacion1 = null;
         }
         if ($request->hasFile('cotizacion2')) {
             $archivo = $request->file('cotizacion2');
@@ -53,6 +55,8 @@ class ComprasController extends Controller
             }
             $archivo->move($directory, $archivo->getClientOriginalName());
             $cotizacion2 = $url . $archivo->getClientOriginalName();
+        } else {
+            $cotizacion2 = null;
         }
         if ($request->hasFile('cotizacion3')) {
             $archivo = $request->file('cotizacion3');
@@ -63,6 +67,8 @@ class ComprasController extends Controller
             }
             $archivo->move($directory, $archivo->getClientOriginalName());
             $cotizacion3 = $url . $archivo->getClientOriginalName();
+        } else {
+            $cotizacion3 = null;
         }
 
         $descripcion_servicio = $request->input('descripcion_servicio');
@@ -228,40 +234,53 @@ class ComprasController extends Controller
             $servicio['um_servicio'] = $request->input('um_servicio')[$i];
             $servicio['observacion_servicio'] = $request->input('observacion_servicio')[$i];
         }
-        if (empty($compra->cotizacion1) || empty($compra->cotizacion2) || empty($compra->cotizacion3)) {
-            if ($request->hasFile('cotizacion1')) {
-                $archivo = $request->file('cotizacion1');
-                $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
-                $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
-                if (!File::exists($directory)) {
-                    File::makeDirectory($directory, 0777, true);
-                }
-                $archivo->move($directory, $archivo->getClientOriginalName());
-                $cotizacion1 = $url . $archivo->getClientOriginalName();
+
+
+        $cod_area = $request->area;
+        $date = date('Ymdh');
+        $new_folder_name = 'RQS' . '_' . $cod_area . '_' . $date;
+
+        $cotizacion1 = $compra->cotizacion1 ?? null; // asigna el valor actual o null si está vacío
+
+        if ($request->hasFile('cotizacion1')) {
+            $archivo = $request->file('cotizacion1');
+            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
+            $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0777, true);
             }
-            if ($request->hasFile('cotizacion2')) {
-                $archivo = $request->file('cotizacion2');
-                $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
-                $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
-                if (!File::exists($directory)) {
-                    File::makeDirectory($directory, 0777, true);
-                }
-                $archivo->move($directory, $archivo->getClientOriginalName());
-                $cotizacion2 = $url . $archivo->getClientOriginalName();
-            }
-            if ($request->hasFile('cotizacion3')) {
-                $archivo = $request->file('cotizacion3');
-                $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
-                $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
-                if (!File::exists($directory)) {
-                    File::makeDirectory($directory, 0777, true);
-                }
-                $archivo->move($directory, $archivo->getClientOriginalName());
-                $cotizacion3 = $url . $archivo->getClientOriginalName();
-            }
+            $archivo->move($directory, $archivo->getClientOriginalName());
+            $cotizacion1 = $url . $archivo->getClientOriginalName();
         }
+
+
+        $cotizacion2 = $compra->cotizacion2 ?? null;
+
+        if ($request->hasFile('cotizacion2')) {
+            $archivo = $request->file('cotizacion2');
+            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
+            $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0777, true);
+            }
+            $archivo->move($directory, $archivo->getClientOriginalName());
+            $cotizacion2 = $url . $archivo->getClientOriginalName();
+        }
+        $cotizacion3 = $compra->cotizacion3 ?? null;
+
+        if ($request->hasFile('cotizacion3')) {
+            $archivo = $request->file('cotizacion3');
+            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
+            $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0777, true);
+            }
+            $archivo->move($directory, $archivo->getClientOriginalName());
+            $cotizacion3 = $url . $archivo->getClientOriginalName();
+        }
+
         $compra->area = $request->input('area');
-        $compra->fecha_esperada = date('Y-m-d H:i:s', strtotime($request->input('fecha_esperada')));
+        $compra->fecha_esperada = date('Y-m-d H:i:s', strtotime($request->input('entrega_esperada')));
         $compra->tipo_solicitud = $request->input('tipo_solicitud');
         $compra->sede = $request->input('sede');
         $compra->razon_social = $request->input('razon_social');
@@ -275,6 +294,12 @@ class ComprasController extends Controller
         $compra->cotizacion3 = $cotizacion3;
         $compra->save();
 
-        return response()->json(['success' => 'Formato actualizado correctamente!!']);
+        $id = $compra->id;
+        $user = Auth::user();
+        $responsable = $user->name;
+        $fecha_actual = Carbon::now()->setTimezone('America/Bogota');
+        C_histories::create(['compra_id' => $id, 'estado' => '4', 'descripcion' => 'Modificacion exitosa !!', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
+
+        return redirect()->route('compras.show', ['id' => $compra]);
     }
 }

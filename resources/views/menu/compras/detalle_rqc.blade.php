@@ -21,7 +21,7 @@
 
                 </div>
             </div>
-            <form action="{{ url("/Compras/dashboard/detalle/{$compra->id}/update") }}" method="post">
+            <form action="{{ url("/Compras/dashboard/detalle/{$compra->id}/update") }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
@@ -460,6 +460,8 @@
                                 <td>RQS Rechazada</td>
                             @elseif ($ch->estado == 3)
                                 <td>En gestion - compras</td>
+                            @elseif ($ch->estado == 4)
+                                <td>Modificacion exitosa</td>
                             @endif
 
                             @if ($ch->descripcion == 1)
