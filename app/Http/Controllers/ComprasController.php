@@ -155,6 +155,7 @@ class ComprasController extends Controller
         $us = Auth::user();
         $nombreus = $us->id;
         $action = $request->input('apr_decl_rqs');
+        $action2 = $request->input('apr_rqs');
         $motivo = $request->motivo_rechazo;
         $fecha_actual = Carbon::now()
             ->setTimezone('America/Bogota')
@@ -166,13 +167,31 @@ class ComprasController extends Controller
         $compraid = $compra->id;
         $responsable = $us->name;
 
+
+
         if ($action == '3') {
-            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual, 'motivo_cancelacion' => $motivo]);
+            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus,'fecha_estado' => $fecha_actual, 'motivo_cancelacion' => $motivo]);
             C_histories::create(['compra_id' => $compraid, 'estado' => '2', 'descripcion' => $motivo, 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
-        } elseif ($action == '2') {
-            $compra->update(['estado' => '2', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual, 'fecha_esperada' => $fecha_espe]);
+        } elseif ($action2 == '2') {
+            $servicios = json_decode($compra->servicios, true);
+
+            foreach ($servicios as &$servicio) {
+                $i = array_search($servicio, $servicios);
+
+                $servicio['cantidad_aprobada'] = $request->input('cantidad_aprobada')[$i];
+
+            }
+            $compra->update(['estado' => '2', 'autorizado_por' => $nombreus, 'servicios' => json_encode($servicios), 'fecha_estado' => $fecha_actual, 'fecha_esperada' => $fecha_espe]);
             C_histories::create(['compra_id' => $compraid, 'estado' => '1', 'descripcion' => 'Aprobado sin problema', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
         }
+
+        /* if ($action == '3') {
+            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual, 'motivo_cancelacion' => $motivo]);
+            C_histories::create(['compra_id' => $compraid, 'estado' => '2', 'descripcion' => $motivo, 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
+        } elseif ($action2 == '2') {
+            $compra->update(['estado' => '2', 'autorizado_por' => $nombreus, 'servicios' => json_encode($servicios) ,'fecha_estado' => $fecha_actual, 'fecha_esperada' => $fecha_espe]);
+            C_histories::create(['compra_id' => $compraid, 'estado' => '1', 'descripcion' => 'Aprobado sin problema', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
+        } */
 
         return redirect()->route('compras.dashboard');
     }
@@ -235,7 +254,6 @@ class ComprasController extends Controller
             $servicio['observacion_servicio'] = $request->input('observacion_servicio')[$i];
         }
 
-
         $cod_area = $request->area;
         $date = date('Ymdh');
         $new_folder_name = 'RQS' . '_' . $cod_area . '_' . $date;
@@ -252,7 +270,6 @@ class ComprasController extends Controller
             $archivo->move($directory, $archivo->getClientOriginalName());
             $cotizacion1 = $url . $archivo->getClientOriginalName();
         }
-
 
         $cotizacion2 = $compra->cotizacion2 ?? null;
 

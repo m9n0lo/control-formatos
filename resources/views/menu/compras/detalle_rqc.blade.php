@@ -21,7 +21,8 @@
 
                 </div>
             </div>
-            <form action="{{ url("/Compras/dashboard/detalle/{$compra->id}/update") }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url("/Compras/dashboard/detalle/{$compra->id}/update") }}" method="post"
+                enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
@@ -109,6 +110,7 @@
                         <div class="row title"><span>Acreedores Propuestos</span></div>
                     </div>
                     <div class="row">
+                        {{-- RAZON SOCIAL --}}
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Razon Social -->
                             <div class="form-floating">
@@ -118,6 +120,7 @@
                             </div>
                         </div>
 
+                        {{-- CORREO CONTACTO --}}
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Correo Contacto-->
                             <div class="form-floating">
@@ -126,6 +129,8 @@
                                 <label for="floatingInput">Correo Contacto</label>
                             </div>
                         </div>
+
+                        {{-- TELEFONO CONTACTO --}}
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Telefono Contacto -->
                             <div class="form-floating">
@@ -138,10 +143,13 @@
                     </div>
                 </div>
 
+                {{-- CARD BODY SERVICIOS --}}
                 <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
                     <div class="card-title">
                         <div class="row title"><span>Servicios</span></div>
                     </div>
+
+                    {{-- TABLA SERVICIOS  --}}
                     <table id="tabla_detalleRQS" class="table table-bordered" style="width:100%">
                         <thead>
                             <tr>
@@ -181,7 +189,9 @@
                         </tbody>
 
                     </table>
+
                     <div class="row">
+                        {{-- DETALLE SOLICITUD --}}
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
                             <!-- Detalle Solicitud -->
                             <div class="form-floating">
@@ -190,6 +200,7 @@
                                 <label for="floatingInput">Detalle Solicitud</label>
                             </div>
                         </div>
+                        {{-- COSTO ESTIMADO --}}
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
                             <!-- Costo Estimado Total -->
                             <div class="form-floating">
@@ -318,21 +329,19 @@
             </form>
 
 
-            <form class="d-inline-flex " method="POST" action="{{ url("/Compras/dashboard/{$compra->id}/detalle/") }}">
-                @csrf
-                @method('POST')
 
-                <div class="buttons_d">
-                    <button type="submit" class="btn btn-success " name="apr_decl_rqs" value="2"
-                        style="margin-bottom: 3px">
-                        <i class="fa-solid fa-circle-check fa-lg"></i>
-                        <span class="nav-text">
-                            Aprobar RQS
-                        </span>
-                    </button>
-                </div>
-            </form>
-            {{--  --}}
+            {{-- </form> --}}
+            <div class="buttons_d">
+                <button type="button" class="btn btn-success " data-bs-toggle="modal"style="margin-bottom: 3px"
+                    data-bs-target="#AprobarRQS">
+                    <i class="fa-solid fa-circle-check fa-lg"></i>
+                    <span class="nav-text">
+                        Aprobar RQS
+                    </span>
+                </button>
+            </div>
+
+
             <div class="buttons_d">
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" style="margin-bottom: 3px"
                     data-bs-target="#RechazarRQS">
@@ -364,8 +373,8 @@
 
 
         {{-- MODAL DE CONTINUAR RQS --}}
-        <div class="modal fade" id="continuarRQS" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="continuarRQS" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -395,7 +404,8 @@
 
         </div>
         {{-- MODAL DE RECHAZO RQS --}}
-        <div class="modal fade" id="RechazarRQS" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="RechazarRQS" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -406,6 +416,7 @@
                         @csrf
                         @method('POST')
                         <div class="modal-body">
+
 
                             <div class="mb-3">
                                 <label for="recipient-name" class="col-form-label">Motivo:</label>
@@ -430,9 +441,92 @@
                     </form>
                 </div>
             </div>
+
+        </div>
+
+
+        {{-- MODAL APROBADO RQS --}}
+        <div class="modal fade modal-xl modal-dialog-scrollable" id="AprobarRQS" data-bs-backdrop="static"
+            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form class="d-inline-flex " method="POST"
+                    action="{{ url("/Compras/dashboard/{$compra->id}/detalle/") }}">
+                    @csrf
+                    @method('POST')
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <table id="tabla_detalleRQS" class="table table-bordered" style="width:100%">
+                                <thead style="background: rgb(74, 193, 248)">
+                                    <tr>
+
+                                        <th>Descripcion</th>
+                                        <th>Centro Costo</th>
+                                        <th>Area</th>
+                                        <th>Cantidad</th>
+                                        <th>Cantidad Aprobada</th>
+                                        <th>U.M.</th>
+                                        <th>Observacion</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $datos = json_decode($datosJson, true);
+                                    @endphp
+
+                                    @foreach ($datos as $servicio)
+                                        <tr>
+
+                                            <td> <input type="text" name="descripcion_servicio[]"
+                                                    id="detalle_solicitud" class="form-control"
+                                                    value="{{ $servicio['descripcion_servicio'] }}" disabled />
+                                            </td>
+                                            <td> <input type="text" name="centro_servicio[]" id="detalle_solicitud"
+                                                    class="form-control" value="{{ $servicio['centro_servicio'] }}"
+                                                    disabled />
+                                            </td>
+                                            <td> <input type="text" name="area_servicio[]" id="detalle_solicitud"
+                                                    class="form-control" value="{{ $servicio['area_servicio'] }}"
+                                                    disabled />
+                                            </td>
+                                            <td> <input type="text" name="cantidad_servicio[]" id="detalle_solicitud"
+                                                    class="form-control" value="{{ $servicio['cantidad_servicio'] }}"
+                                                    disabled />
+                                            </td>
+                                            <td> <input type="text" name="cantidad_aprobada[]" id="detalle_solicitud"
+                                                    class="form-control" value="{{ $servicio['cantidad_servicio'] }}" />
+                                            </td>
+                                            <td> <input type="text" name="um_servicio[]" id="detalle_solicitud"
+                                                    class="form-control" value="{{ $servicio['um_servicio'] }}"
+                                                    disabled /></td>
+                                            <td> <input type="text" name="observacion_servicio[]"
+                                                    id="detalle_solicitud" class="form-control"
+                                                    value="{{ $servicio['observacion_servicio'] }}" disabled />
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" id="apr_rqs" name="apr_rqs" class="btn btn-success"
+                                value="2">Confirmar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
         </div>
 
+        {{-- TABLA DE HISTORIAL DE CAMBIOS --}}
         <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
             <table class="table table-bordered " style="width:100%">
                 <thead>
