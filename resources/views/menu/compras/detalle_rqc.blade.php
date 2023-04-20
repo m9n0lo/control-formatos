@@ -150,7 +150,7 @@
                     </div>
 
                     {{-- TABLA SERVICIOS  --}}
-                    <table id="tabla_detalleRQS" class="table table-bordered" style="width:100%">
+                    <table id="tabla_detalleRQS" class="table " style="width:100%">
                         <thead>
                             <tr>
 
@@ -326,51 +326,105 @@
                                     </span>
                                 </button>
                             </div>
+                            <div class="buttons_d">
+                                <button type="button" class="btn btn-success "
+                                    data-bs-toggle="modal"style="margin-bottom: 3px" data-bs-target="#AprobarRQS">
+                                    <i class="fa-solid fa-circle-check fa-lg"></i>
+                                    <span class="nav-text">
+                                        Aprobar RQS
+                                    </span>
+                                </button>
+                            </div>
+
+
+                            <div class="buttons_d">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    style="margin-bottom: 3px" data-bs-target="#RechazarRQS">
+                                    <i class="fa-solid fa-rectangle-xmark fa-lg"></i>
+                                    <span class="nav-text">
+                                        Rechazar RQS
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($compra->estado == 2 && $compra->estado_gestion == 1)
+                        <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
+                            <div class=" buttons_d">
+                                <button type="button" class="btn btn-primary" name="gestion_rqs"
+                                    style="margin-bottom: 3px" data-bs-toggle="modal" data-bs-target="#continuarRQS">
+                                    <span class="nav-text">
+                                        Continuar
+                                    </span>
+                                    <i class="fa-sharp fa-solid fa-circle-arrow-right fa-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                    @else
+                    @endif
+                </div>
             </form>
+            {{-- TABLA DE HISTORIAL DE CAMBIOS --}}
+            <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
+                <table class="table " style="width:100%">
+                    <thead>
+                        <tr>
+
+                            <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 mt-3">#</th>
+                            <th class="col-xs-3 col-sm-2 col-md-2 col-lg-2 mt-3">Estado</th>
+                            <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 mt-3">Descripcion</th>
+                            <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 mt-3">Responsable y Fecha</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $contador = 1;
+                        @endphp
+                        @foreach ($c_history as $ch)
+                            <tr>
+
+                                <td> {{ $contador }}</td>
+
+                                @if ($ch->estado == 1)
+                                    <td>RQS Aprobado</td>
+                                @elseif ($ch->estado == 2)
+                                    <td>RQS Rechazada</td>
+                                @elseif ($ch->estado == 3)
+                                    <td>En gestion - compras</td>
+                                @elseif ($ch->estado == 4)
+                                    <td>Modificacion exitosa</td>
+                                @endif
+
+                                @if ($ch->descripcion == 1)
+                                    <td> SE ANULA POR ERROR DE DIGITACION</td>
+                                @elseif ($ch->descripcion == 2)
+                                    <td> SE ANULA POR DUPLICADO</td>
+                                @elseif ($ch->descripcion == 3)
+                                    <td> SE ANULA POR PROBLEMAS DE CONFIGURACION</td>
+                                @elseif ($ch->descripcion == 4)
+                                    <td> SE ANULA POR PROBLEMAS DE CONSECUTIVO</td>
+                                @elseif ($ch->descripcion == 5)
+                                    <td> RECLASIFICACION DE BANCO</td>
+                                @elseif ($ch->descripcion == 6)
+                                    <td> PAGO NO APLICADO POR EL BANCO</td>
+                                @else
+                                    <td>{{ $ch->descripcion }}</td>
+                                @endif
+                                <td> {{ $ch->responsable }} - {{ $ch->fecha_cambio }}</td>
 
 
-
-            {{-- </form> --}}
-            <div class="buttons_d">
-                <button type="button" class="btn btn-success " data-bs-toggle="modal"style="margin-bottom: 3px"
-                    data-bs-target="#AprobarRQS">
-                    <i class="fa-solid fa-circle-check fa-lg"></i>
-                    <span class="nav-text">
-                        Aprobar RQS
-                    </span>
-                </button>
-            </div>
-
-
-            <div class="buttons_d">
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" style="margin-bottom: 3px"
-                    data-bs-target="#RechazarRQS">
-                    <i class="fa-solid fa-rectangle-xmark fa-lg"></i>
-                    <span class="nav-text">
-                        Rechazar RQS
-                    </span>
-                </button>
+                            </tr>
+                            @php
+                                $contador++;
+                            @endphp
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
 
         </div>
-        @endif
-
-        @if ($compra->estado == 2 && $compra->estado_gestion == 1)
-            <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
-                <div class=" buttons_d">
-                    <button type="submit" class="btn btn-primary" name="gestion_rqs" style="margin-bottom: 3px"
-                        data-bs-toggle="modal" data-bs-target="#continuarRQS">
-                        <span class="nav-text">
-                            Continuar
-                        </span>
-                        <i class="fa-sharp fa-solid fa-circle-arrow-right fa-lg"></i>
-                    </button>
-                </div>
-            </div>
-        @else
-        @endif
-
-
 
         {{-- MODAL DE CONTINUAR RQS --}}
         <div class="modal fade" id="continuarRQS" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -403,6 +457,7 @@
             </div>
 
         </div>
+
         {{-- MODAL DE RECHAZO RQS --}}
         <div class="modal fade" id="RechazarRQS" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -444,7 +499,6 @@
 
         </div>
 
-
         {{-- MODAL APROBADO RQS --}}
         <div class="modal fade modal-xl modal-dialog-scrollable" id="AprobarRQS" data-bs-backdrop="static"
             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -461,7 +515,7 @@
                         </div>
 
                         <div class="modal-body">
-                            <table id="tabla_detalleRQS" class="table table-bordered" style="width:100%">
+                            <table id="tabla_detalleRQS" class="table " style="width:100%">
                                 <thead style="background: rgb(74, 193, 248)">
                                     <tr>
 
@@ -524,66 +578,9 @@
                 </form>
             </div>
         </div>
-        </div>
-
-        {{-- TABLA DE HISTORIAL DE CAMBIOS --}}
-        <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
-            <table class="table table-bordered " style="width:100%">
-                <thead>
-                    <tr>
-
-                        <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1 mt-3">#</th>
-                        <th class="col-xs-3 col-sm-2 col-md-2 col-lg-2 mt-3">Estado</th>
-                        <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 mt-3">Descripcion</th>
-                        <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 mt-3">Responsable y Fecha</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $contador = 1;
-                    @endphp
-                    @foreach ($c_history as $ch)
-                        <tr>
-
-                            <td> {{ $contador }}</td>
-
-                            @if ($ch->estado == 1)
-                                <td>RQS Aprobado</td>
-                            @elseif ($ch->estado == 2)
-                                <td>RQS Rechazada</td>
-                            @elseif ($ch->estado == 3)
-                                <td>En gestion - compras</td>
-                            @elseif ($ch->estado == 4)
-                                <td>Modificacion exitosa</td>
-                            @endif
-
-                            @if ($ch->descripcion == 1)
-                                <td> SE ANULA POR ERROR DE DIGITACION</td>
-                            @elseif ($ch->descripcion == 2)
-                                <td> SE ANULA POR DUPLICADO</td>
-                            @elseif ($ch->descripcion == 3)
-                                <td> SE ANULA POR PROBLEMAS DE CONFIGURACION</td>
-                            @elseif ($ch->descripcion == 4)
-                                <td> SE ANULA POR PROBLEMAS DE CONSECUTIVO</td>
-                            @elseif ($ch->descripcion == 5)
-                                <td> RECLASIFICACION DE BANCO</td>
-                            @elseif ($ch->descripcion == 6)
-                                <td> PAGO NO APLICADO POR EL BANCO</td>
-                            @else
-                                <td>{{ $ch->descripcion }}</td>
-                            @endif
-                            <td> {{ $ch->responsable }} - {{ $ch->fecha_cambio }}</td>
 
 
-                        </tr>
-                        @php
-                            $contador++;
-                        @endphp
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        </div>
+
+
     </section>
 @endsection

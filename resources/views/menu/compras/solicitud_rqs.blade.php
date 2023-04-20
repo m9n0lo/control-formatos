@@ -139,7 +139,7 @@
                         </a>
                     </div>
 
-                    <table id="tabla_solicitudRQS" class="table table-bordered" style="width:100%">
+                    <table id="tabla_solicitudRQS" class="table " style="width:100%">
                         <thead>
                             <tr>
 

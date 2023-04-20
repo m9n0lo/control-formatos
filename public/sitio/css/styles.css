@@ -256,7 +256,6 @@ nav.main-menu li.active > a,
 }
 
 .rqs {
-
     margin-bottom: 20px;
 }
 
@@ -264,21 +263,19 @@ nav.main-menu li.active > a,
     padding: 30px;
 }
 
-.td-green{
+.td-green {
     background-color: green;
 }
 
-.td-blue{
+.td-blue {
     background-color: blue;
 }
 
-.buttons_d{
+.buttons_d {
     margin-left: 3px;
     margin-right: 3px;
-
 }
 .estado_rqs {
-
     border-radius: 30px;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
@@ -290,10 +287,18 @@ nav.main-menu li.active > a,
     right: -10px;
     bottom: -20px;
     cursor: pointer;
-    transition: all .25s ease;
+    transition: all 0.25s ease;
     box-shadow: -5px 6px 20px 0px rgba(26, 26, 26, 0.4);
-  }
+}
 
 thead {
- background: rgb(74, 193, 248);
+    background: rgb(74, 193, 248);
+}
+
+table{
+
+    border-color: white;
+    color: #fff;
+    border-radius: .8em;
+    overflow: hidden;
 }

@@ -185,14 +185,6 @@ class ComprasController extends Controller
             C_histories::create(['compra_id' => $compraid, 'estado' => '1', 'descripcion' => 'Aprobado sin problema', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
         }
 
-        /* if ($action == '3') {
-            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual, 'motivo_cancelacion' => $motivo]);
-            C_histories::create(['compra_id' => $compraid, 'estado' => '2', 'descripcion' => $motivo, 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
-        } elseif ($action2 == '2') {
-            $compra->update(['estado' => '2', 'autorizado_por' => $nombreus, 'servicios' => json_encode($servicios) ,'fecha_estado' => $fecha_actual, 'fecha_esperada' => $fecha_espe]);
-            C_histories::create(['compra_id' => $compraid, 'estado' => '1', 'descripcion' => 'Aprobado sin problema', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
-        } */
-
         return redirect()->route('compras.dashboard');
     }
 
