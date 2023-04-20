@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('cotizacion1')->nullable();
             $table->string('detalle_solicitud')->nullable();
             $table->string('costo_estimado')->nullable();
+            $table->string('costo_aprobado')->nullable();
             $table->string('estado_gestion')->nullable();
             $table->string('estado')->nullable();
             $table->string('motivo_cancelacion')->nullable();

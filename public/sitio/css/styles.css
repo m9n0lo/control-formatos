@@ -295,10 +295,9 @@ thead {
     background: rgb(74, 193, 248);
 }
 
-table{
-
+table {
     border-color: white;
     color: #fff;
-    border-radius: .8em;
+    border-radius: 0.8em;
     overflow: hidden;
 }

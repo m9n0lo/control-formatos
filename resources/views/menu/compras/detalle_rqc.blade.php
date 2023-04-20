@@ -2,6 +2,9 @@
 @section('content')
     <section class="section">
 
+        @if ($compra->estado == 3 || $compra->estado == 2)
+            <fieldset disabled>
+        @endif
         <div class="card card-spacing">
             <div class="card-title">
                 <div class="row titulo title-background"><span>{{ 'Detalle RQS - ' . $compra->id }}</span></div>
@@ -134,7 +137,8 @@
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Telefono Contacto -->
                             <div class="form-floating">
-                                <input type="text" name="telefono_contacto" value="{{ $compra->telefono_contacto }}"
+                                <input type="text" pattern="[0-9]+" title="Ingrese solo números"
+                                    name="telefono_contacto" value="{{ $compra->telefono_contacto }}"
                                     id="telefono_contacto_DRQS" class="form-control" />
                                 <label for="floatingInput">Telefono Contacto </label>
                             </div>
@@ -178,7 +182,8 @@
                                     <td> <input type="text" name="area_servicio[]" id="detalle_solicitud"
                                             class="form-control" value="{{ $servicio['area_servicio'] }}" /></td>
                                     <td> <input type="text" name="cantidad_servicio[]" id="detalle_solicitud"
-                                            class="form-control" value="{{ $servicio['cantidad_servicio'] }}" /></td>
+                                            class="form-control" value="{{ $servicio['cantidad_servicio'] }}"
+                                            pattern="[0-9]+" title="Ingrese solo números" /></td>
                                     <td> <input type="text" name="um_servicio[]" id="detalle_solicitud"
                                             class="form-control" value="{{ $servicio['um_servicio'] }}" /></td>
                                     <td> <input type="text" name="observacion_servicio[]" id="detalle_solicitud"
@@ -204,14 +209,18 @@
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
                             <!-- Costo Estimado Total -->
                             <div class="form-floating">
-                                <input type="text" name="costo_estimado" id="costo_estimado_DRQS"
-                                    class="form-control" value="{{ $compra->costo_estimado }}" />
+                                <input type="text" pattern="[0-9]+" title="Ingrese solo números"
+                                    name="costo_estimado" id="costo_estimado_DRQS" class="form-control"
+                                    value="{{ $compra->costo_estimado }}" />
                                 <label for="floatingInput">Costo Estimado Total</label>
                             </div>
                         </div>
                     </div>
 
                 </div>
+                @if ($compra->estado == 3 || $compra->estado == 2)
+                    </fieldset>
+                @endif
 
                 <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
                     <div class="card-title">
@@ -226,7 +235,8 @@
                                     <div class="form-control Neon Neon-theme-dragdropbox">
                                         <div class="Neon-input-dragDrop">
                                             <input name="cotizacion1" id="filer_input2" class="form-control"
-                                                type="file" accept="image/jpeg,image/png/,.pdf">
+                                                type="file" accept="image/jpeg,image/png/,.pdf"
+                                                @if ($compra->estado == 2) required @endif>
 
                                             <div class="Neon-input-inner">
                                                 <div class="Neon-input-icon"></div>
@@ -257,7 +267,8 @@
                                     <div class="form-control Neon Neon-theme-dragdropbox">
                                         <div class="Neon-input-dragDrop">
                                             <input name="cotizacion2" id="filer_input2" class="form-control"
-                                                type="file" accept="image/jpeg,image/png/,.pdf">
+                                                type="file" accept="image/jpeg,image/png/,.pdf"
+                                                @if ($compra->estado == 2) required @endif>
 
                                             <div class="Neon-input-inner">
                                                 <div class="Neon-input-icon"></div>
@@ -287,7 +298,8 @@
                                     <div class="form-control Neon Neon-theme-dragdropbox">
                                         <div class="Neon-input-dragDrop">
                                             <input name="cotizacion3" id="filer_input2" class="form-control"
-                                                type="file" accept="image/jpeg,image/png/,.pdf">
+                                                type="file" accept="image/jpeg,image/png/,.pdf"
+                                                @if ($compra->estado == 2) required @endif>
 
                                             <div class="Neon-input-inner">
                                                 <div class="Neon-input-icon"></div>
@@ -326,6 +338,7 @@
                                     </span>
                                 </button>
                             </div>
+
                             <div class="buttons_d">
                                 <button type="button" class="btn btn-success "
                                     data-bs-toggle="modal"style="margin-bottom: 3px" data-bs-target="#AprobarRQS">
@@ -335,7 +348,6 @@
                                     </span>
                                 </button>
                             </div>
-
 
                             <div class="buttons_d">
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
@@ -364,7 +376,9 @@
                     @else
                     @endif
                 </div>
+
             </form>
+
             {{-- TABLA DE HISTORIAL DE CAMBIOS --}}
             <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
                 <table class="table " style="width:100%">
@@ -435,7 +449,6 @@
                         <h5 class="modal-title" id="exampleModalLabel">¿Desea continuar con la RQS?</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-
                     <form method="POST"action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}">
                         @csrf
                         @method('POST')
@@ -509,7 +522,7 @@
                     @method('POST')
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Resumen Aprobado</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
@@ -567,6 +580,28 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="row">
+                                {{-- DETALLE SOLICITUD --}}
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
+                                    <!-- Detalle Solicitud -->
+                                    <div class="form-floating">
+                                        <input type="text" name="detalle_solicitud" id="detalle_solicitud_DRQS"
+                                            class="form-control" value="{{ $compra->detalle_solicitud }}" disabled />
+                                        <label for="floatingInput">Detalle Solicitud</label>
+                                    </div>
+                                </div>
+                                {{-- COSTO ESTIMADO --}}
+                                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
+                                    <!-- Costo Estimado Total -->
+                                    <div class="form-floating">
+                                        <input type="text" pattern="[0-9]+" title="Ingrese solo números"
+                                            name="costo_aprobado" id="costo_aprobado_DRQS" class="form-control "
+                                            value="{{ $compra->costo_estimado }}" />
+                                        <label for="floatingInput">Costo Aprobado Total</label>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="modal-footer">

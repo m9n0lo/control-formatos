@@ -27,6 +27,7 @@ class Compras extends Model
         'cotizacion3',
         'detalle_solicitud',
         'costo_estimado',
+        'costo_aprobado',
         'estado_gestion',
         'estado',
         'servicios',

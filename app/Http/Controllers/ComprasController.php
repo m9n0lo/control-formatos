@@ -113,6 +113,7 @@ class ComprasController extends Controller
             'cotizacion3' => $cotizacion3,
             'detalle_solicitud' => $request->detalle_solicitud,
             'costo_estimado' => $request->costo_estimado,
+            'costo_aprobado' => 0,
             'estado_gestion' => 1,
             'estado' => 1,
             'created_at' => date('Y-m-d H:i:s'),
@@ -167,21 +168,18 @@ class ComprasController extends Controller
         $compraid = $compra->id;
         $responsable = $us->name;
 
-
-
         if ($action == '3') {
-            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus,'fecha_estado' => $fecha_actual, 'motivo_cancelacion' => $motivo]);
+            $compra->update(['estado' => '3', 'autorizado_por' => $nombreus, 'fecha_estado' => $fecha_actual, 'motivo_cancelacion' => $motivo]);
             C_histories::create(['compra_id' => $compraid, 'estado' => '2', 'descripcion' => $motivo, 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
         } elseif ($action2 == '2') {
             $servicios = json_decode($compra->servicios, true);
-
+            $costo_aprobado = $request->input('costo_aprobado');
             foreach ($servicios as &$servicio) {
                 $i = array_search($servicio, $servicios);
 
                 $servicio['cantidad_aprobada'] = $request->input('cantidad_aprobada')[$i];
-
             }
-            $compra->update(['estado' => '2', 'autorizado_por' => $nombreus, 'servicios' => json_encode($servicios), 'fecha_estado' => $fecha_actual, 'fecha_esperada' => $fecha_espe]);
+            $compra->update(['estado' => '2', 'autorizado_por' => $nombreus, 'servicios' => json_encode($servicios), 'costo_aprobado' => $costo_aprobado, 'fecha_estado' => $fecha_actual, 'fecha_esperada' => $fecha_espe]);
             C_histories::create(['compra_id' => $compraid, 'estado' => '1', 'descripcion' => 'Aprobado sin problema', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
         }
 
