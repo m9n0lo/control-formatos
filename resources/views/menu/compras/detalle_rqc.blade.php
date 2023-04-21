@@ -24,7 +24,7 @@
 
                 </div>
             </div>
-            <form action="{{ url("/Compras/dashboard/detalle/{$compra->id}/update") }}" method="post"
+            <form id="DetalleRQS" action="{{ url("/Compras/dashboard/detalle/{$compra->id}/update") }}" method="post"
                 enctype="multipart/form-data">
                 @csrf
                 @method('POST')
@@ -253,6 +253,7 @@
                             <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4 mt-3">
 
                                 <a class="button" href="{{ asset($compra->cotizacion1) }}" target="_blank"
+                                    name="cotizacion1"
                                     style="color:black; text-decoration:none; margin: 10px 10px 10px 0;">
                                     <i class="fa-solid fa-file-pdf"></i>
                                     <span class="nav-text">Visualizar PDF</span>
@@ -283,8 +284,8 @@
                             </div>
                         @else
                             <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4 mt-3">
-                                <a class="button" href="{{ asset($compra->cotizacion2) }}" target="_blank"
-                                    style="color:black; text-decoration:none; margin: 10px 10px 0;">
+                                <a class="button" name="cotizacion2" href="{{ asset($compra->cotizacion2) }}"
+                                    target="_blank" style="color:black; text-decoration:none; margin: 10px 10px 0;">
                                     <i class="fa-solid fa-file-pdf"></i>
                                     <span class="nav-text">Visualizar PDF</span>
                                 </a>
@@ -315,8 +316,8 @@
                             </div>
                         @else
                             <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4 mt-3">
-                                <a class="button" href="{{ asset($compra->cotizacion3) }}" target="_blank"
-                                    style="color:black; text-decoration:none; margin: 510x  10px 10px 0;">
+                                <a class="button" name="cotizacion3" href="{{ asset($compra->cotizacion3) }}"
+                                    target="_blank" style="color:black; text-decoration:none; margin: 510x  10px 10px 0;">
                                     <i class="fa-solid fa-file-pdf"></i>
                                     <span class="nav-text">Visualizar PDF</span>
                                 </a>
@@ -364,8 +365,8 @@
                     @if ($compra->estado == 2 && $compra->estado_gestion == 1)
                         <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
                             <div class=" buttons_d">
-                                <button type="button" class="btn btn-primary" name="gestion_rqs"
-                                    style="margin-bottom: 3px" data-bs-toggle="modal" data-bs-target="#continuarRQS">
+                                <button type="button" class="btn btn-primary" name="gestion_rqs" id="gestion_rqs"
+                                    style="margin-bottom: 3px" onclick="validarFormulario(event)">
                                     <span class="nav-text">
                                         Continuar
                                     </span>

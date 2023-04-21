@@ -76,3 +76,24 @@ if (load_rqs) {
         }
     });
 }
+
+function validarFormulario(event) {
+    event.preventDefault(); // prevenir que se ejecute el evento click por defecto
+    event.stopPropagation(); // detener la propagación del evento
+
+    const detalleRQs = document.querySelector("#DetalleRQS");
+    if (
+        ((detalleRQs.cotizacion1 && detalleRQs.cotizacion1.files.length > 0) || !detalleRQs.cotizacion1)/*  &&
+        ((detalleRQs.cotizacion2 && detalleRQs.cotizacion2.files.length > 0) || !detalleRQs.cotizacion2) &&
+        ((detalleRQs.cotizacion3 && detalleRQs.cotizacion3.files.length > 0) || !detalleRQs.cotizacion3) */
+    ) {
+        $("#continuarRQS").modal("show");
+    } else {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Falta campos por diligenciar!",
+        });
+    }
+
+}
