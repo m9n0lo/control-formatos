@@ -71,6 +71,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/Compras/dashboard/detalle/{id}/', 'ComprasController@show')->name('compras.show');
         Route::post('/Compras/dashboard/detalle/{id}/update', 'ComprasController@update_RQS')->name('compras.update');
 
+        Route::get('/inactivate-records', 'ComprasController@inactivateRecords');
 
     });
 });

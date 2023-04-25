@@ -12,6 +12,7 @@ use App\Models\C_histories;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Artisan;
 
 class ComprasController extends Controller
 {
@@ -289,6 +290,7 @@ class ComprasController extends Controller
         $compra->area = $request->input('area');
         $compra->fecha_esperada = date('Y-m-d H:i:s', strtotime($request->input('entrega_esperada')));
         $compra->tipo_solicitud = $request->input('tipo_solicitud');
+        $compra->jefe_inmediato=$request->input('persona_id');
         $compra->sede = $request->input('sede');
         $compra->razon_social = $request->input('razon_social');
         $compra->correo_electronico = $request->input('correo_contacto');
@@ -308,5 +310,12 @@ class ComprasController extends Controller
         C_histories::create(['compra_id' => $id, 'estado' => '4', 'descripcion' => 'Modificacion exitosa !!', 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
 
         return redirect()->route('compras.show', ['id' => $compra]);
+    }
+
+    public function inactivateRecords()
+    {
+        Artisan::call('rechazar:rqs');
+
+        return response()->json(['message' => 'Registros inactivados']);
     }
 }
