@@ -18,7 +18,7 @@
              </span>
          </a>
 
-         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" >
+         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
              <li class="dropdown-item">
                  <a href="{{ route('compras.solicitud') }}">
                      <i class="fa fa-home fa-2x"></i>
@@ -32,6 +32,15 @@
              </li>
 
          </ul>
+     </li>
+
+     <li>
+         <a href="{{ route('formato') }}">
+             <i class="fa fa-home fa-2x"></i>
+             <span class="nav-text">
+                 SST
+             </span>
+         </a>
      </li>
 
  </ul>
