@@ -65,7 +65,7 @@
                             <!-- Jefe_Inmediato -->
                             <select class="js-example-basic-single" class="form-control" name="persona_id" id="persona_id"
                                 required>
-                                <option selected>{{ $compraNombreP }}</option>
+                                <option value="{{$compraIdp}}" selected>{{ $compraNombreP }}</option>
                                 @foreach ($jefe as $jef)
                                     <option value="{{ $jef->id }}">{{ $jef->nombre_funcionario }}</option>
                                 @endforeach

@@ -108,7 +108,7 @@
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4 mt-3">
                             <!-- Telefono Contacto -->
                             <div class="form-floating">
-                                <input type="text" name="telefono_contacto" id="telefono_contacto" class="form-control"
+                                <input type="text" name="telefono_contacto" pattern="[0-9]+" id="telefono_contacto" class="form-control"
                                     required />
                                 <label for="floatingInput">Telefono Contacto </label>
                             </div>
@@ -167,7 +167,7 @@
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
                             <!-- Costo Estimado Total -->
                             <div class="form-floating">
-                                <input type="text" name="costo_estimado" id="costo_estimado" class="form-control"
+                                <input type="text" name="costo_estimado" pattern="[0-9]+" id="costo_estimado" class="form-control"
                                     required />
                                 <label for="floatingInput">Costo Estimado Total</label>
                             </div>

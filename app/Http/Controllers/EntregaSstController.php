@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entrega_sst;
+use App\Models\Articulos_sst;
+use App\Models\Persona;
 use App\Http\Requests\StoreEntrega_sstRequest;
 use App\Http\Requests\UpdateEntrega_sstRequest;
 
@@ -15,7 +17,11 @@ class EntregaSstController extends Controller
      */
     public function index()
     {
-        //
+        $person = Persona::select('id', 'nombre_funcionario')->get();
+        $articulos = Articulos_sst::select('descripcion')->get();
+
+
+        return view('menu.SST.entrega_sst', compact('person','articulos'));
     }
 
     /**

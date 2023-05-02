@@ -35,7 +35,7 @@
      </li>
 
      <li>
-         <a href="{{ route('formato') }}">
+         <a href="{{ route('sst') }}">
              <i class="fa fa-home fa-2x"></i>
              <span class="nav-text">
                  SST

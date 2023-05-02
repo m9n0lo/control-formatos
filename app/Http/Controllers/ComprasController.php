@@ -220,11 +220,12 @@ class ComprasController extends Controller
 
         $compra = Compras::with('personas:id,nombre_funcionario', 'users:id,name')->find($id);
         $compraNombreP = $compra->personas->nombre_funcionario;
+        $compraIdp = $compra->personas->id;
         $compraNombreU = $compra->users->name;
 
         $datosJson = $compra->servicios;
 
-        return view('menu.compras.detalle_rqc', compact('compra', 'compraNombreP', 'compraNombreU', 'datosJson', 'c_history', 'jefe'));
+        return view('menu.compras.detalle_rqc', compact('compra', 'compraNombreP', 'compraIdp','compraNombreU', 'datosJson', 'c_history', 'jefe'));
     }
 
     public function update_RQS(Request $request, $id)
