@@ -35,8 +35,27 @@ class EntregaSstController extends Controller
             ->orderBy('cargo', 'asc')
             ->get();
 
-        // Convertir la salida a JSON
-        $json = $resultados->toJson();
+        // Agrupar los resultados por cargo
+        $grupos = $resultados->groupBy('cargo');
+
+        // Construir las opciones del select2
+        $options = [];
+        foreach ($grupos as $cargo => $personas) {
+            $opciones = [];
+            foreach ($personas as $persona) {
+                $opciones[] = [
+                    'id' => $persona->nombre_funcionario,
+                    'text' => $persona->nombre_funcionario,
+                ];
+            }
+            $options[] = [
+                'text' => $cargo,
+                'children' => $opciones,
+            ];
+        }
+
+        // Convertir las opciones a JSON
+        $json = json_encode($options);
 
         return $json;
     }

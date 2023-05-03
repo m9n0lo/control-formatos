@@ -23,12 +23,9 @@
                                     });
                                 });
                             </script>
-                            <select class="js-example-basic-single" class="form-control" name="persona_id" id="persona_id"
+                            <select class="js-example-basic-single" class="form-control" name="persona_id_sst" id="persona_id_sst"
                                 required>
                                 <option value="" disabled selected>-- Seleccione Operario --</option>
-                                @foreach ($person as $person)
-                                    <option value="{{ $person->id }}">{{ $person->nombre_funcionario }}</option>
-                                @endforeach
                             </select>
                         </div>
                     </div>
