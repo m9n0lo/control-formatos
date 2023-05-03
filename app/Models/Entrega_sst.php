@@ -29,6 +29,6 @@ class Entrega_sst extends Model
         return $this->belongsTo(User::class,'usuario');
      }
      public function articulos(){
-        return $this->belongsTo(Articulos_sst::class,'articulos');
+        return $this->belongsTo(Articulos_ssts::class,'articulos');
      }
 }

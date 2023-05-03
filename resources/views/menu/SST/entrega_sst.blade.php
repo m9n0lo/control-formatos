@@ -10,16 +10,32 @@
                     {{--  Nombre persona --}}
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3">
                         <div class="input-group">
-                            <input required="" type="text" name="nombre_personal" id="nombre_personal"
-                                class="input rounded">
-                            <label class="user-label">Nombre Completo:</label>
+                            <script>
+                                let dataformatosst = "{{ route('sst.select') }}";
+                                jQuery(document).ready(function($) {
+                                    $("#persona_id_sst").select2({
+                                        closeOnSelect: true,
+                                        ajax: {
+                                            url: 'dataformatosst',
+                                            dataType: 'json'
+                                            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+                                        }
+                                    });
+                                });
+                            </script>
+                            <select class="js-example-basic-single" class="form-control" name="persona_id" id="persona_id"
+                                required>
+                                <option value="" disabled selected>-- Seleccione Operario --</option>
+                                @foreach ($person as $person)
+                                    <option value="{{ $person->id }}">{{ $person->nombre_funcionario }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     {{-- Cargo --}}
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3">
                         <div class="input-group">
-                            <input required="" type="text" name="cargo" id="cargo" class="input rounded">
-                            <label class="user-label">Cargo:</label>
+
                         </div>
                     </div>
                     {{-- Fecha Entrega --}}
@@ -33,15 +49,23 @@
 
                     <table id="tabla_articulos" class="table " style="width:100%">
                         <thead>
-                            @foreach ($articulos as $ar)
-                                <tr>
 
-                                    <th> {{ $ar}}</th>
+                            <tr>
+                                <th></th>
+                                @foreach ($articulos as $ar)
+                                    <th> {{ $ar->descripcion }}(Und)</th>
+                                @endforeach
 
-
-                                </tr>
-                            @endforeach
+                            </tr>
                         </thead>
+                        <tbody>
+                            <th>
+                                @foreach ($articulos as $ar)
+                            <th><input type='text' class='form-control'></th>
+                            @endforeach
+                            </tr>
+                        </tbody>
+
                     </table>
                     {{-- Otro --}}
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3">

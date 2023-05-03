@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\EntregaSstController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +78,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         * Routes SST
         */
         Route::get('/sst', 'EntregaSstController@index')->name('sst');
+        Route::get('/sst/select', 'EntregaSstController@select2')->name('sst.select');
 
 
 

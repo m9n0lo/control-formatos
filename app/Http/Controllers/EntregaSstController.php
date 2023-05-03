@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entrega_sst;
-use App\Models\Articulos_sst;
+use App\Models\Articulos_ssts;
 use App\Models\Persona;
+use DB;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreEntrega_sstRequest;
 use App\Http\Requests\UpdateEntrega_sstRequest;
 
@@ -18,10 +20,25 @@ class EntregaSstController extends Controller
     public function index()
     {
         $person = Persona::select('id', 'nombre_funcionario')->get();
-        $articulos = Articulos_sst::select('descripcion')->get();
+        $articulos = Articulos_ssts::all();
 
+        return view('menu.SST.entrega_sst', compact('person', 'articulos'));
+    }
 
-        return view('menu.SST.entrega_sst', compact('person','articulos'));
+    public function select2()
+    {
+        //SELECT cargo ,nombre_funcionario FROM usuarios GROUP BY cargo, nombre_funcionario ORDER BY cargo ASC ;
+        // Ejecutar la consulta SQL y obtener los resultados en una instancia de Collection
+        $resultados = DB::table('personas')
+            ->select('cargo', 'nombre_funcionario')
+            ->groupBy('cargo', 'nombre_funcionario')
+            ->orderBy('cargo', 'asc')
+            ->get();
+
+        // Convertir la salida a JSON
+        $json = $resultados->toJson();
+
+        return $json;
     }
 
     /**
