@@ -83,9 +83,7 @@ function validarFormulario(event) {
 
     const detalleRQs = document.querySelector("#DetalleRQS");
     if (
-        ((detalleRQs.cotizacion1 && detalleRQs.cotizacion1.files.length > 0) || !detalleRQs.cotizacion1)/*  &&
-        ((detalleRQs.cotizacion2 && detalleRQs.cotizacion2.files.length > 0) || !detalleRQs.cotizacion2) &&
-        ((detalleRQs.cotizacion3 && detalleRQs.cotizacion3.files.length > 0) || !detalleRQs.cotizacion3) */
+        ((detalleRQs.cotizacion1 && detalleRQs.cotizacion1.files.length > 0) || !detalleRQs.cotizacion1)
     ) {
         $("#continuarRQS").modal("show");
     } else {

@@ -450,7 +450,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">¿Desea continuar con la RQS?</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form method="POST"action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}">
+                    <form method="POST"action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
                         <div class="modal-body">

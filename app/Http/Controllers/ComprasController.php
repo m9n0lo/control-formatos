@@ -191,13 +191,56 @@ class ComprasController extends Controller
     {
         $compra = Compras::find($id);
         $us = Auth::user();
+        $cod_area = $request->area;
+        $date = date('Ymdh');
+        $new_folder_name = 'RQS' . '_' . $cod_area . '_' . $date;
+
+        $cotizacion1 = $compra->cotizacion1 ?? null; // asigna el valor actual o null si está vacío
+
+        if ($request->hasFile('cotizacion1')) {
+            $archivo = $request->file('cotizacion1');
+            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
+            $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0777, true);
+            }
+            $archivo->move($directory, $archivo->getClientOriginalName());
+            $cotizacion1 = $url . $archivo->getClientOriginalName();
+        }
+
+        $cotizacion2 = $compra->cotizacion2 ?? null;
+
+        if ($request->hasFile('cotizacion2')) {
+            $archivo = $request->file('cotizacion2');
+            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
+            $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0777, true);
+            }
+            $archivo->move($directory, $archivo->getClientOriginalName());
+            $cotizacion2 = $url . $archivo->getClientOriginalName();
+        }
+        $cotizacion3 = $compra->cotizacion3 ?? null;
+
+        if ($request->hasFile('cotizacion3')) {
+            $archivo = $request->file('cotizacion3');
+            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
+            $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0777, true);
+            }
+            $archivo->move($directory, $archivo->getClientOriginalName());
+            $cotizacion3 = $url . $archivo->getClientOriginalName();
+        }
+
+
         $RQS = $request->input('RQS_continuar');
         $fecha_actual = Carbon::now()
             ->setTimezone('America/Bogota')
             ->format('Y-m-d H:i:s');
         $compraid = $compra->id;
         $responsable = $us->name;
-        $compra->update(['estado_gestion' => '2', 'cod_rqs' => $RQS]);
+        $compra->update(['estado_gestion' => '2', 'cod_rqs' => $RQS, 'cotizacion1' => $cotizacion1, 'cotizacion2' => $cotizacion2, 'cotizacion3' => $cotizacion3]);
         C_histories::create(['compra_id' => $compraid, 'estado' => '3', 'descripcion' => 'Su orden de compra es ' . $RQS, 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
         return redirect()->route('compras.dashboard');
     }
@@ -225,7 +268,7 @@ class ComprasController extends Controller
 
         $datosJson = $compra->servicios;
 
-        return view('menu.compras.detalle_rqc', compact('compra', 'compraNombreP', 'compraIdp','compraNombreU', 'datosJson', 'c_history', 'jefe'));
+        return view('menu.compras.detalle_rqc', compact('compra', 'compraNombreP', 'compraIdp', 'compraNombreU', 'datosJson', 'c_history', 'jefe'));
     }
 
     public function update_RQS(Request $request, $id)
@@ -291,7 +334,7 @@ class ComprasController extends Controller
         $compra->area = $request->input('area');
         $compra->fecha_esperada = date('Y-m-d H:i:s', strtotime($request->input('entrega_esperada')));
         $compra->tipo_solicitud = $request->input('tipo_solicitud');
-        $compra->jefe_inmediato=$request->input('persona_id');
+        $compra->jefe_inmediato = $request->input('persona_id');
         $compra->sede = $request->input('sede');
         $compra->razon_social = $request->input('razon_social');
         $compra->correo_electronico = $request->input('correo_contacto');
