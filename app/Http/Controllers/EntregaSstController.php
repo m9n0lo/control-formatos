@@ -25,40 +25,7 @@ class EntregaSstController extends Controller
         return view('menu.SST.entrega_sst', compact('person', 'articulos'));
     }
 
-    public function select2()
-    {
-        //SELECT cargo ,nombre_funcionario FROM usuarios GROUP BY cargo, nombre_funcionario ORDER BY cargo ASC ;
-        // Ejecutar la consulta SQL y obtener los resultados en una instancia de Collection
-        $resultados = DB::table('personas')
-            ->select('cargo', 'nombre_funcionario')
-            ->groupBy('cargo', 'nombre_funcionario')
-            ->orderBy('cargo', 'asc')
-            ->get();
 
-        // Agrupar los resultados por cargo
-        $grupos = $resultados->groupBy('cargo');
-
-        // Construir las opciones del select2
-        $options = [];
-        foreach ($grupos as $cargo => $personas) {
-            $opciones = [];
-            foreach ($personas as $persona) {
-                $opciones[] = [
-                    'id' => $persona->nombre_funcionario,
-                    'text' => $persona->nombre_funcionario,
-                ];
-            }
-            $options[] = [
-                'text' => $cargo,
-                'children' => $opciones,
-            ];
-        }
-
-        // Convertir las opciones a JSON
-        $json = json_encode($options);
-
-        return $json;
-    }
 
     /**
      * Show the form for creating a new resource.

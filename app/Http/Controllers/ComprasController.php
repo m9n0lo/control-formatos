@@ -191,57 +191,15 @@ class ComprasController extends Controller
     {
         $compra = Compras::find($id);
         $us = Auth::user();
-        $cod_area = $request->area;
-        $date = date('Ymdh');
-        $new_folder_name = 'RQS' . '_' . $cod_area . '_' . $date;
-
-        $cotizacion1 = $compra->cotizacion1 ?? null; // asigna el valor actual o null si está vacío
-
-        if ($request->hasFile('cotizacion1')) {
-            $archivo = $request->file('cotizacion1');
-            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
-            $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
-            if (!File::exists($directory)) {
-                File::makeDirectory($directory, 0777, true);
-            }
-            $archivo->move($directory, $archivo->getClientOriginalName());
-            $cotizacion1 = $url . $archivo->getClientOriginalName();
-        }
-
-        $cotizacion2 = $compra->cotizacion2 ?? null;
-
-        if ($request->hasFile('cotizacion2')) {
-            $archivo = $request->file('cotizacion2');
-            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
-            $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
-            if (!File::exists($directory)) {
-                File::makeDirectory($directory, 0777, true);
-            }
-            $archivo->move($directory, $archivo->getClientOriginalName());
-            $cotizacion2 = $url . $archivo->getClientOriginalName();
-        }
-        $cotizacion3 = $compra->cotizacion3 ?? null;
-
-        if ($request->hasFile('cotizacion3')) {
-            $archivo = $request->file('cotizacion3');
-            $directory = public_path() . '/sitio/imagenes/cotizaciones/' . $new_folder_name;
-            $url = '/sitio/imagenes/cotizaciones/' . $new_folder_name . '/';
-            if (!File::exists($directory)) {
-                File::makeDirectory($directory, 0777, true);
-            }
-            $archivo->move($directory, $archivo->getClientOriginalName());
-            $cotizacion3 = $url . $archivo->getClientOriginalName();
-        }
-
-
         $RQS = $request->input('RQS_continuar');
         $fecha_actual = Carbon::now()
             ->setTimezone('America/Bogota')
             ->format('Y-m-d H:i:s');
         $compraid = $compra->id;
         $responsable = $us->name;
-        $compra->update(['estado_gestion' => '2', 'cod_rqs' => $RQS, 'cotizacion1' => $cotizacion1, 'cotizacion2' => $cotizacion2, 'cotizacion3' => $cotizacion3]);
+        $compra->update(['estado_gestion' => '2', 'cod_rqs' => $RQS]);
         C_histories::create(['compra_id' => $compraid, 'estado' => '3', 'descripcion' => 'Su orden de compra es ' . $RQS, 'responsable' => $responsable, 'fecha_cambio' => $fecha_actual]);
+        //dd($request->all());
         return redirect()->route('compras.dashboard');
     }
 
