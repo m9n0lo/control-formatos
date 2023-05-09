@@ -366,7 +366,7 @@
                         <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
                             <div class=" buttons_d">
                                 <button type="button" class="btn btn-primary" name="gestion_rqs" id="gestion_rqs"
-                                    style="margin-bottom: 3px" onclick="validarFormulario(event)">
+                                    style="margin-bottom: 3px" >
                                     <span class="nav-text">
                                         Continuar
                                     </span>
