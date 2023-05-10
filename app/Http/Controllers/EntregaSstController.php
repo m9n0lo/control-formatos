@@ -20,12 +20,24 @@ class EntregaSstController extends Controller
     public function index()
     {
         $person = Persona::select('id', 'nombre_funcionario')->get();
-        $articulos = Articulos_ssts::all();
 
-        return view('menu.SST.entrega_sst', compact('person', 'articulos'));
+        return view('menu.SST.entrega_sst', compact('person'));
     }
 
+    public function datatable()
+    {
+        $articulos = Articulos_ssts::select('id', 'descripcion')
+            ->where('estado', '=', 1)
+            ->get();
 
+        return datatables()
+            ->collection(
+                Articulos_ssts::select('id', 'descripcion')
+                    ->where('estado', '=', 1)
+                    ->get(),
+            )
+            ->toJson();
+    }
 
     /**
      * Show the form for creating a new resource.

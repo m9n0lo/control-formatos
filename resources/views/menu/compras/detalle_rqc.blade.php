@@ -65,7 +65,7 @@
                             <!-- Jefe_Inmediato -->
                             <select class="js-example-basic-single" class="form-control" name="persona_id" id="persona_id"
                                 required>
-                                <option value="{{$compraIdp}}" selected>{{ $compraNombreP }}</option>
+                                <option value="{{ $compraIdp }}" selected>{{ $compraNombreP }}</option>
                                 @foreach ($jefe as $jef)
                                     <option value="{{ $jef->id }}">{{ $jef->nombre_funcionario }}</option>
                                 @endforeach
@@ -181,9 +181,15 @@
                                             class="form-control" value="{{ $servicio['centro_servicio'] }}" /></td>
                                     <td> <input type="text" name="area_servicio[]" id="detalle_solicitud"
                                             class="form-control" value="{{ $servicio['area_servicio'] }}" /></td>
-                                    <td> <input type="text" name="cantidad_servicio[]" id="detalle_solicitud"
-                                            class="form-control" value="{{ $servicio['cantidad_servicio'] }}"
-                                            pattern="[0-9]+" title="Ingrese solo números" /></td>
+                                    @if ($compra->estado == 2)
+                                        <td> <input type="text" name="cantidad_servicio[]" id="detalle_solicitud"
+                                                class="form-control" value="{{ $servicio['cantidad_aprobada'] }}"
+                                                pattern="[0-9]+" title="Ingrese solo números" /></td>
+                                    @else
+                                        <td> <input type="text" name="cantidad_servicio[]" id="detalle_solicitud"
+                                                class="form-control" value="{{ $servicio['cantidad_servicio'] }}"
+                                                pattern="[0-9]+" title="Ingrese solo números" /></td>
+                                    @endif
                                     <td> <input type="text" name="um_servicio[]" id="detalle_solicitud"
                                             class="form-control" value="{{ $servicio['um_servicio'] }}" /></td>
                                     <td> <input type="text" name="observacion_servicio[]" id="detalle_solicitud"
@@ -208,12 +214,21 @@
                         {{-- COSTO ESTIMADO --}}
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6 mt-3">
                             <!-- Costo Estimado Total -->
-                            <div class="form-floating">
-                                <input type="text" pattern="[0-9]+" title="Ingrese solo números"
-                                    name="costo_estimado" id="costo_estimado_DRQS" class="form-control"
-                                    value="{{ $compra->costo_estimado }}" />
-                                <label for="floatingInput">Costo Estimado Total</label>
-                            </div>
+                            @if ($compra->estado == 2)
+                                <div class="form-floating">
+                                    <input type="text" pattern="[0-9]+" title="Ingrese solo números"
+                                        name="costo_estimado" id="costo_estimado_DRQS" class="form-control"
+                                        value="{{ $compra->costo_aprobado }}" />
+                                    <label for="floatingInput">Costo Aprobado Total</label>
+                                </div>
+                            @else
+                                <div class="form-floating">
+                                    <input type="text" pattern="[0-9]+" title="Ingrese solo números"
+                                        name="costo_estimado" id="costo_estimado_DRQS" class="form-control"
+                                        value="{{ $compra->costo_estimado }}" />
+                                    <label for="floatingInput">Costo Estimado Total</label>
+                                </div>
+                            @endif
                         </div>
                     </div>
 
@@ -366,7 +381,7 @@
                         <div class="card-footer bg-transparent  d-flex  justify-content-end" style="margin-top: 10px">
                             <div class=" buttons_d">
                                 <button type="button" class="btn btn-primary" name="gestion_rqs" id="gestion_rqs"
-                                    style="margin-bottom: 3px" >
+                                    style="margin-bottom: 3px">
                                     <span class="nav-text">
                                         Continuar
                                     </span>
@@ -450,7 +465,8 @@
                         <h5 class="modal-title" id="exampleModalLabel">¿Desea continuar con la RQS?</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form method="POST"action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}" enctype="multipart/form-data">
+                    <form method="POST"action="{{ url("/Compras/dashboard/detalle/{$compra->id}") }}"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('POST')
                         <div class="modal-body">

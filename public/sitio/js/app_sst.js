@@ -1,21 +1,83 @@
-
-let boton = document.getElementById("boton_operario");
-let div= document.getElementById("div_registro");
-
-
-boton.addEventListener("click", function() {
-
-    div.style.display = "block";
-
-});
-
 jQuery(document).ready(function ($) {
     $("#persona_id_sst").select2({
         closeOnSelect: true,
     });
 });
-jQuery(document).ready(function ($) {
-    $("#articulos_sst").select2({
-        closeOnSelect: true,
+
+
+let boton = document.getElementById("boton_operario");
+let div = document.getElementById("div_registro");
+
+if (boton) {
+    boton.addEventListener("click", function () {
+        let persona_id_stt = $("#persona_id_sst").val();
+        let fecha_entrega = $("#fecha_entrega_sst").val();
+
+        if (persona_id_stt == "" || fecha_entrega == "") {
+            Swal.fire(
+                "Seleccionaste el operario?",
+                "Revisa los datos",
+                "question"
+            );
+        } else {
+            div.style.display = "block";
+        }
     });
+}
+
+$(document).ready(function () {
+    var t = $("#tabla_articulos_sst").DataTable({
+        responsive: true,
+        scrollY: "250px",
+        scrollCollapse: true,
+        paging: false,
+        autowidth: true,
+        ordering: false,
+        info: false,
+        searching: false,
+    });
+
+    // Agregar una nueva fila cada vez que se presione el botón
+    $("#addRow").on("click", function () {
+        // Realizar una petición AJAX para obtener los datos de la base de datos
+        $.ajax({
+            url: "/sst/datatable",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                // Generar el contenido del menú desplegable a partir de los datos obtenidos
+                var opciones = "";
+
+                $.each(data.data, function (i, opcion) {
+
+                    opciones +=
+                        "<option value='" + opcion.id +"'>" + opcion.descripcion + "</option>";
+                });
+
+                // Agregar una nueva fila a la tabla con el menú desplegable generado
+                t.row
+                    .add([
+
+                        "<select  name='articulos_sst'"+
+                        "id='articulos_sst' class='form-control' style='width: 200px'>" + opciones + "</select>",
+                        "<input type='text' name='centro_servicio[]' id='centro_servicio'class='form-control' />",
+                    ])
+                    .draw(false);
+            },
+            error: function (xhr, status, error) {
+                console.log("Error al obtener las opciones: " + error);
+            },
+        });
+    });
+    $("#addRow").click();
+
+    $("#removeRow").on("click", function () {
+        t.row().remove().draw(false);
+    });
+    $("#removeRow").click();
+
+    /*  $("#addRQS").on("click", function () {
+        console.log(informacionCampo);
+    }); */
+    $("#addRQS").click();
 });
