@@ -23,8 +23,8 @@
                     {{-- Fecha Entrega --}}
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3">
                         <div class="form-floating">
-                            <input required="" type="text" name="fecha_entrega_sst" id="fecha_entrega_sst"
-                                class="form-control">
+                            <input required="" type="date" name="fecha_entrega_sst" id="fecha_entrega_sst"
+                                class="form-control" value="<?php echo date('Y-m-d'); ?>">
                             <label class="user-label">Fecha Entrega:</label>
                         </div>
                     </div>
@@ -63,20 +63,19 @@
                         </a>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <table id="tabla_articulos_sst" ">
-                            <thead >
+                        <table id="tabla_articulos_sst" class="table " style="width: 100%">
+                            <thead>
                                 <tr>
 
-                                    <th>Articulo</th>
-                                    <th>Cantidad</th>
+                                    <th style="text-align: center">Articulo</th>
+                                    <th style="text-align: center">Cantidad</th>
 
 
                                 </tr>
                             </thead>
-                            <script>
-                                let data = "{{ route('sst.data') }}";
+                            <tbody>
 
-                            </script>
+                            </tbody>
 
 
                         </table>
@@ -91,7 +90,7 @@
                     {{-- Observaciones --}}
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3">
                         <div class="form-floating">
-                            <input required="" type="text" name="observaciones" id="observaciones"
+                            <input required="" type="text" name="observaciones_sst" id="observaciones_sst"
                                 class="form-control">
                             <label class="user-label">Observaciones:</label>
                         </div>
@@ -100,7 +99,7 @@
                     {{-- Firma Recibido --}}
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3">
                         <div class="form-floating">
-                            <input required="" type="text" name="firma_recibido" id="firma_recibido"
+                            <input required="" type="text" name="firma_recibido_sst" id="firma_recibido_sst"
                                 class="form-control">
                             <label class="user-label">Firma Recibido:</label>
                         </div>
@@ -109,7 +108,8 @@
                     {{-- Firma SGSST --}}
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3">
                         <div class="form-floating">
-                            <input required="" type="text" name="cargo" id="cargo " class="form-control">
+                            <input required="" type="text" name="firma_SGSST_sst" id="firma_SGSST_sst"
+                             class="form-control">
                             <label class="user-label">Firma SGSST:</label>
                         </div>
                     </div>

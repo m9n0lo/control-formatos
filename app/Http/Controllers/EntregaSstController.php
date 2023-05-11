@@ -44,9 +44,18 @@ class EntregaSstController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $Entrega_sst = Entrega_sst::create([
+        'usuario'=>$user_id,
+        'persona_id'=> $request->persona_id_sst,
+        'articulos' => $request->,
+        'fecha_entrega'date('Y-m-d H:i:s', strtotime($request->fecha_entrega_sst)),
+        'otro',
+        'firma'=> $request->firma_recibido_sst,
+        'observaciones'=> $request->bservaciones_sst,
+        'firma_sgsst'=> $request->firma_SGSST_sst,
+        ]);
     }
 
     /**

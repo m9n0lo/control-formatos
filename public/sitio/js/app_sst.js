@@ -27,14 +27,12 @@ if (boton) {
 
 $(document).ready(function () {
     var t = $("#tabla_articulos_sst").DataTable({
-        responsive: true,
-        scrollY: "250px",
-        scrollCollapse: true,
         paging: false,
         autowidth: true,
         ordering: false,
         info: false,
         searching: false,
+
     });
 
     // Agregar una nueva fila cada vez que se presione el botón
@@ -49,7 +47,6 @@ $(document).ready(function () {
                 var opciones = "";
 
                 $.each(data.data, function (i, opcion) {
-
                     opciones +=
                         "<option value='" + opcion.id +"'>" + opcion.descripcion + "</option>";
                 });
@@ -59,8 +56,10 @@ $(document).ready(function () {
                     .add([
 
                         "<select  name='articulos_sst'"+
-                        "id='articulos_sst' class='form-control' style='width: 200px'>" + opciones + "</select>",
-                        "<input type='text' name='centro_servicio[]' id='centro_servicio'class='form-control' />",
+                        "id='articulos_sst' class='form-control' style='width: 200px'>"+
+                        "<option disabled selected>-- Seleccione Articulo --</option>"
+                         + opciones + "</select>",
+                        "<input type='text' name='cantidad_articulos[]'style='width: 100px' id='cantidad_articulos'class='form-control' />",
                     ])
                     .draw(false);
             },
