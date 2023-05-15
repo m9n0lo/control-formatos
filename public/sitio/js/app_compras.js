@@ -65,6 +65,12 @@ if (load_rqs) {
             detalle_solicitud === "" ||
             costo_estimado === ""
         ) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Existen campos vacios, valida nuevamente!',
+
+              })
         } else {
             Swal.fire({
                 position: "center",

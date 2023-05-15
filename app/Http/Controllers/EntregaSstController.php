@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Entrega_sst;
+use App\Models\Entrega_ssts;
 use App\Models\Articulos_ssts;
+use App\Models\Detalle_entrega_sst;
 use App\Models\Persona;
 use DB;
 use Illuminate\Http\Request;
@@ -46,16 +47,54 @@ class EntregaSstController extends Controller
      */
     public function create(Request $request)
     {
-        $Entrega_sst = Entrega_sst::create([
-        'usuario'=>$user_id,
-        'persona_id'=> $request->persona_id_sst,
-        'articulos' => $request->,
-        'fecha_entrega'date('Y-m-d H:i:s', strtotime($request->fecha_entrega_sst)),
-        'otro',
-        'firma'=> $request->firma_recibido_sst,
-        'observaciones'=> $request->bservaciones_sst,
-        'firma_sgsst'=> $request->firma_SGSST_sst,
-        ]);
+        DB::beginTransaction();
+
+        try {
+            // Crear registro de  entrega
+            $user_id = auth()->id();
+
+            $entrega = Entrega_ssts::create([
+                'usuario' => $user_id,
+                'persona_id'=>$request->persona_id_sst,
+                'fecha_entrega'=>date('Y-m-d H:i:s', strtotime($request->fecha_entrega_sst)),
+                'firma'=>$request->firma_recibido_sst,
+                'firma_sgsst'=>$request->firma_SGSST_sst
+            ]);
+
+            // Crear registro de detalle de entrega para cada artículo
+
+            $articulos_sst = $request->input('articulos_sst');
+            $cantidad_articulos = $request->input('cantidad_articulos');
+            $observaciones_sst = $request->input('observaciones_sst');
+
+
+            $articulos = [];
+
+            for ($i = 0; $i < count($articulos_sst); $i++) {
+                $articulos[] = [
+
+                    'articulos_id' => $articulos_sst[$i],
+                    'cantidad_articulos' => $cantidad_articulos[$i],
+
+                ];
+            }
+
+            foreach ($articulos as $articulo) {
+                Detalle_entrega_sst::create([
+                    'entregas_id' => $entrega->id,
+                    'articulos_id' => $articulo['articulos_id'],
+                    'cantidad_entregada' => $articulo['cantidad_articulos'],
+                    'observaciones' => $request->observaciones_sst
+                ]);
+            }
+            /* dd($request->all()); */
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
     }
 
     /**

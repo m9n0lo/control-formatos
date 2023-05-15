@@ -13,20 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('entrega_sst', function (Blueprint $table) {
+        Schema::create('entrega_ssts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('usuario'); //persona logeada//personal de la empresa
             $table->unsignedBigInteger('persona_id')->nullable(); //personal de la empresa
-            $table->unsignedBigInteger('articulos')->nullable(); //articulo a entregar
             $table->date('fecha_entrega');
-            $table->string('otro')->nullable();
             $table->string('firma');
-            $table->string('observaciones')->nullable();
             $table->string('firma_sgsst');
             $table->timestamps();
             $table->foreign('usuario')->references('id')->on('users');
             $table->foreign('persona_id')->references('id')->on('personas');
-            $table->foreign('articulos')->references('id')->on('articulos_sst');
+
         });
     }
 
@@ -37,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entrega_sst');
+        Schema::dropIfExists('entrega_ssts');
     }
 };

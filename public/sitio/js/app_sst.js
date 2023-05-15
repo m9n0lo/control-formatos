@@ -4,6 +4,40 @@ jQuery(document).ready(function ($) {
     });
 });
 
+let load_sst = document.getElementById("guardar_sst");
+if (load_sst) {
+    load_sst.addEventListener("click", function () {
+        let funcionario = $("#persona_id_sst").val();
+        let fecha_entrega = $("#fecha_entrega_sst").val();
+        let observaciones = $("#observaciones_sst").val();
+        let firma_recibido = $("#firma_recibido_sst").val();
+        let firma_sgsst = $("#firma_SGSST_sst").val();
+
+        if (
+            funcionario === "" ||
+            fecha_entrega === "" ||
+            observaciones === "" ||
+            firma_recibido === "" ||
+            firma_sgsst === ""
+        ) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Existen campos vacios, valida nuevamente!',
+
+              })
+        } else {
+            console.log(funcionario,fecha_entrega,observaciones,firma_recibido,firma_sgsst);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Guardado Exitosamente!",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
+    });
+}
 
 let boton = document.getElementById("boton_operario");
 let div = document.getElementById("div_registro");
@@ -32,7 +66,6 @@ $(document).ready(function () {
         ordering: false,
         info: false,
         searching: false,
-
     });
 
     // Agregar una nueva fila cada vez que se presione el botón
@@ -48,17 +81,21 @@ $(document).ready(function () {
 
                 $.each(data.data, function (i, opcion) {
                     opciones +=
-                        "<option value='" + opcion.id +"'>" + opcion.descripcion + "</option>";
+                        "<option value='" +
+                        opcion.id +
+                        "'>" +
+                        opcion.descripcion +
+                        "</option>";
                 });
 
                 // Agregar una nueva fila a la tabla con el menú desplegable generado
                 t.row
                     .add([
-
-                        "<select  name='articulos_sst'"+
-                        "id='articulos_sst' class='form-control' style='width: 200px'>"+
-                        "<option disabled selected>-- Seleccione Articulo --</option>"
-                         + opciones + "</select>",
+                        "<select  name='articulos_sst[]'" +
+                            "id='articulos_sst' class='form-control' style='width: 200px'>" +
+                            "<option disabled selected>-- Seleccione Articulo --</option>" +
+                            opciones +
+                            "</select>",
                         "<input type='text' name='cantidad_articulos[]'style='width: 100px' id='cantidad_articulos'class='form-control' />",
                     ])
                     .draw(false);

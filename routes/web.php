@@ -80,6 +80,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/sst', 'EntregaSstController@index')->name('sst');
         Route::get('/sst/select', 'EntregaSstController@select2')->name('sst.select');
         Route::get('/sst/datatable', 'EntregaSstController@datatable')->name('sst.data');
+        Route::post('/sst/create', 'EntregaSstController@create')->name('sst.create');
 
 
 

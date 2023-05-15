@@ -5,18 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Entrega_sst extends Model
+class Entrega_ssts extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
     protected $fillable = [
         'usuario',
         'persona_id',
-        'articulos',
         'fecha_entrega',
-        'otro',
         'firma',
-        'observaciones',
         'firma_sgsst'
     ];
 
@@ -28,7 +25,5 @@ class Entrega_sst extends Model
     public function users(){
         return $this->belongsTo(User::class,'usuario');
      }
-     public function articulos(){
-        return $this->belongsTo(Articulos_ssts::class,'articulos');
-     }
+
 }
