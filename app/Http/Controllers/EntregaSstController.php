@@ -53,12 +53,13 @@ class EntregaSstController extends Controller
             // Crear registro de  entrega
             $user_id = auth()->id();
 
+
             $entrega = Entrega_ssts::create([
                 'usuario' => $user_id,
                 'persona_id'=>$request->persona_id_sst,
                 'fecha_entrega'=>date('Y-m-d H:i:s', strtotime($request->fecha_entrega_sst)),
-                'firma'=>$request->firma_recibido_sst,
-                'firma_sgsst'=>$request->firma_SGSST_sst
+                'firma'=>$request->input('draw_dataUrl'),
+                'firma_sgsst'=>$request->input('draw_dataUrl2')
             ]);
 
             // Crear registro de detalle de entrega para cada artículo
@@ -87,7 +88,7 @@ class EntregaSstController extends Controller
                     'observaciones' => $request->observaciones_sst
                 ]);
             }
-            /* dd($request->all()); */
+           /*  dd($request->all()); */
 
             DB::commit();
         } catch (\Exception $e) {
@@ -114,9 +115,11 @@ class EntregaSstController extends Controller
      * @param  \App\Models\Entrega_sst  $entrega_sst
      * @return \Illuminate\Http\Response
      */
-    public function show(Entrega_sst $entrega_sst)
+    public function show($id)
     {
-        //
+        $img = Entrega_ssts::find($id);
+
+        return view('menu.SST.prueba', compact('img'));
     }
 
     /**

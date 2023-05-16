@@ -92,7 +92,7 @@
 
 
                         {{-- Observaciones --}}
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3 d-flex align-items-center">
                             <div class="form-floating">
                                 <input required="" type="text" name="observaciones_sst" id="observaciones_sst"
                                     class="form-control">
@@ -101,26 +101,39 @@
                         </div>
 
                         {{-- Firma Recibido --}}
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3 ">
 
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                Launch demo modal
+                            <!-- Button Firma Recibido -->
+                            <button type="button" id="boton_f_r" class="btn btn-secondary" data-bs-toggle="modal"
+                                data-bs-target="#modal_firma_recibido" style="width: 226.667px; height: 58px; ">
+                                Firma Solicitante
+                                <i class="fa-solid fa-file-signature fa-bounce fa-lg"></i>
                             </button>
-                            <img id="draw-image" src="" alt="Tu Imagen aparecera Aqui!" />
-                            <textarea id="draw-dataUrl" class="form-control" rows="5" hidden>Para los que saben que es esto:</textarea>
+                            <img id="draw-image" src="" alt="Tu Imagen aparecera Aqui!" style="width: 15rem;"
+                                hidden />
+                            <hr id="hr_f_r" hidden>
+                            <p id="texto_firma" style="margin-top: -15px" hidden>Firma de Recibido</p>
+                            <textarea id="draw_dataUrl" name="draw_dataUrl" class="form-control" rows="5" hidden>Para los que saben que es esto:</textarea>
 
 
                         </div>
 
                         {{-- Firma SGSST --}}
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3">
-                            <div class="form-floating">
-                                <input required="" type="text" name="firma_SGSST_sst" id="firma_SGSST_sst"
-                                    class="form-control" value="{{ auth()->user()->name }}" required>
-                                <label class="user-label">Firma SGSST:</label>
-                            </div>
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3 ">
+
+                            <!-- Button Firma SGSST-->
+                            <button type="button" id="boton_f_r2" class="btn btn-secondary" data-bs-toggle="modal"
+                                data-bs-target="#modal_firma_recibido2" style="width: 226.667px; height: 58px; ">
+                               Firma SGSST
+                                <i class="fa-solid fa-file-signature fa-bounce fa-lg"></i>
+                            </button>
+                            <img id="draw_image2" name="draw_image2" src="" alt="Tu Imagen aparecera Aqui!" style="width: 15rem;"
+                                hidden />
+                            <hr id="hr_f_r2" hidden>
+                            <p id="texto_firma2" style="margin-top: -15px" hidden>Firma de Recibido</p>
+                            <textarea id="draw_dataUrl2" name="draw_dataUrl2"class="form-control" rows="5" hidden>Para los que saben que es esto:</textarea>
+
+
                         </div>
                     </div>
                 </div>
@@ -131,13 +144,13 @@
                     </span>
                 </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
+                <!-- Modal Firma recibido-->
+                <div class="modal fade" id="modal_firma_recibido" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -147,10 +160,34 @@
                                 </canvas>
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-success" value="Limpiar" id="draw_clearBtn_sst">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id="draw_submitBtn_sst">Save
-                                    changes</button>
+                                <input type="button" class="btn btn-warning" value="Limpiar" id="draw_clearBtn_sst">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-success" id="draw_submitBtn_sst"
+                                    data-bs-dismiss="modal">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Firma SGSST-->
+                <div class="modal fade" id="modal_firma_recibido2" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body d-flex justify-content-center">
+                                <canvas id="draw_canvas_sst2" width="420" height="160">
+                                    No tienes un buen navegador.
+                                </canvas>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-warning" value="Limpiar" id="draw_clearBtn_sst2">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-success" id="draw_submitBtn_sst2"
+                                    data-bs-dismiss="modal">Guardar</button>
                             </div>
                         </div>
                     </div>
