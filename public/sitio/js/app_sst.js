@@ -21,13 +21,18 @@ if (load_sst) {
             firma_sgsst === ""
         ) {
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Existen campos vacios, valida nuevamente!',
-
-              })
+                icon: "error",
+                title: "Oops...",
+                text: "Existen campos vacios, valida nuevamente!",
+            });
         } else {
-            console.log(funcionario,fecha_entrega,observaciones,firma_recibido,firma_sgsst);
+            console.log(
+                funcionario,
+                fecha_entrega,
+                observaciones,
+                firma_recibido,
+                firma_sgsst
+            );
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -41,13 +46,14 @@ if (load_sst) {
 
 let boton = document.getElementById("boton_operario");
 let div = document.getElementById("div_registro");
+let tabla_h_p = document.getElementById("tabla_h_p");
 
 if (boton) {
     boton.addEventListener("click", function () {
         let persona_id_stt = $("#persona_id_sst").val();
         let fecha_entrega = $("#fecha_entrega_sst").val();
 
-        if (persona_id_stt == "" || fecha_entrega == "") {
+        if (persona_id_stt == "" && fecha_entrega == "") {
             Swal.fire(
                 "Seleccionaste el operario?",
                 "Revisa los datos",
@@ -55,6 +61,7 @@ if (boton) {
             );
         } else {
             div.style.display = "block";
+            tabla_h_p.removeAttribute('hidden');
         }
     });
 }
@@ -116,4 +123,62 @@ $(document).ready(function () {
         console.log(informacionCampo);
     }); */
     $("#addRQS").click();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    let cargar_i_p = document.getElementById("boton_operario");
+    let tabla_historial = document.getElementById("tabla_e_sst_p");
+
+    var dataTable = null;
+
+    cargar_i_p.addEventListener("click", function () {
+        var id = $("#persona_id_sst").val();
+        // Realizar la solicitud AJAX utilizando Fetch
+        fetch("/sst/select/history/" + id)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                // Actualizar la tabla DataTable con los datos obtenidos
+                actualizarTablaDatos(data);
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    });
+    function actualizarTablaDatos(data) {
+        if (dataTable !== null) {
+            dataTable.clear();
+            dataTable.destroy();
+        }
+
+        dataTable = $(tabla_historial).DataTable({
+            autowidth: true,
+            data: data,
+            columns: [
+                { data: "nombre_funcionario" },
+                { data: "fecha_entrega" },
+                { data: "descripcion" },
+                { data: "cantidad_entregada" },
+                {
+                    data: "firma",
+                    render: function (firma) {
+                        return (
+                            '<img src="' + firma + '" style="width: 12rem;"/>'
+                        );
+                    },
+                },
+                {
+                    data: "firma_sgsst",
+                    render: function (firma_sgsst) {
+                        return (
+                            '<img src="' +
+                            firma_sgsst +
+                            '" style="width: 12rem;"/>'
+                        );
+                    },
+                },
+            ],
+        });
+    }
 });

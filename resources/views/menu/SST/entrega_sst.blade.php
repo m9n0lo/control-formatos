@@ -35,9 +35,9 @@
                             <div class=" buttons_d ">
                                 <button type="button" class="btn btn-primary" name="boton_operario" id="boton_operario">
                                     <span class="nav-text">
-                                        Agregar
+                                        Seleccionar
                                     </span>
-                                    <i class="fa-sharp fa-solid fa-circle-arrow-right fa-lg"></i>
+                                    <i class="fa-solid fa-eye fa-beat fa-lg"></i>
                                 </button>
                             </div>
                         </div>
@@ -124,11 +124,11 @@
                             <!-- Button Firma SGSST-->
                             <button type="button" id="boton_f_r2" class="btn btn-secondary" data-bs-toggle="modal"
                                 data-bs-target="#modal_firma_recibido2" style="width: 226.667px; height: 58px; ">
-                               Firma SGSST
+                                Firma SGSST
                                 <i class="fa-solid fa-file-signature fa-bounce fa-lg"></i>
                             </button>
-                            <img id="draw_image2" name="draw_image2" src="" alt="Tu Imagen aparecera Aqui!" style="width: 15rem;"
-                                hidden />
+                            <img id="draw_image2" name="draw_image2" src="" alt="Tu Imagen aparecera Aqui!"
+                                style="width: 15rem;" hidden />
                             <hr id="hr_f_r2" hidden>
                             <p id="texto_firma2" style="margin-top: -15px" hidden>Firma de Recibido</p>
                             <textarea id="draw_dataUrl2" name="draw_dataUrl2"class="form-control" rows="5" hidden>Para los que saben que es esto:</textarea>
@@ -136,13 +136,18 @@
 
                         </div>
                     </div>
+                    <br>
+                    <div class="card-footer bg-transparent  d-flex justify-content-end" style="border-top: none">
+                        <button class="btn btn-success" id="guardar_sst" name="guardar_sst" style="margin-bottom: 3px">
+                            <i class="fa-solid fa-vest-patches fa-bounce fa-lg"></i>
+                            <span class="nav-text">
+                                Agregar Entrega
+                            </span>
+                        </button>
+
+                    </div>
                 </div>
-                <button class="btn btn-success" id="guardar_sst" name="guardar_sst" style="margin-bottom: 3px">
-                    <i class="fa-solid fa-cart-plus fa-lg"></i>
-                    <span class="nav-text">
-                        Agregar Entrega
-                    </span>
-                </button>
+
 
                 <!-- Modal Firma recibido-->
                 <div class="modal fade" id="modal_firma_recibido" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -193,6 +198,31 @@
                     </div>
                 </div>
             </form>
+
+            {{-- Bloque Historial de articulos entregados al funcionario --}}
+            <div class="card-body rqs shadow p-3 mb-5 bg-body rounded" id="tabla_h_p" hidden>
+                <div class="card-title">
+                    <div class="row title"><span>Historial Entregas</span></div>
+                </div>
+                <br>
+
+                <table id="tabla_e_sst_p" class="table " style="width:100%">
+                    <thead>
+                        <tr>
+
+                            <th>Nombre Funcionario</th>
+                            <th>Fecha Entrega</th>
+                            <th>Articulo</th>
+                            <th>Cantidad</th>
+                            <th>Firma Recibido</th>
+                            <th>Firma SGSST</th>
+
+                        </tr>
+                    </thead>
+
+
+                </table>
+            </div>
         </div>
     </section>
 @endsection

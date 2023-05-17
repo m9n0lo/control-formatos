@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
-            $table->string('empresa');
             $table->string('nombre_funcionario');
+            $table->string('empresa');
             $table->string('cargo');
             $table->string('area');
             $table->timestamps();
