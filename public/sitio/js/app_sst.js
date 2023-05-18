@@ -85,13 +85,13 @@ $(document).ready(function () {
             success: function (data) {
                 // Generar el contenido del menú desplegable a partir de los datos obtenidos
                 var opciones = "";
-
+                console.log(data);
                 $.each(data.data, function (i, opcion) {
                     opciones +=
                         "<option value='" +
                         opcion.id +
                         "'>" +
-                        opcion.descripcion +
+                        opcion.nombre +
                         "</option>";
                 });
 

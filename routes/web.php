@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\EntregaSstController;
+use App\Http\Controllers\ArticulosSstController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +83,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/sst/select/history/{id}', 'EntregaSstController@show_persona')->name('sst.show');
         Route::get('/sst/datatable', 'EntregaSstController@datatable')->name('sst.data');
         Route::post('/sst/create', 'EntregaSstController@create')->name('sst.create');
+
+        /*
+        * Routes SST
+        */
+        Route::get('/articulos', 'ArticulosSstController@index')->name('articulos');
 
 
 

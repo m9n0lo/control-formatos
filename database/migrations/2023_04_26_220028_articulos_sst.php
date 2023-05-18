@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('articulos_ssts', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre')->nullable();
             $table->string('descripcion')->nullable();
             $table->string('estado')->nullable();
             $table->timestamps();

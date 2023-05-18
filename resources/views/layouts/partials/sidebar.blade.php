@@ -34,14 +34,32 @@
          </ul>
      </li>
 
-     <li>
-         <a href="{{route('sst')}}">
-             <i class="fa fa-home fa-2x"></i>
+     <li class="has-subnav">
+         <a class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+             aria-expanded="false">
+             <i class="fa-solid fa-shop fa-xl"></i>
              <span class="nav-text">
                  SST
              </span>
          </a>
+
+         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+             <li class="dropdown-item">
+                 <a href="{{ route('sst') }}">
+                     <i class="fa fa-home fa-2x"></i>
+                     <span class="nav-text">
+                         Entrega SST
+                     </span>
+                 </a>
+             </li>
+             <li class="dropdown-item">
+                 <a class="dropdown-item" href="{{ route('articulos') }}">Articulos SST</a>
+             </li>
+
+         </ul>
      </li>
+
+
 
  </ul>
 

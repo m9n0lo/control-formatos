@@ -10,6 +10,7 @@ class Articulos_ssts extends Model
     use HasFactory;
     protected $primaryKey = 'id';
     protected $fillable = [
+        'nombre',
         'descripcion',
         'estado'
     ];
