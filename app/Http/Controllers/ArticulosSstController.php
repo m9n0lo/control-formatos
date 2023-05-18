@@ -17,7 +17,7 @@ class ArticulosSstController extends Controller
     {
         $articulos = Articulos_ssts::all();
 
-        return view('menu.SST.articulos_sst',compact('articulos'));
+        return view('menu.SST.articulos_sst', compact('articulos'));
     }
 
     /**
@@ -25,9 +25,17 @@ class ArticulosSstController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $entrega = Articulos_ssts::create([
+            'nombre' => $request->nombre_a_sst,
+            'descripcion' => $request->descripcion_a_sst,
+            'estado' => 1,
+        ]);
 
+        return redirect()
+            ->route('articulos')
+            ->with('mensaje', '¡Articulos agregado correctamente!');
     }
 
     /**
@@ -70,9 +78,18 @@ class ArticulosSstController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $estado = $request->input('estado');
+
+        // Actualizar el estado del artículo en la base de datos
+        $articulo = Articulos_ssts::find($id);
+        $articulo->estado = $estado;
+        $articulo->save();
+
+        // Puedes devolver una respuesta JSON si es necesario
+        return response()->json(['success' => true]);
     }
 
     /**

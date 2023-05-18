@@ -88,6 +88,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         * Routes SST
         */
         Route::get('/articulos', 'ArticulosSstController@index')->name('articulos');
+        Route::post('/articulos/create', 'ArticulosSstController@create')->name('articulos.create');
+        Route::post('/articulos/inactive', 'ArticulosSstController@update')->name('articulos.inactive');
 
 
 

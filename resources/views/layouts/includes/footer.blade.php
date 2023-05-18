@@ -14,6 +14,7 @@
 <script src="{{ asset('sitio/js/app_compras.js') }}"></script>
 <script src="{{ asset('sitio/js/app_formato.js') }}"></script>
 <script src="{{ asset('sitio/js/app_sst.js') }}"></script>
+<script src="{{ asset('sitio/js/app_art_sst.js') }}"></script>
 
 
 
