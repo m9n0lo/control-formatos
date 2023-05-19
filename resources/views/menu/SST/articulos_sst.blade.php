@@ -43,43 +43,37 @@
                     </div>
                 </form>
             </div>
-            <form action="{{ route('articulos.inactive') }}" method="post" class="form-floating">
 
-                <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
+            <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
 
-                    <table id="tabla_art_sst" class="table " style="width: 100%">
-                        <thead>
+                <table id="tabla_art_sst" class="table " style="width: 100%">
+                    <thead>
+                        <tr>
+
+                            <th style="text-align: center">#</th>
+                            <th style="text-align: center">Articulo</th>
+                            <th style="text-align: center">Descripcion</th>
+                            <th style="text-align: center">Estado</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody style="text-align: center">
+                        @foreach ($articulos as $articulo)
                             <tr>
-
-                                <th style="text-align: center">#</th>
-                                <th style="text-align: center">Articulo</th>
-                                <th style="text-align: center">Descripcion</th>
-                                <th style="text-align: center">Estado</th>
-
-
+                                <td>{{ $articulo->id }}</td>
+                                <td>{{ $articulo->nombre }}</td>
+                                <td>{{ $articulo->descripcion }}</td>
+                                <td>
+                                    <input type="checkbox" class="estado-checkbox switch" data-id="{{ $articulo->id }}"
+                                        {{ $articulo->estado == 1 ? 'checked' : '' }}>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody style="text-align: center">
-                            @foreach ($articulos as $articulo)
-                                <tr>
-                                    <td>{{ $articulo->id }}</td>
-                                    <td>{{ $articulo->nombre }}</td>
-                                    <td>{{ $articulo->descripcion }}</td>
-                                    <td>
-                                        <input type="checkbox" class="estado-checkbox switch" data-id="{{ $articulo->id }}"
-                                            {{ $articulo->estado == 1 ? 'checked' : '' }}>
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-                        </tbody>
-
-                    </table>
-
-
-                </div>
-            </form>
         </div>
-
     </section>
 @endsection
