@@ -55,6 +55,12 @@
              <li class="dropdown-item">
                  <a class="dropdown-item" href="{{ route('articulos') }}">Articulos SST</a>
              </li>
+             <li class="dropdown-item">
+                <a class="dropdown-item" href="{{ route('sst.dashboard') }}">Dashboard SST</a>
+            </li>
+             <li class="dropdown-item">
+                <a class="dropdown-item" href="{{ route('sst.dashboard') }}">Dashboard SST</a>
+            </li>
 
          </ul>
      </li>

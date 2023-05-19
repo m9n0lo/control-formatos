@@ -83,6 +83,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/sst/select/history/{id}', 'EntregaSstController@show_persona')->name('sst.show');
         Route::get('/sst/datatable', 'EntregaSstController@datatable')->name('sst.data');
         Route::post('/sst/create', 'EntregaSstController@create')->name('sst.create');
+        Route::get('/articulos/dashboard', 'EntregaSstController@dashboard')->name('sst.dashboard');
 
         /*
         * Routes SST
@@ -90,6 +91,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/articulos', 'ArticulosSstController@index')->name('articulos');
         Route::post('/articulos/create', 'ArticulosSstController@create')->name('articulos.create');
         Route::post('/articulos/inactive', 'ArticulosSstController@update')->name('articulos.inactive');
+
 
 
 

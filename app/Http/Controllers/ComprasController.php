@@ -146,7 +146,9 @@ class ComprasController extends Controller
     {
         $data = Compras::with('users')->get();
 
-        return $data->toJson();
+        return datatables()
+        ->collection(Compras::with('users')->get())
+        ->toJson();
     }
 
     public function estado_RQS($id, Request $request)

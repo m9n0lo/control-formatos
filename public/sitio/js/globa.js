@@ -826,3 +826,4 @@ function cleanContentForm(options) {
     }
   });
 }
+
