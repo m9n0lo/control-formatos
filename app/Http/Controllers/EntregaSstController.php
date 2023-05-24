@@ -87,6 +87,9 @@ class EntregaSstController extends Controller
             /*  dd($request->all()); */
 
             DB::commit();
+            return redirect()
+            ->route('sst')
+            ->with('mensaje', '¡Articulos agregado correctamente!');
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;

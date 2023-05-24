@@ -43,7 +43,8 @@
     <script src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
 
-
+    {{-- Importar highcharts --}}
+    <script src="{{ asset('sitio/js/highcharts.js') }}"></script>
 
 
 
