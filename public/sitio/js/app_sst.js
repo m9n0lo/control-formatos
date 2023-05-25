@@ -10,15 +10,17 @@ if (load_sst) {
         let funcionario = $("#persona_id_sst").val();
         let fecha_entrega = $("#fecha_entrega_sst").val();
         let observaciones = $("#observaciones_sst").val();
-        let firma_recibido = $("#firma_recibido_sst").val();
-        let firma_sgsst = $("#firma_SGSST_sst").val();
+        let firma_recibido = $("#draw_dataUrl").val();
+        let firma_sgsst = $("#draw_dataUrl2").val();
+        let articulos = $("#articulos_sst").val();
 
         if (
             funcionario === "" ||
             fecha_entrega === "" ||
             observaciones === "" ||
             firma_recibido === "" ||
-            firma_sgsst === ""
+            firma_sgsst === "" ||
+            articulos === ""
         ) {
             Swal.fire({
                 icon: "error",
@@ -26,13 +28,6 @@ if (load_sst) {
                 text: "Existen campos vacios, valida nuevamente!",
             });
         } else {
-            console.log(
-                funcionario,
-                fecha_entrega,
-                observaciones,
-                firma_recibido,
-                firma_sgsst
-            );
             Swal.fire({
                 position: "center",
                 icon: "success",
@@ -53,7 +48,7 @@ if (boton) {
         let persona_id_stt = $("#persona_id_sst").val();
         let fecha_entrega = $("#fecha_entrega_sst").val();
 
-        if (persona_id_stt == "" && fecha_entrega == "") {
+        if (persona_id_stt == null || fecha_entrega == "") {
             Swal.fire(
                 "Seleccionaste el operario?",
                 "Revisa los datos",
@@ -85,7 +80,7 @@ $(document).ready(function () {
             success: function (data) {
                 // Generar el contenido del menú desplegable a partir de los datos obtenidos
                 var opciones = "";
-                console.log(data);
+
                 $.each(data.data, function (i, opcion) {
                     opciones +=
                         "<option value='" +
@@ -99,7 +94,7 @@ $(document).ready(function () {
                 t.row
                     .add([
                         "<select  name='articulos_sst[]'" +
-                            "id='articulos_sst' class='form-control' style='width: 200px'>" +
+                            "id='articulos_sst' class='form-control' style='width: 200px' >" +
                             "<option disabled selected>-- Seleccione Articulo --</option>" +
                             opciones +
                             "</select>",
@@ -184,31 +179,30 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-dataTable = $(tabla_dashboard_sst).DataTable({
-    autowidth: true,
-    data: entregasSST,
-    columns: [
-        { data: "nombre_funcionario" },
-        { data: "fecha_entrega" },
-        { data: "nombre" },
-        { data: "cantidad_entregada" },
-        {
-            data: "firma",
-            render: function (firma) {
-                return (
-                    '<img src="' + firma + '" style="width: 12rem;"/>'
-                );
+var tablaDashboardSST = document.getElementById("tabla_dashboard_sst");
+if (tablaDashboardSST !== null) {
+    dataTable = $(tabla_dashboard_sst).DataTable({
+        autowidth: true,
+        data: entregasSST,
+        columns: [
+            { data: "nombre_funcionario" },
+            { data: "fecha_entrega" },
+            { data: "nombre" },
+            { data: "cantidad_entregada" },
+            {
+                data: "firma",
+                render: function (firma) {
+                    return '<img src="' + firma + '" style="width: 12rem;"/>';
+                },
             },
-        },
-        {
-            data: "firma_sgsst",
-            render: function (firma_sgsst) {
-                return (
-                    '<img src="' +
-                    firma_sgsst +
-                    '" style="width: 12rem;"/>'
-                );
+            {
+                data: "firma_sgsst",
+                render: function (firma_sgsst) {
+                    return (
+                        '<img src="' + firma_sgsst + '" style="width: 12rem;"/>'
+                    );
+                },
             },
-        },
-    ],
-});
+        ],
+    });
+}

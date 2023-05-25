@@ -34,7 +34,18 @@
 
 -- Consulta cantidad de articulos total entregados a todas las personas
 
-SELECT p.nombre_funcionario, a.nombre,count(de.articulos_id) AS cantidad_articulos_entregados FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id GROUP BY p.nombre_funcionario, a.nombre;
+-- SELECT p.nombre_funcionario, a.nombre, SUM(de.cantidad_entregada) AS cantidad FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id GROUP BY p.nombre_funcionario, a.nombre;
+
+-- Consulta cantidad de articulos total entregados a X persona en una rango de fecha estipulada
+-- SELECT p.nombre_funcionario,a.nombre,SUM(de.cantidad_entregada) FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id WHERE e.persona_id = 10 AND e.fecha_entrega BETWEEN '2023-05-18' AND '2023-05-23' GROUP BY a.nombre;
+
+
+-- Consulta cantidad de articulos total entregados a todas las personas de dicha sede
+
+-- SELECT p.nombre_funcionario, a.nombre, SUM(de.cantidad_entregada) AS cantidad FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id WHERE p.empresa LIKE '%BPACK S.A.S%' GROUP BY p.nombre_funcionario, a.nombre ;
+
+
+
 
 
 

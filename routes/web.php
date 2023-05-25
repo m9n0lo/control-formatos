@@ -5,6 +5,7 @@ use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\EntregaSstController;
 use App\Http\Controllers\ArticulosSstController;
+use App\Http\Controllers\InformesSstController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,9 +50,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          * Routes Sidebar
          */
         Route::get('/Formato', 'FormatoController@index')->name('formato');
+        Route::get('/articulos', 'ArticulosSstController@index')->name('articulos');
         Route::get('/Compras/solicitudRQS', 'ComprasController@index')->name('compras.solicitud');
         Route::get('/Compras/dashboard', 'ComprasController@dashboardRQS')->name('compras.dashboard');
-        Route::get('/Compras/detalle', 'ComprasController@detalleRQS')->name('compras.detalle_rqs');
+        Route::get('/sst', 'EntregaSstController@index')->name('sst');
+        Route::get('/articulos/dashboard', 'EntregaSstController@dashboard')->name('sst.dashboard');
+        Route::get('/sst/informes', 'InformesSstController@index')->name('informesst');
+
 
         /**
          * Routes Formato
@@ -78,17 +83,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         /*
         * Routes SST
         */
-        Route::get('/sst', 'EntregaSstController@index')->name('sst');
         Route::get('/sst/select', 'EntregaSstController@select2')->name('sst.select');
         Route::get('/sst/select/history/{id}', 'EntregaSstController@show_persona')->name('sst.show');
         Route::get('/sst/datatable', 'EntregaSstController@datatable')->name('sst.data');
         Route::post('/sst/create', 'EntregaSstController@create')->name('sst.create');
-        Route::get('/articulos/dashboard', 'EntregaSstController@dashboard')->name('sst.dashboard');
+
+
 
         /*
-        * Routes SST
+        * Routes SST Articulos
         */
-        Route::get('/articulos', 'ArticulosSstController@index')->name('articulos');
         Route::post('/articulos/create', 'ArticulosSstController@create')->name('articulos.create');
         Route::post('/articulos/inactive', 'ArticulosSstController@update')->name('articulos.inactive');
 

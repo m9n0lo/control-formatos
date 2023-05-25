@@ -14,7 +14,7 @@
                             <div class="form-floating">
 
                                 <select class="js-example-basic-single" class="form-control" name="persona_id_sst"
-                                    id="persona_id_sst" required>
+                                    id="persona_id_sst"  required>
                                     <option value="" disabled selected>-- Seleccione Operario --</option>
                                     @foreach ($person as $jef)
                                         <option value="{{ $jef->id }}">{{ $jef->nombre_funcionario }}</option>
@@ -113,7 +113,7 @@
                                 hidden />
                             <hr id="hr_f_r" hidden>
                             <p id="texto_firma" style="margin-top: -15px" hidden>Firma de Recibido</p>
-                            <textarea id="draw_dataUrl" name="draw_dataUrl" class="form-control" rows="5" hidden>Para los que saben que es esto:</textarea>
+                            <textarea id="draw_dataUrl" name="draw_dataUrl" class="form-control" rows="5" hidden></textarea>
 
 
                         </div>
@@ -131,14 +131,14 @@
                                 style="width: 15rem;" hidden />
                             <hr id="hr_f_r2" hidden>
                             <p id="texto_firma2" style="margin-top: -15px" hidden>Firma de Recibido</p>
-                            <textarea id="draw_dataUrl2" name="draw_dataUrl2"class="form-control" rows="5" hidden>Para los que saben que es esto:</textarea>
+                            <textarea id="draw_dataUrl2" name="draw_dataUrl2"class="form-control" rows="5" hidden></textarea>
 
 
                         </div>
                     </div>
                     <br>
                     <div class="card-footer bg-transparent  d-flex justify-content-end" style="border-top: none">
-                        <button class="btn btn-success" id="guardar_sst" name="guardar_sst" style="margin-bottom: 3px">
+                        <button class="btn btn-success"  id="guardar_sst" name="guardar_sst" style="margin-bottom: 3px">
                             <i class="fa-solid fa-vest-patches fa-bounce fa-lg"></i>
                             <span class="nav-text">
                                 Agregar Entrega
