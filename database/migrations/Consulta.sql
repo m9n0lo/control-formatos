@@ -5,18 +5,18 @@
 
 -- SELECT c.id, u.name , AREA, fecha_solicitud, tipo_solicitud, detalle_solicitud, estado , estado_gestion  FROM compras c  JOIN users u ON c.id= u.id;
 
--- SELECT c.* , u.name FROM compras c JOIN users u ON c.autorizado_por = u.id WHERE c.autorizado_por;  
+-- SELECT c.* , u.name FROM compras c JOIN users u ON c.autorizado_por = u.id WHERE c.autorizado_por;
 
 -- SELECT ch.id, ch.descripcion FROM compras c JOIN  c_histories ch ON c.id = ch.compra_id WHERE c.id=1;
 
 -- SELECT * FROM mysql.time_zone_name ;
 
 
--- SELECT p.nombre_funcionario, e.fecha_entrega,a.descripcion,de.cantidad_entregada,  e.firma , e.firma_sgsst FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de 
--- ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id WHERE e.persona_id = 7; 
+-- SELECT p.nombre_funcionario, e.fecha_entrega,a.descripcion,de.cantidad_entregada,  e.firma , e.firma_sgsst FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de
+-- ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id WHERE e.persona_id = 7;
 
--- SELECT p.nombre_funcionario, e.fecha_entrega,a.descripcion,de.cantidad_entregada,  e.firma , e.firma_sgsst FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de 
--- ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id; 
+-- SELECT p.nombre_funcionario, e.fecha_entrega,a.descripcion,de.cantidad_entregada,  e.firma , e.firma_sgsst FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de
+-- ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id;
 
 -- SET GLOBAL local_infile=1;
 -- SHOW GLOBAL VARIABLES LIKE 'local_infile';

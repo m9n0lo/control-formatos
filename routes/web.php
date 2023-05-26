@@ -96,6 +96,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/articulos/create', 'ArticulosSstController@create')->name('articulos.create');
         Route::post('/articulos/inactive', 'ArticulosSstController@update')->name('articulos.inactive');
 
+        /*
+        * Routes SST Informes
+        */
+        Route::post('/sst/informes/informe1', 'InformesSstController@show_informe_1')->name('informes.taesst');
+
 
 
 
