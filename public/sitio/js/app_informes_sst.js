@@ -6,6 +6,7 @@ jQuery(document).ready(function ($) {
 
 let div_i1 = document.getElementById("informe_1");
 let div_i2 = document.getElementById("informe_2");
+let div_i3 = document.getElementById("informe_3");
 
 var prueba = document.getElementById("persona_id");
 var nombreSeleccionado = prueba.options[prueba.selectedIndex].innerText;
@@ -81,6 +82,7 @@ function grafico_informe1(data) {
     });
 }
 
+
 $(document).ready(function () {
     $("#boton_i2").click(function () {
         var persona_id = $("#persona_id").val();
@@ -112,47 +114,6 @@ $(document).ready(function () {
     });
 });
 
-/* function grafico_informe2(data) {
-    Highcharts.chart("informe_2", {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: "column",
-        },
-        title: {
-            text: "Cantidad Articulos Por Fecha Estipulada",
-            align: "left",
-        },
-
-        tooltip: {
-            pointFormat: "{series.name}: <b>{point.y}</b>",
-        },
-        accessibility: {
-            point: {
-                valueSuffix: "%",
-            },
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: "pointer",
-                dataLabels: {
-                    enabled: true,
-                    format: "<b>{point.name}</b>: {point.percentage:.1f} %",
-                },
-            },
-        },
-        series: [
-            {
-                name: "Cantidad",
-                colorByPoint: true,
-                data: data,
-            },
-        ],
-    });
-} */
-
 function grafico_informe2(data) {
     Highcharts.chart("informe_2", {
         chart: {
@@ -160,7 +121,7 @@ function grafico_informe2(data) {
         },
         title: {
             align: "left",
-            text: "Cantidad total entregada a " + nombreSeleccionado,
+            text: "Cantidad total entregada por persona seleccionada ",
         },
         accessibility: {
             announceNewData: {
@@ -198,6 +159,78 @@ function grafico_informe2(data) {
         series: [
             {
                 name: "Articulo",
+                colorByPoint: true,
+                data: data,
+            },
+        ],
+    });
+}
+
+$(document).ready(function () {
+    $("#boton_i3").click(function () {
+        var empresa_id = $("#epresa_id").val();
+        var fechaInicial3 = $("#fecha_inicial_i3").val();
+        var fechaFinal3 = $("#fecha_final_i3").val();
+
+
+        // Envía la solicitud AJAX
+        $.ajax({
+            url: "/sst/informes/informe3", // Reemplaza esto con la ruta correcta a tu controlador
+            method: "POST",
+            data: {
+                persona_id: empresa_id,
+                fecha_inicial_i3: fechaInicial3,
+                fecha_final_i3: fechaFinal3,
+                _token: token,
+            },
+            success: function (data) {
+                // Maneja la respuesta del servidor
+                div_i3.removeAttribute("hidden");
+                grafico_informe3(data);
+                // Aquí puedes utilizar la variable 'data' para mostrar el gráfico
+            },
+            error: function (xhr) {
+                // Maneja los errores de la solicitud AJAX
+                console.log(xhr.responseText);
+            },
+        });
+    });
+});
+
+
+function grafico_informe3(data) {
+    Highcharts.chart("informe_3", {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: "pie",
+        },
+        title: {
+            text: "Cantidad Articulos Por sede",
+            align: "left",
+        },
+        tooltip: {
+            pointFormat: "{series.name}: <b>{point.y}</b>",
+        },
+        accessibility: {
+            point: {
+                valueSuffix: "%",
+            },
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: "pointer",
+                dataLabels: {
+                    enabled: true,
+                    format: "<b>{point.name}</b>: {point.percentage:.1f} %",
+                },
+            },
+        },
+        series: [
+            {
+                name: "Cantidad",
                 colorByPoint: true,
                 data: data,
             },

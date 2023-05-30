@@ -110,10 +110,25 @@
                         <select class="js-example-basic-single" class="form-control" name="empresa_id" id="empresa_id"
                             required>
                             <option value="" disabled selected>-- Seleccione Funcionario --</option>
-                            @foreach ($person as $jef)
-                                <option value="{{ $jef->id }}">{{ $jef->empresa}}</option>
+                            @foreach ($array as $jef)
+                                <option value="{{$jef}}">{{ $jef}}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-2 mt-3">
+                        <!-- Correo Contacto-->
+                        <div class="form-floating">
+                            <input type="date" name="fecha_inicial_i3" id="fecha_inicial_i3" class="form-control"
+                                required />
+                            <label for="floatingInput">Fecha inicial:</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-2 mt-3">
+                        <!-- Telefono Contacto -->
+                        <div class="form-floating">
+                            <input type="date" name="fecha_final_i3" id="fecha_final_i3" class="form-control" required />
+                            <label for="floatingInput">Fecha final:</label>
+                        </div>
                     </div>
 
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3 d-flex align-items-center">
