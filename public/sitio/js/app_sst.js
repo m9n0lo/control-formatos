@@ -110,8 +110,15 @@ $(document).ready(function () {
     $("#addRow").click();
 
     $("#removeRow").on("click", function () {
-        t.row().remove().draw(false);
+        var rowCount = t.rows().count();
+
+        if (rowCount > 0) {
+            t.rows(rowCount - 1)
+                .remove()
+                .draw(false);
+        }
     });
+
     $("#removeRow").click();
 
     /*  $("#addRQS").on("click", function () {

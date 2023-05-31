@@ -6,6 +6,7 @@ use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\EntregaSstController;
 use App\Http\Controllers\ArticulosSstController;
 use App\Http\Controllers\InformesSstController;
+use App\Http\Controllers\InventariosSstController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,12 +51,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          * Routes Sidebar
          */
         Route::get('/Formato', 'FormatoController@index')->name('formato');
-        Route::get('/articulos', 'ArticulosSstController@index')->name('articulos');
+        Route::get('/articulos', 'ArticulosSstController@index')->name('sst.articulos');
         Route::get('/Compras/solicitudRQS', 'ComprasController@index')->name('compras.solicitud');
         Route::get('/Compras/dashboard', 'ComprasController@dashboardRQS')->name('compras.dashboard');
         Route::get('/sst', 'EntregaSstController@index')->name('sst');
         Route::get('/articulos/dashboard', 'EntregaSstController@dashboard')->name('sst.dashboard');
-        Route::get('/sst/informes', 'InformesSstController@index')->name('informesst');
+        Route::get('/sst/informes', 'InformesSstController@index')->name('sst.informes');
+        Route::get('/sst/inventarios', 'InventariosSstController@index')->name('sst.inventarios');
 
 
         /**

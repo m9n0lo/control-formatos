@@ -53,13 +53,16 @@
                  </a>
              </li>
              <li class="dropdown-item">
-                 <a class="dropdown-item" href="{{ route('articulos') }}">Articulos SST</a>
+                 <a class="dropdown-item" href="{{ route('sst.articulos') }}">Articulos SST</a>
              </li>
              <li class="dropdown-item">
                 <a class="dropdown-item" href="{{ route('sst.dashboard') }}">Dashboard SST</a>
             </li>
              <li class="dropdown-item">
-                <a class="dropdown-item" href="{{ route('informesst') }}">Informes SST</a>
+                <a class="dropdown-item" href="{{ route('sst.informes') }}">Informes SST</a>
+            </li>
+             <li class="dropdown-item">
+                <a class="dropdown-item" href="{{ route('sst.inventarios') }}">Inventarios SST</a>
             </li>
 
          </ul>

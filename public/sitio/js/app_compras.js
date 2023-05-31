@@ -23,19 +23,23 @@ $(document).ready(function () {
             .draw(false);
     });
 
-    // Automatically add a first row of data
-    /* var informacionTabla = JSON.stringify(t); */
+
 
     $("#addRow").click();
 
     $("#removeRow").on("click", function () {
-        t.row().remove().draw(false);
+        var rowCount = t.rows().count();
+
+        if (rowCount > 0) {
+            t.rows(rowCount - 1)
+                .remove()
+                .draw(false);
+        }
     });
+
     $("#removeRow").click();
 
-    /*  $("#addRQS").on("click", function () {
-        console.log(informacionCampo);
-    }); */
+
     $("#addRQS").click();
 });
 let load_rqs = document.getElementById("guardar_RQS");
@@ -66,11 +70,10 @@ if (load_rqs) {
             costo_estimado === ""
         ) {
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Existen campos vacios, valida nuevamente!',
-
-              })
+                icon: "error",
+                title: "Oops...",
+                text: "Existen campos vacios, valida nuevamente!",
+            });
         } else {
             Swal.fire({
                 position: "center",
@@ -82,4 +85,3 @@ if (load_rqs) {
         }
     });
 }
-
