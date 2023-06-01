@@ -106,6 +106,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/sst/informes/informe3', 'InformesSstController@show_informe_3')->name('informes.caesst');
 
 
+        /*
+        * Routes SST Inventarios
+        */
+        Route::post('/sst/inventarios/guardar', 'InventariosSstController@GuardarInventarioSst')->name('sst.guardar_inventarios');
+
 
 
 

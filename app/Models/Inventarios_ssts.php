@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Inventario_sst extends Model
+class Inventarios_ssts extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';

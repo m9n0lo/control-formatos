@@ -3,6 +3,16 @@ jQuery(document).ready(function ($) {
         closeOnSelect: true,
     });
 });
+jQuery(document).ready(function ($) {
+    $("#sede_i_sst").select2({
+        closeOnSelect: true,
+    });
+});
+jQuery(document).ready(function ($) {
+    $("#nombre_a_i_sst").select2({
+        closeOnSelect: true,
+    });
+});
 
 let load_sst = document.getElementById("guardar_sst");
 if (load_sst) {
