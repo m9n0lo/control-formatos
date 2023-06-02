@@ -9,10 +9,14 @@ class Inventarios_ssts extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    protected $fillable = ['articulos_id', 'cantidad_disponible', 'sede', 'observaciones','fecha_ingreso'];
+    protected $fillable = ['usuario','articulos_id', 'cantidad_disponible', 'sede', 'observaciones','fecha_ingreso'];
 
     public function articulos(){
         return $this->belongsTo(Articulos_ssts::class,'articulos_id');
+     }
+
+     public function users(){
+        return $this->belongsTo(User::class,'usuario');
      }
 
 }

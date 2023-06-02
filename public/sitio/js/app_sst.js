@@ -196,30 +196,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-var tablaDashboardSST = document.getElementById("tabla_dashboard_sst");
-if (tablaDashboardSST !== null) {
-    dataTable = $(tabla_dashboard_sst).DataTable({
-        autowidth: true,
-        data: entregasSST,
-        columns: [
-            { data: "nombre_funcionario" },
-            { data: "fecha_entrega" },
-            { data: "nombre" },
-            { data: "cantidad_entregada" },
-            {
-                data: "firma",
-                render: function (firma) {
-                    return '<img src="' + firma + '" style="width: 12rem;"/>';
-                },
-            },
-            {
-                data: "firma_sgsst",
-                render: function (firma_sgsst) {
-                    return (
-                        '<img src="' + firma_sgsst + '" style="width: 12rem;"/>'
-                    );
-                },
-            },
-        ],
-    });
-}
+

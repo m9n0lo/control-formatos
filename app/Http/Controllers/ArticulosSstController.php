@@ -34,7 +34,7 @@ class ArticulosSstController extends Controller
         ]);
 
         return redirect()
-            ->route('articulos')
+            ->route('sst.articulos')
             ->with('mensaje', '¡Articulos agregado correctamente!');
     }
 

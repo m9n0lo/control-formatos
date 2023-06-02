@@ -164,19 +164,5 @@ class EntregaSstController extends Controller
         //
     }
 
-    public function dashboard(){
-/* SELECT p.nombre_funcionario, e.fecha_entrega,a.nombre,de.cantidad_entregada,  e.firma ,
-        e.firma_sgsst FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de
-         ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id WHERE e.persona_id = 7;  */
 
-         $entregas_sst = DB::table('personas')
-         ->join('entrega_ssts', 'personas.id', '=', 'entrega_ssts.persona_id')
-         ->join('detalle_entrega_ssts', 'entrega_ssts.id', '=', 'detalle_entrega_ssts.entregas_id')
-         ->join('articulos_ssts', 'detalle_entrega_ssts.articulos_id', '=', 'articulos_ssts.id')
-         ->select('personas.nombre_funcionario', 'entrega_ssts.fecha_entrega', 'articulos_ssts.nombre', 'detalle_entrega_ssts.cantidad_entregada', 'entrega_ssts.firma', 'entrega_ssts.firma_sgsst')
-         ->get();
-
-
-    return view('menu.SST.dashboard_sst',compact('entregas_sst'));
-    }
 }

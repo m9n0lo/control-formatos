@@ -11,19 +11,17 @@
                         <tr>
 
                             <th>Nombre Funcionario</th>
-                            <th>Fecha Entrega</th>
-                            <th>Articulo</th>
-                            <th>Cantidad</th>
-                            <th>Firma Recibido</th>
-                            <th>Firma SGSST</th>
+                            <th>Cantidad Articulos</th>
+                            <th>Total Unidades </th>
+                            <th>Sede</th>
+                            <th>Observaciones</th>
+                            <th>Fecha Ingreso</th>
 
 
                         </tr>
                     </thead>
 
-                    <script>
-                        let entregasSST = {!! $entregas_sst->toJson() !!};
-                    </script>
+
 
                 </table>
 

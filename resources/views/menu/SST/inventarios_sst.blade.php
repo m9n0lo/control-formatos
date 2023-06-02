@@ -3,7 +3,7 @@
     <section class="section">
         <div class="card card-spacing">
             <div class="card-title">
-                <div class="row titulo title-background"><span>Articulos SST</span></div>
+                <div class="row titulo title-background"><span>Inventario SST</span></div>
             </div>
 
             <div class="card-body rqs shadow p-3 mb-5 bg-body rounded">
@@ -64,7 +64,7 @@
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-1 d-flex justify-content-end"
                             style="width: 85.7%">
                             <div class=" buttons_d ">
-                                <button type="button" onclick="agregarFila()" class="btn btn-success" name="boton_a_sst"
+                                <button type="button" class="btn btn-success" name="boton_a_sst"
                                     id="boton_a_sst">
                                     <span class="nav-text">
                                         Añadir
@@ -74,20 +74,6 @@
                             </div>
                         </div>
                     </form>
-                    <script>
-                        function agregarFila() {
-                            var formData = $('#inventario_sst_form').serializeArray();
-                            var newRow = $('<tr>');
-
-
-                            $.each(formData, function(index, field) {
-                                newRow.append($('<td>').text(field.value));
-                            });
-
-                            $('#tabla_art_sst tbody').append(newRow);
-
-                        }
-                    </script>
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
                         <table id="tabla_art_sst" class="table " style="width: 100%">
                             <thead>
@@ -116,42 +102,6 @@
                                 <i class="fa-solid fa-check-to-slot fa-bounce fa-lg"></i>
                             </button>
                         </div>
-
-                        <script>
-                            var token = $('meta[name="csrf-token"]').attr("content");
-
-                            function guardarEnBD() {
-                                var data = [];
-                                $('#tabla_art_sst tbody tr').each(function() {
-                                    var rowData = {};
-                                    $(this).find('td').each(function() {
-                                        var columnName = $(this).closest('table').find('th').eq($(this).index()).text().trim();
-                                        rowData[columnName] = $(this).text().trim();
-                                    });
-                                    data.push(rowData);
-
-                                });
-
-                                $.ajax({
-                                    url: '/sst/inventarios/guardar',
-                                    method: 'POST',
-                                    data: {
-                                        data: data,
-                                        _token: token,
-                                    },
-
-                                    success: function(data) {
-
-                                    },
-                                    error: function(xhr, status, error) {
-
-                                        console.error(error);
-                                    }
-                                });
-                            }
-
-
-                        </script>
 
                         <div class=" buttons_d ">
                             <button type="submit" class="btn btn-danger" name="boton_a_sst" id="boton_a_sst">

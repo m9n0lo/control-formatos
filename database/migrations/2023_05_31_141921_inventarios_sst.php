@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('inventarios_sst', function (Blueprint $table) {
+        Schema::create('inventarios_ssts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('usuario'); //persona logeada
             $table->unsignedBigInteger('articulos_id');
             $table->string('cantidad_disponible');
             $table->string('sede');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->date('fecha_ingreso');
             $table->timestamps();
             $table->foreign('articulos_id')->references('id')->on('articulos_ssts');
+            $table->foreign('usuario')->references('id')->on('users');
 
         });
     }
