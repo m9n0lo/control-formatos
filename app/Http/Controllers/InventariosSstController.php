@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventarios_ssts;
+use App\Models\Detalle_inventario_sst;
 use App\Models\Articulos_ssts;
 use DB;
 use Illuminate\Http\Request;
@@ -44,27 +45,60 @@ class InventariosSstController extends Controller
         //
     }
 
-    public function GuardarInventarioSst(Request $request)
-    {
-        $data = $request->input('data');
+   public function GuardarInventarioSst(Request $request)
+{
+    DB::beginTransaction();
+
+    try {
         $user_id = auth()->id();
 
-        foreach ($data as $row) {
-            $inventario = Inventarios_ssts::create([
-                'usuario' => $user_id,
-                'articulos_id' => $row['Nombre articulo'],
-                'cantidad_disponible' => $row['Cantidad'],
-                'sede' => $row['Sede'],
-                'observaciones' => $row['Observaciones'],
-                'fecha_ingreso' => $row['Fecha ingreso'],
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
+        $inventario = Inventarios_ssts::create([
+            'usuario' => $user_id,
+            'sede' => $request->sede_i_sst,
+            'observaciones' => $request->observaciones_i_sst,
+            'fecha_ingreso' => date('Y-m-d H:i:s', strtotime($request->fecha_ingreso_i_sst)),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        $articulos_i_sst = $request->input('articulos_i_sst');
+        $cantidad_articulos_d_i = $request->input('cantidad_articulos_d_i');
+
+        $articulos_d = [];
+
+        for ($i = 0; $i < count($articulos_i_sst); $i++) {
+            $articulos_d[] = [
+                'articulos_id' => $articulos_i_sst[$i],
+                'cantidad_articulos' => $cantidad_articulos_d_i[$i],
+            ];
+        }
+
+        foreach ($articulos_d as $articulo) {
+            $detalle_inventario = Detalle_inventario_sst::create([
+                'inventario_id' => $inventario->id,
+                'articulos_id' => $articulo['articulos_id'],
+                'cantidad_disponible' => $articulo['cantidad_articulos'],
             ]);
         }
+
+        $articulo = Articulos_ssts::find($articulo['articulos_id']);
+
+        if ($articulo->estado === '3') {
+            $articulo->estado = '1';
+            $articulo->save();
+        }
+
+        DB::commit();
         return redirect()
             ->route('sst.inventarios')
-            ->with('mensaje', '¡Formato agregado correctamente!');
+            ->with('mensaje', '¡Articulos agregados correctamente!');
+    } catch (\Exception $e) {
+        DB::rollback();
+        throw $e;
     }
+}
+
+
 
     /**
      * Display the specified resource.
@@ -124,5 +158,14 @@ class InventariosSstController extends Controller
             ->get();
 
         return view('menu.SST.dashboard_i_sst', compact('inventarios_sst'));
+    }
+
+    public function datatable_i()
+    {
+        $articulos = Articulos_ssts::all();
+
+        return datatables()
+            ->collection(Articulos_ssts::all())
+            ->toJson();
     }
 }

@@ -9,8 +9,9 @@ let div_i2 = document.getElementById("informe_2");
 let div_i3 = document.getElementById("informe_3");
 
 var prueba = document.getElementById("persona_id");
+if(prueba){
 var nombreSeleccionado = prueba.options[prueba.selectedIndex].innerText;
-
+}
 var boton2 = document.getElementById("boton_i2");
 var token = $('meta[name="csrf-token"]').attr("content");
 
