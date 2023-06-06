@@ -15,3 +15,4 @@ class Articulos_ssts extends Model
         'estado'
     ];
 }
+

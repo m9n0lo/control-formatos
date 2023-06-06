@@ -36,12 +36,16 @@
 -- SELECT p.nombre_funcionario, a.nombre, SUM(de.cantidad_entregada) AS cantidad FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id GROUP BY p.nombre_funcionario, a.nombre;
 
 -- Consulta cantidad de articulos total entregados a X persona en una rango de fecha estipulada
-SELECT a.nombre,SUM(de.cantidad_entregada) FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id WHERE e.persona_id = 1 AND e.fecha_entrega or BETWEEN '2023-05-25' AND '2023-05-25' GROUP BY a.nombre; 
+-- SELECT a.nombre,SUM(de.cantidad_entregada) FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id WHERE e.persona_id = 1 AND e.fecha_entrega or BETWEEN '2023-05-25' AND '2023-05-25' GROUP BY a.nombre; 
 
 
 -- Consulta cantidad de articulos total entregados a todas las personas de dicha sede
 -- SELECT  a.nombre, SUM(de.cantidad_entregada) AS cantidad FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id WHERE p.empresa LIKE '%BPACK S.A.S%' GROUP BY a.nombre ;
 
+-- Consulta la cantidad disponible actual de cada articulo
+
+ SELECT a.id,a.descripcion,a.nombre, sum(di.cantidad_disponible) fROM articulos_ssts a left JOIN detalle_inventario_ssts di ON  a.id=di.articulos_id GROUP BY a.id,a.descripcion,a.nombre;
+ 
 
 
 

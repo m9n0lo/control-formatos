@@ -53,6 +53,7 @@
                             <th style="text-align: center">#</th>
                             <th style="text-align: center">Articulo</th>
                             <th style="text-align: center">Descripcion</th>
+                            <th style="text-align: center">Cantidad Disponible</th>
                             <th style="text-align: center">Estado</th>
 
 
@@ -64,10 +65,23 @@
                                 <td>{{ $articulo->id }}</td>
                                 <td>{{ $articulo->nombre }}</td>
                                 <td>{{ $articulo->descripcion }}</td>
+                                @if ($articulo->total == null)
+                                <td style="color:red">Sin stock</td>
+                                @else
+                                <td>{{ $articulo->total }}</td>
+                                @endif
+
+                                @if ($articulo->total == 0)
+                                <td>
+                                    <input type="checkbox" class="estado-checkbox switch" data-id="{{ $articulo->id }}"
+                                        {{ $articulo->estado == 2 ? 'checked' : '' }}>
+                                </td>
+                                @else
                                 <td>
                                     <input type="checkbox" class="estado-checkbox switch" data-id="{{ $articulo->id }}"
                                         {{ $articulo->estado == 1 ? 'checked' : '' }}>
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Entrega_ssts;
 use App\Models\Articulos_ssts;
 use App\Models\Detalle_entrega_sst;
+use App\Models\Detalle_inventario_sst;
 use App\Models\Persona;
 use DB;
 use Illuminate\Http\Request;
@@ -84,7 +85,13 @@ class EntregaSstController extends Controller
                     'observaciones' => $request->observaciones_sst,
                 ]);
             }
-            /*  dd($request->all()); */
+
+            $articulo = Detalle_inventario_sst::find($articulo['articulos_id']);
+
+            if ($articulo->estado === '3') {
+                $articulo->estado = '1';
+                $articulo->save();
+            }
 
             DB::commit();
             return redirect()
