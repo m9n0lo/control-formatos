@@ -108,7 +108,7 @@ $(document).ready(function () {
                             "<option disabled selected>-- Seleccione Articulo --</option>" +
                             opciones +
                             "</select>",
-                        "<input type='text' name='cantidad_articulos[]'style='width: 100px' id='cantidad_articulos'class='form-control' />",
+                        "<input type='number' name='cantidad_articulos[]'style='width: 100px' id='cantidad_articulos'class='form-control' />",
                     ])
                     .draw(false);
             },
@@ -195,5 +195,34 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+
+    function validarCantidad() {
+      var articuloID = document.getElementById('articulo').value;
+      var cantidad = parseInt(document.getElementById('cantidad').value);
+
+      // Aquí podrías realizar una consulta a la base de datos para obtener la cantidad disponible
+      // para el artículo seleccionado (utilizando AJAX, por ejemplo).
+      // En este ejemplo, simularemos la consulta con datos predefinidos.
+
+      // Datos ficticios de cantidad disponible por artículo (simulando una respuesta de la base de datos)
+      var cantidadDisponible = {
+        1: 10,
+        2: 5,
+        3: 8
+      };
+
+      // Verificar si la cantidad ingresada es mayor a la cantidad disponible
+      if (cantidad > cantidadDisponible[articuloID]) {
+        alert('La cantidad ingresada supera la cantidad disponible.');
+        return false;
+      }
+
+      // La cantidad ingresada es válida
+      return true;
+    }
+
+
+
 
 

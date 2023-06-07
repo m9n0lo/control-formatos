@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreEntrega_sstRequest;
 use App\Http\Requests\UpdateEntrega_sstRequest;
 
+
 class EntregaSstController extends Controller
 {
     /**
@@ -84,19 +85,30 @@ class EntregaSstController extends Controller
                     'cantidad_entregada' => $articulo['cantidad_articulos'],
                     'observaciones' => $request->observaciones_sst,
                 ]);
-            }
+                $detalle_inventario = Detalle_inventario_sst::where('articulos_id', $articulo['articulos_id'])->first();
 
-            $articulo = Detalle_inventario_sst::find($articulo['articulos_id']);
+                if ($detalle_inventario) {
+                    $cantidad_disponible = $detalle_inventario->cantidad_disponible;
 
-            if ($articulo->estado === '3') {
-                $articulo->estado = '1';
-                $articulo->save();
+                    if ($cantidad_disponible >= $articulo['cantidad_articulos']) {
+                        $cantidad_actualizada = $cantidad_disponible - $articulo['cantidad_articulos'];
+                        $detalle_inventario->cantidad_disponible = $cantidad_actualizada;
+                        $detalle_inventario->save();
+
+                        // Verificar si la cantidad disponible llegó a cero y actualizar el estado del artículo
+                        if ($cantidad_actualizada === 0) {
+                            $articulo = Articulos_ssts::find($articulo['articulos_id']);
+                            $articulo->estado = '3';
+                            $articulo->save();
+                        }
+                    }
+                }
             }
 
             DB::commit();
             return redirect()
-            ->route('sst')
-            ->with('mensaje', '¡Articulos agregado correctamente!');
+                ->route('sst')
+                ->response()->json(['success' => 'Se realizo entrega correctamente'], 200);
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;
@@ -170,6 +182,4 @@ class EntregaSstController extends Controller
     {
         //
     }
-
-
 }
