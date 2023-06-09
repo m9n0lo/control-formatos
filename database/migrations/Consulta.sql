@@ -47,5 +47,5 @@
  SELECT a.id,a.descripcion,a.nombre, sum(di.cantidad_disponible) fROM articulos_ssts a left JOIN detalle_inventario_ssts di ON  a.id=di.articulos_id GROUP BY a.id,a.descripcion,a.nombre;
  
 
-
+ SELECT a.id,sum(di.cantidad_disponible) fROM articulos_ssts a left JOIN detalle_inventario_ssts di ON  a.id=di.articulos_id WHERE a.id= 3 GROUP BY a.id;
 

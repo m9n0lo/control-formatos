@@ -108,7 +108,7 @@ class EntregaSstController extends Controller
             DB::commit();
             return redirect()
                 ->route('sst')
-                ->response()->json(['success' => 'Se realizo entrega correctamente'], 200);
+                ->with('mensaje', '¡Articulos agregado correctamente!');
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;
@@ -147,6 +147,18 @@ class EntregaSstController extends Controller
             ->get();
 
         return $persona_art->toJson();
+    }
+
+    public function show_cantidad_d ($id){
+        //SELECT a.id,sum(di.cantidad_disponible) fROM articulos_ssts a left JOIN detalle_inventario_ssts di ON  a.id=di.articulos_id GROUP BY a.id;
+         $articulo_d = DB::table('articulos_ssts')
+         ->leftjoin('detalle_entrega_ssts','articulos_ssts.id','=','detalle_entrega_ssts.articulos_id' )
+         ->selectRaw('articulos_ssts.id as id_a,sum(detalle_entrega_ssts.cantidad_disponible) AS cantidad')
+         ->where('articulos_ssts.id' ,'=',$id)
+         ->groupBy('articulos_ssts.id')
+         ->get();
+
+         return $articulo_d->toJson();
     }
 
     /**

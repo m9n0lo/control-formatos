@@ -13,8 +13,9 @@ jQuery(document).ready(function ($) {
         closeOnSelect: true,
     });
 });
+var token = $('meta[name="csrf-token"]').attr("content");
 
-let load_sst = document.getElementById("guardar_sst");
+/* let load_sst = document.getElementById("guardar_sst");
 if (load_sst) {
     load_sst.addEventListener("click", function () {
         let funcionario = $("#persona_id_sst").val();
@@ -47,7 +48,7 @@ if (load_sst) {
             });
         }
     });
-}
+} */
 
 let boton = document.getElementById("boton_operario");
 let div = document.getElementById("div_registro");
@@ -104,12 +105,14 @@ $(document).ready(function () {
                 t.row
                     .add([
                         "<select  name='articulos_sst[]'" +
-                            "id='articulos_sst' class='form-control' style='width: 200px' >" +
+                            "id='articulos_sst' class='articulos_sst form-control' style='width: 200px' >" +
                             "<option disabled selected>-- Seleccione Articulo --</option>" +
                             opciones +
                             "</select>",
-                        "<input type='number' name='cantidad_articulos[]'style='width: 100px' id='cantidad_articulos'class='form-control' />",
+                        "<input type='number' name='cantidad_articulos[]' style='width: 100px' id='cantidad_articulos' class='cantidad_articulos form-control' onchange='Validation(this)' />",
+                        "<p class='mensaje'></p>",
                     ])
+
                     .draw(false);
             },
             error: function (xhr, status, error) {
@@ -117,6 +120,7 @@ $(document).ready(function () {
             },
         });
     });
+
     $("#addRow").click();
 
     $("#removeRow").on("click", function () {
@@ -131,98 +135,102 @@ $(document).ready(function () {
 
     $("#removeRow").click();
 
-    /*  $("#addRQS").on("click", function () {
-        console.log(informacionCampo);
-    }); */
     $("#addRQS").click();
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-    let cargar_i_p = document.getElementById("boton_operario");
-    let tabla_historial = document.getElementById("tabla_e_sst_p");
+    document.addEventListener("DOMContentLoaded", function () {
+        let cargar_i_p = document.getElementById("boton_operario");
+        let tabla_historial = document.getElementById("tabla_e_sst_p");
 
-    var dataTable = null;
-    if (cargar_i_p) {
-        cargar_i_p.addEventListener("click", function () {
-            var id = $("#persona_id_sst").val();
-            // Realizar la solicitud AJAX utilizando Fetch
-            fetch("/sst/select/history/" + id)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    // Actualizar la tabla DataTable con los datos obtenidos
-                    actualizarTablaDatos(data);
-                })
-                .catch(function (error) {
-                    console.error(error);
-                });
-        });
-    }
-    function actualizarTablaDatos(data) {
-        if (dataTable !== null) {
-            dataTable.clear();
-            dataTable.destroy();
+        var dataTable = null;
+        if (cargar_i_p) {
+            cargar_i_p.addEventListener("click", function () {
+                var id = $("#persona_id_sst").val();
+                // Realizar la solicitud AJAX utilizando Fetch
+                fetch("/sst/select/history/" + id)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        // Actualizar la tabla DataTable con los datos obtenidos
+                        actualizarTablaDatos(data);
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            });
         }
+        function actualizarTablaDatos(data) {
+            if (dataTable !== null) {
+                dataTable.clear();
+                dataTable.destroy();
+            }
 
-        dataTable = $(tabla_historial).DataTable({
-            autowidth: true,
-            data: data,
-            columns: [
-                { data: "nombre_funcionario" },
-                { data: "fecha_entrega" },
-                { data: "nombre" },
-                { data: "cantidad_entregada" },
-                {
-                    data: "firma",
-                    render: function (firma) {
-                        return (
-                            '<img src="' + firma + '" style="width: 12rem;"/>'
-                        );
+            dataTable = $(tabla_historial).DataTable({
+                autowidth: true,
+                data: data,
+                columns: [
+                    { data: "nombre_funcionario" },
+                    { data: "fecha_entrega" },
+                    { data: "nombre" },
+                    { data: "cantidad_entregada" },
+                    {
+                        data: "firma",
+                        render: function (firma) {
+                            return (
+                                '<img src="' +
+                                firma +
+                                '" style="width: 12rem;"/>'
+                            );
+                        },
                     },
-                },
-                {
-                    data: "firma_sgsst",
-                    render: function (firma_sgsst) {
-                        return (
-                            '<img src="' +
-                            firma_sgsst +
-                            '" style="width: 12rem;"/>'
-                        );
+                    {
+                        data: "firma_sgsst",
+                        render: function (firma_sgsst) {
+                            return (
+                                '<img src="' +
+                                firma_sgsst +
+                                '" style="width: 12rem;"/>'
+                            );
+                        },
                     },
-                },
-            ],
-        });
-    }
+                ],
+            });
+        }
+    });
 });
 
 
-    function validarCantidad() {
-      var articuloID = document.getElementById('articulo').value;
-      var cantidad = parseInt(document.getElementById('cantidad').value);
 
-      // Aquí podrías realizar una consulta a la base de datos para obtener la cantidad disponible
-      // para el artículo seleccionado (utilizando AJAX, por ejemplo).
-      // En este ejemplo, simularemos la consulta con datos predefinidos.
+function Validation(e, articuloSelect) {
+    var articuloSelect = document.getElementById('articulos_sst');
+    var row = $(this).closest("tr");
 
-      // Datos ficticios de cantidad disponible por artículo (simulando una respuesta de la base de datos)
-      var cantidadDisponible = {
-        1: 10,
-        2: 5,
-        3: 8
-      };
+    var articuloID = articuloSelect.value;
+    var cantidad = e.value;
+    console.log(articuloSelect);
+    console.log(cantidad);
+    console.log(articuloID);
 
-      // Verificar si la cantidad ingresada es mayor a la cantidad disponible
-      if (cantidad > cantidadDisponible[articuloID]) {
-        alert('La cantidad ingresada supera la cantidad disponible.');
-        return false;
-      }
+    // Realizar la consulta a la base de datos utilizando AJAX
+    $.ajax({
+        url: "/sst/articulosd/{id}",
+        type: "POST",
+        data: { articuloID: articuloID, _token: token },
+        success: function (response) {
+            var cantidadDisponible = parseInt(response);
+            console.log("prueba");
 
-      // La cantidad ingresada es válida
-      return true;
-    }
-
-
-
-
-
+            // Verificar si la cantidad ingresada es mayor a la cantidad disponible
+            if (cantidad > cantidadDisponible) {
+                row.find(".mensaje").text(
+                    "La cantidad ingresada supera la cantidad disponible."
+                );
+            } else {
+                row.find(".mensaje").text("");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}

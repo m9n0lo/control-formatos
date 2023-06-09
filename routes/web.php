@@ -87,6 +87,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         */
         Route::get('/sst/select', 'EntregaSstController@select2')->name('sst.select');
         Route::get('/sst/select/history/{id}', 'EntregaSstController@show_persona')->name('sst.show');
+        Route::post('/sst/articulosd/{id}', 'EntregaSstController@show_cantidad_d')->name('sst.show_c_d');
         Route::post('/sst/create', 'EntregaSstController@create')->name('sst.create');
         Route::get('/sst/datatable', 'EntregaSstController@datatable')->name('sst.datatable');
 

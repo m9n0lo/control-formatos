@@ -2,7 +2,7 @@
 @section('content')
     <section class="section">
         <div class="card card-spacing">
-            <form method="POST" action="{{ route('sst.create') }}" enctype="multipart/form-data" class="form-floating" onsubmit="return validarCantidad();">
+            <form method="POST" action="{{ route('sst.create') }}" enctype="multipart/form-data" class="form-floating" >
                 @csrf
                 <div class="card-title">
                     <div class="row titulo title-background"><span>Entrega de elementos de proteccion personal</span></div>
@@ -66,6 +66,7 @@
                                 </span>
                             </a>
                         </div>
+                        <p id="mensaje"></p>
                         <div class="d-flex justify-content-center">
                             <table id="tabla_articulos_sst" class="table " style="width: 100%">
                                 <thead>
