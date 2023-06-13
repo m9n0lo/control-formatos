@@ -15,7 +15,7 @@ jQuery(document).ready(function ($) {
 });
 var token = $('meta[name="csrf-token"]').attr("content");
 
-/* let load_sst = document.getElementById("guardar_sst");
+let load_sst = document.getElementById("guardar_sst");
 if (load_sst) {
     load_sst.addEventListener("click", function () {
         let funcionario = $("#persona_id_sst").val();
@@ -48,7 +48,7 @@ if (load_sst) {
             });
         }
     });
-} */
+}
 
 let boton = document.getElementById("boton_operario");
 let div = document.getElementById("div_registro");
@@ -110,7 +110,7 @@ $(document).ready(function () {
                             opciones +
                             "</select>",
                         "<input type='number' name='cantidad_articulos[]' style='width: 100px' id='cantidad_articulos' class='cantidad_articulos form-control' onchange='Validation(this)' />",
-                        "<p class='mensaje'></p>",
+
                     ])
 
                     .draw(false);
@@ -199,10 +199,8 @@ $(document).ready(function () {
     });
 });
 
-
-
 function Validation(e, articuloSelect) {
-    var articuloSelect = document.getElementById('articulos_sst');
+    var articuloSelect = document.getElementById("articulos_sst");
     var row = $(this).closest("tr");
 
     var articuloID = articuloSelect.value;
@@ -213,20 +211,22 @@ function Validation(e, articuloSelect) {
 
     // Realizar la consulta a la base de datos utilizando AJAX
     $.ajax({
-        url: "/sst/articulosd/{id}",
+        url: "/sst/articulosd/" + articuloID,
         type: "POST",
         data: { articuloID: articuloID, _token: token },
         success: function (response) {
-            var cantidadDisponible = parseInt(response);
-            console.log("prueba");
+            var parsedResponse = JSON.parse(response); // Analizar la respuesta JSON
 
-            // Verificar si la cantidad ingresada es mayor a la cantidad disponible
-            if (cantidad > cantidadDisponible) {
-                row.find(".mensaje").text(
-                    "La cantidad ingresada supera la cantidad disponible."
-                );
-            } else {
-                row.find(".mensaje").text("");
+            if (Array.isArray(parsedResponse) && parsedResponse.length > 0) {
+                var cantidadDisponible = parseInt(parsedResponse[0].cantidad);
+
+                // Verificar si la cantidad ingresada es mayor a la cantidad disponible
+                if (cantidad >= cantidadDisponible ) {
+
+                    Swal.fire('Cantidad supera el stock disponible!!')
+                } else {
+                    row.find(".mensaje").text("");
+                }
             }
         },
         error: function (xhr, status, error) {
