@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreEntrega_sstRequest;
 use App\Http\Requests\UpdateEntrega_sstRequest;
 
-
 class EntregaSstController extends Controller
 {
     /**
@@ -149,16 +148,29 @@ class EntregaSstController extends Controller
         return $persona_art->toJson();
     }
 
-    public function show_cantidad_d ($id){
+    public function show_cantidad_d($id)
+    {
         //SELECT a.id,sum(di.cantidad_disponible) fROM articulos_ssts a left JOIN detalle_inventario_ssts di ON  a.id=di.articulos_id GROUP BY a.id;
-         $articulo_d = DB::table('articulos_ssts')
-         ->leftjoin('detalle_inventario_ssts','articulos_ssts.id','=','detalle_inventario_ssts.articulos_id' )
-         ->selectRaw('sum(detalle_inventario_ssts.cantidad_disponible) AS cantidad')
-         ->where('articulos_ssts.id' ,'=',$id)
-         ->groupBy('articulos_ssts.id')
-         ->get();
+        $articulo_d = DB::table('articulos_ssts')
+            ->leftjoin('detalle_inventario_ssts', 'articulos_ssts.id', '=', 'detalle_inventario_ssts.articulos_id')
+            ->selectRaw('sum(detalle_inventario_ssts.cantidad_disponible) AS cantidad')
+            ->where('articulos_ssts.id', '=', $id)
+            ->groupBy('articulos_ssts.id')
+            ->get();
 
-         return $articulo_d->toJson();
+        return $articulo_d->toJson();
+    }
+    public function show_cantidad_d_a($id)
+    {
+        //SELECT a.id,sum(di.cantidad_disponible) fROM articulos_ssts a left JOIN detalle_inventario_ssts di ON  a.id=di.articulos_id GROUP BY a.id;
+        $articulo_d_a = DB::table('articulos_ssts')
+            ->leftjoin('detalle_inventario_ssts', 'articulos_ssts.id', '=', 'detalle_inventario_ssts.articulos_id')
+            ->selectRaw('COALESCE(SUM(detalle_inventario_ssts.cantidad_disponible), 0) AS cantidad')
+            ->where('articulos_ssts.id', '=', $id)
+            ->groupBy('articulos_ssts.id')
+            ->first();
+
+        return $articulo_d_a->cantidad;
     }
 
     /**

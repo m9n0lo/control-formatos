@@ -66,21 +66,25 @@
                                 <td>{{ $articulo->nombre }}</td>
                                 <td>{{ $articulo->descripcion }}</td>
                                 @if ($articulo->total == null)
-                                <td style="color:red">Sin stock</td>
+                                    <td style="color:red">Sin stock</td>
                                 @else
-                                <td>{{ $articulo->total }}</td>
+                                    @if ($articulo->total <= 20)
+                                        <td style="color:orange">{{ $articulo->total }}</td>
+                                    @else
+                                        <td style="color:rgb(51, 168, 51)">{{ $articulo->total }}</td>
+                                    @endif
                                 @endif
 
                                 @if ($articulo->total == 0)
-                                <td>
-                                    <input type="checkbox" class="estado-checkbox switch" data-id="{{ $articulo->id }}"
-                                        {{ $articulo->estado == 2 ? 'checked' : '' }}>
-                                </td>
+                                    <td>
+                                        <input type="checkbox" class="estado-checkbox switch" data-id="{{ $articulo->id }}"
+                                            {{ $articulo->estado == 2 ? '!checked' : '' }}>
+                                    </td>
                                 @else
-                                <td>
-                                    <input type="checkbox" class="estado-checkbox switch" data-id="{{ $articulo->id }}"
-                                        {{ $articulo->estado == 1 ? 'checked' : '' }}>
-                                </td>
+                                    <td>
+                                        <input type="checkbox" class="estado-checkbox switch" data-id="{{ $articulo->id }}"
+                                            {{ $articulo->estado == 1 ? 'checked' : '' }}>
+                                    </td>
                                 @endif
                             </tr>
                         @endforeach

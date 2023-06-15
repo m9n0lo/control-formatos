@@ -18,12 +18,14 @@ class ArticulosSstController extends Controller
         //SELECT a.nombre, sum(di.cantidad_disponible) FROM articulos_ssts a JOIN detalle_inventario_ssts di
         //ON  a.id=di.articulos_id GROUP BY a.nombre;
         $articulos = DB::table('articulos_ssts')
-                        ->leftjoin('detalle_inventario_ssts','articulos_ssts.id','=','detalle_inventario_ssts.articulos_id')
-                        ->selectRaw('articulos_ssts.nombre, sum(detalle_inventario_ssts.cantidad_disponible) AS total , articulos_ssts.id ,articulos_ssts.descripcion,articulos_ssts.estado')
-                        ->groupBy('articulos_ssts.nombre','articulos_ssts.id','articulos_ssts.descripcion','articulos_ssts.estado')
-                        ->get();
+            ->leftjoin('detalle_inventario_ssts', 'articulos_ssts.id', '=', 'detalle_inventario_ssts.articulos_id')
+            ->selectRaw('articulos_ssts.nombre, sum(detalle_inventario_ssts.cantidad_disponible) AS total , articulos_ssts.id ,articulos_ssts.descripcion,articulos_ssts.estado')
+            ->groupBy('articulos_ssts.nombre', 'articulos_ssts.id', 'articulos_ssts.descripcion', 'articulos_ssts.estado')
+            ->get();
 
-        return view('menu.SST.articulos_sst', compact('articulos'));
+
+
+         return view('menu.SST.articulos_sst', compact('articulos'));
     }
 
     /**
@@ -33,7 +35,6 @@ class ArticulosSstController extends Controller
      */
     public function create(Request $request)
     {
-
         $entrega = Articulos_ssts::create([
             'nombre' => $request->nombre_a_sst,
             'descripcion' => $request->descripcion_a_sst,

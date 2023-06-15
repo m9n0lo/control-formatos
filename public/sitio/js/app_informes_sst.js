@@ -169,7 +169,7 @@ function grafico_informe2(data) {
 
 $(document).ready(function () {
     $("#boton_i3").click(function () {
-        var empresa_id = $("#epresa_id").val();
+        var empresa_id = $("#empresa_id").val();
         var fechaInicial3 = $("#fecha_inicial_i3").val();
         var fechaFinal3 = $("#fecha_final_i3").val();
 

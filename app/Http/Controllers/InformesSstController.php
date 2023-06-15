@@ -92,6 +92,7 @@ class InformesSstController extends Controller
        /*  SELECT  a.nombre, SUM(de.cantidad_entregada) AS cantidad FROM personas p join entrega_ssts e ON p.id=e.persona_id join
         detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id
         WHERE p.empresa LIKE '%BPACK S.A.S%' GROUP BY p.nombre_funcionario, a.nombre ; */
+
         $fecha_inicial3 = $request->input('fecha_inicial_i3');
         $fecha_final3 = $request->input('fecha_final_i3');
         $empresa = $request->input('empresa_id');

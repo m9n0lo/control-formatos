@@ -221,7 +221,7 @@ function Validation(e, articuloSelect) {
                 var cantidadDisponible = parseInt(parsedResponse[0].cantidad);
 
                 // Verificar si la cantidad ingresada es mayor a la cantidad disponible
-                if (cantidad >= cantidadDisponible ) {
+                if (cantidad > cantidadDisponible ) {
 
                     Swal.fire('Cantidad supera el stock disponible!!')
                 } else {
