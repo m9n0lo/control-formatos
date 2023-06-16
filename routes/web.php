@@ -106,6 +106,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/sst/informes/informe1', 'InformesSstController@show_informe_1')->name('informes.taesst');
         Route::post('/sst/informes/informe2', 'InformesSstController@show_informe_2')->name('informes.capsst');
         Route::post('/sst/informes/informe3', 'InformesSstController@show_informe_3')->name('informes.caesst');
+        Route::post('/sst/informes/informe4', 'InformesSstController@show_informe_4')->name('informes.cavsst');
 
 
         /*

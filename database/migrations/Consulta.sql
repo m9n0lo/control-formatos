@@ -40,14 +40,32 @@
 
 
 -- Consulta cantidad de articulos total entregados a todas las personas de dicha sede
-SELECT  a.nombre, SUM(de.cantidad_entregada) AS cantidad FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id  GROUP BY a.nombre ;
+-- SELECT  a.nombre, SUM(de.cantidad_entregada) AS cantidad FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id  GROUP BY a.nombre ;
 
 -- Consulta la cantidad disponible actual de cada articulo
 
- SELECT a.id,a.descripcion,a.nombre, sum(di.cantidad_disponible) fROM articulos_ssts a left JOIN detalle_inventario_ssts di ON  a.id=di.articulos_id GROUP BY a.id,a.descripcion,a.nombre;
+--  SELECT a.id,a.descripcion,a.nombre, sum(di.cantidad_disponible) fROM articulos_ssts a left JOIN detalle_inventario_ssts di ON  a.id=di.articulos_id GROUP BY a.id,a.descripcion,a.nombre;
+--  
+-- 
+--  SELECT sum(di.cantidad_disponible) fROM articulos_ssts a left JOIN detalle_inventario_ssts di ON  a.id=di.articulos_id WHERE a.id= 3 GROUP BY a.id;
+-- 
+-- 
+-- SELECT a.nombre, sum(di.cantidad_disponible) FROM articulos_ssts a JOIN detalle_inventario_ssts di ON  a.id=di.articulos_id GROUP BY a.nombre;
+
+-- Consulta total de articulos X entregados por sede en una fecha X de rango
+-- SELECT p.empresa, SUM(de.cantidad_entregada) AS cantidad FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id WHERE a.id = 1 and  e.fecha_entrega  BETWEEN '2022-05-25' AND '2023-06-25' GROUP BY p.empresa  ;
+-- 
+
+-- Consulta total articulos X disponible por sede en una fecha X de rango
  
+-- SELECT p.empresa, SUM(di.cantidad_disponible) AS cantidad FROM personas p join entrega_ssts e ON p.id=e.persona_id join detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id GROUP BY p.nombre_funcionario, a.nombre;
 
- SELECT sum(di.cantidad_disponible) fROM articulos_ssts a left JOIN detalle_inventario_ssts di ON  a.id=di.articulos_id WHERE a.id= 3 GROUP BY a.id;
-
-
-SELECT a.nombre, sum(di.cantidad_disponible) FROM articulos_ssts a JOIN detalle_inventario_ssts di ON  a.id=di.articulos_id GROUP BY a.nombre;
+SELECT p.empresa, SUM(di.cantidad_disponible) AS total_disponible, SUM(de.cantidad_entregada) AS total_entregado
+FROM detalle_inventario_ssts di
+JOIN articulos_ssts a ON di.articulos_id = a.id
+JOIN inventarios_ssts inv ON di.inventario_id = inv.id
+JOIN entrega_ssts e ON di.articulos_id = e.id
+JOIN personas p ON e.persona_id = p.id
+LEFT JOIN detalle_entrega_ssts de ON de.articulos_id = di.articulos_id
+WHERE a.id =3
+GROUP BY p.empresa;

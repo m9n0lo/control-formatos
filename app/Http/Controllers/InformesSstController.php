@@ -123,6 +123,42 @@ class InformesSstController extends Controller
 
         return response()->json($valores);
     }
+    public function show_informe_4(Request $request){
+        // Consulta cantidad de articulos total entregados a todas las personas de dicha sede
+       /*  SELECT  a.nombre, SUM(de.cantidad_entregada) AS cantidad FROM personas p join entrega_ssts e ON p.id=e.persona_id join
+        detalle_entrega_ssts de ON e.id=de.entregas_id JOIN articulos_ssts a ON de.articulos_id=a.id
+        WHERE p.empresa LIKE '%BPACK S.A.S%' GROUP BY p.nombre_funcionario, a.nombre ; */
+
+        $fecha_inicial3 = $request->input('fecha_inicial_i3');
+        $fecha_final3 = $request->input('fecha_final_i3');
+        $empresa = $request->input('empresa_id');
+
+        $consulta = DB::table('personas')
+        ->join('entrega_ssts', 'personas.id', '=', 'entrega_ssts.persona_id')
+        ->join('detalle_entrega_ssts', 'entrega_ssts.id', '=', 'detalle_entrega_ssts.entregas_id')
+        ->join('articulos_ssts', 'detalle_entrega_ssts.articulos_id', '=', 'articulos_ssts.id')
+        ->selectRaw('articulos_ssts.nombre as nombre,sum(detalle_entrega_ssts.cantidad_entregada) AS cantidad')
+        ->groupBy('articulos_ssts.nombre');
+
+        if ($empresa) {
+            $consulta->where('personas.empresa', 'LIKE', $empresa);
+        }
+
+        if ($fecha_inicial3 && $fecha_final3) {
+            $consulta->whereBetween('entrega_ssts.fecha_entrega', [$fecha_inicial3, $fecha_final3]);
+        }
+
+        $informe_c_a_e_sst = $consulta->get();
+
+
+        $valores = [];
+
+        foreach ($informe_c_a_e_sst as $caesst) {
+            $valores[] = ['name' => $caesst->nombre, 'y' => $caesst->cantidad];
+        }
+
+        return response()->json($valores);
+    }
 
     /**
      * Display the specified resource.

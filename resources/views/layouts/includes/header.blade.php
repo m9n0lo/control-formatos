@@ -45,6 +45,9 @@
 
     {{-- Importar highcharts --}}
     <script src="{{ asset('sitio/js/highcharts.js') }}"></script>
+    <script src="{{ asset('sitio/js/export-data.js') }}"></script>
+    <script src="{{ asset('sitio/js/exporting.js') }}"></script>
+    <script src="{{ asset('sitio/js/accessibility.js') }}"></script>
 
 
 

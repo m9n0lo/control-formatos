@@ -3,10 +3,16 @@ jQuery(document).ready(function ($) {
         closeOnSelect: true,
     });
 });
+jQuery(document).ready(function ($) {
+    $("#empresa_id4").select2({
+        closeOnSelect: true,
+    });
+});
 
 let div_i1 = document.getElementById("informe_1");
 let div_i2 = document.getElementById("informe_2");
 let div_i3 = document.getElementById("informe_3");
+let div_i4 = document.getElementById("informe_4");
 
 var prueba = document.getElementById("persona_id");
 if(prueba){
@@ -238,3 +244,83 @@ function grafico_informe3(data) {
         ],
     });
 }
+
+$(document).ready(function () {
+    $("#boton_i4").click(function () {
+        var empresa_id4 = $("#empresa_id4").val();
+        var fechaInicial4 = $("#fecha_inicial_i4").val();
+        var fechaFinal4 = $("#fecha_final_i4").val();
+
+
+        // Envía la solicitud AJAX
+        $.ajax({
+            url: "/sst/informes/informe4", // Reemplaza esto con la ruta correcta a tu controlador
+            method: "POST",
+            data: {
+                persona_id4: empresa_id4,
+                fecha_inicial_i4: fechaInicial4,
+                fecha_final_i4: fechaFinal4,
+                _token: token,
+            },
+            success: function (data) {
+                // Maneja la respuesta del servidor
+                div_i4.removeAttribute("hidden");
+                grafico_informe4(data);
+                // Aquí puedes utilizar la variable 'data' para mostrar el gráfico
+            },
+            error: function (xhr) {
+                // Maneja los errores de la solicitud AJAX
+                console.log(xhr.responseText);
+            },
+        });
+    });
+});
+
+function grafico_informe4(data){
+    Highcharts.chart('informe_4', {
+
+        chart: {
+            type: 'column'
+        },
+
+        title: {
+            text: 'Disponible VS Entregado',
+            align: 'left'
+        },
+
+        xAxis: {
+            categories: ['Bpack', 'Toncacipa', 'Barranquilla','Medellin']
+        },
+
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: 'Count medals'
+            }
+        },
+
+        tooltip: {
+            format: '<b>{key}</b><br/>{series.name}: {y}<br/>' +
+                'Total: {point.stackTotal}'
+        },
+
+        plotOptions: {
+            column: {
+                stacking: 'normal'
+            }
+        },
+
+        series: [{
+            name: 'Disponible',
+            data: [148, 133, 124,25],
+            stack: 'Europe'
+        }, {
+            name: 'Entregado',
+            data: [102, 98, 65,60],
+            stack: 'Europe'
+        }]
+    });
+
+}
+
