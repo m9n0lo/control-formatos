@@ -96,6 +96,30 @@ class ComprasController extends Controller
         $user_id = auth()->id();
         $logDate = Carbon::now()->setTimezone('America/Bogota');
 
+        $compra = Compras::create([
+            'area' => $request->area,
+            'solicitado_por' => $user_id,
+            'fecha_elaboracion' => $logDate->format('Y-m-d H:i:s'),
+            'jefe_inmediato' => $request->persona_id,
+            'fecha_solicitud' => $logDate->format('Y-m-d H:i:s'),
+            'fecha_esperada' => date('Y-m-d H:i:s', strtotime($request->fecha_esperada)),
+            'tipo_solicitud' => $request->tipo_solicitud,
+            'sede' => $request->sede,
+            'razon_social' => $request->razon_social,
+            'correo_electronico' => $request->correo_contacto,
+            'telefono_contacto' => $request->telefono_contacto,
+            'servicios' => json_encode($datos),
+            'cotizacion1' => $cotizacion1,
+            'cotizacion2' => $cotizacion2,
+            'cotizacion3' => $cotizacion3,
+            'detalle_solicitud' => $request->detalle_solicitud,
+            'costo_estimado' => $request->costo_estimado,
+            'costo_aprobado' => 0,
+            'estado_gestion' => 1,
+            'estado' => 1,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
 
 
         $id = $compra->id;

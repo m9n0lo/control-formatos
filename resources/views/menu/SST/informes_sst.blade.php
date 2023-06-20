@@ -161,7 +161,7 @@
                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-3">
                         <select class="js-example-basic-single" class="form-control" name="empresa_id4" id="empresa_id4"
                             required>
-                            <option value="" disabled selected>-- Seleccione Funcionario --</option>
+                            <option value="" disabled selected>-- Seleccione Articulo --</option>
                             @foreach ($array as $jef)
                                 <option value="{{ $jef }}">{{ $jef }}</option>
                             @endforeach

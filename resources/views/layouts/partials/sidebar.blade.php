@@ -56,18 +56,36 @@
                  <a class="dropdown-item" href="{{ route('sst.articulos') }}">Articulos SST</a>
              </li>
              <li class="dropdown-item">
-                <a class="dropdown-item" href="{{ route('sst.dashboard') }}">Dashboard SST</a>
-            </li>
+                 <a class="dropdown-item" href="{{ route('sst.dashboard') }}">Dashboard SST</a>
+             </li>
              <li class="dropdown-item">
-                <a class="dropdown-item" href="{{ route('sst.informes') }}">Informes SST</a>
-            </li>
+                 <a class="dropdown-item" href="{{ route('sst.informes') }}">Informes SST</a>
+             </li>
              <li class="dropdown-item">
-                <a class="dropdown-item" href="{{ route('sst.inventarios') }}">Inventarios SST</a>
-            </li>
+                 <a class="dropdown-item" href="{{ route('sst.inventarios') }}">Inventarios SST</a>
+             </li>
 
          </ul>
      </li>
 
+     <li>
+        <a class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+             aria-expanded="false">
+             <i class="fa-solid fa-shop fa-xl"></i>
+             <span class="nav-text">
+                 TIC
+             </span>
+         </a>
+         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+
+             <li class="dropdown-item">
+                 <a class="dropdown-item" href="{{ route('sst.articulos') }}">Entregas SIESA</a>
+             </li>
+             <li class="dropdown-item">
+                 <a class="dropdown-item" href="{{ route('sst.dashboard') }}">Pendientes SIESA</a>
+             </li>
+         </ul>
+     </li>
 
 
  </ul>
