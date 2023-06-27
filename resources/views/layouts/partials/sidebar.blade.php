@@ -79,10 +79,10 @@
          <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 
              <li class="dropdown-item">
-                 <a class="dropdown-item" href="{{ route('sst.articulos') }}">Entregas SIESA</a>
+                 <a class="dropdown-item" href="{{ route('erp.entregas') }}">Entregas SIESA</a>
              </li>
              <li class="dropdown-item">
-                 <a class="dropdown-item" href="{{ route('sst.dashboard') }}">Pendientes SIESA</a>
+                 <a class="dropdown-item" href="{{ route('erp.pendientes') }}">Pendientes SIESA</a>
              </li>
          </ul>
      </li>

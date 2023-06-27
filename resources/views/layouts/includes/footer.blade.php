@@ -26,3 +26,4 @@
 
 {{-- Importacion SweetAlert2 --}}
 <script src="{{ asset('sitio/js/sweetalert.min.js') }}"></script>
+

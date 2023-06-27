@@ -20,9 +20,8 @@ return new class extends Migration
             $table->string('citada_por')->nullable();
             $table->string('moderador')->nullable();
             $table->string('secretario')->nullable();
-            $table->date('fecha')->nullable();
-            $table->string('hora_inicio')->nullable();
-            $table->string('hora_fin')->nullable();
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_fin')->nullable();
             $table->string('lugar')->nullable();
             $table->json('participantes')->nullable(); // N° - Nombre - Cargo - Firma
             $table->string('punto_discusion')->nullable();

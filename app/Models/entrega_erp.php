@@ -15,9 +15,8 @@ class entrega_erp extends Model
         'citada_por',
         'moderador',
         'secretario',
-        'fecha',
-        'hora_inicio',
-        'hora_fin',
+        'fecha_inicio',
+        'fecha_fin',
         'lugar',
         'participantes', // N° - Nombre - Cargo - Firma
         'punto_discusion',

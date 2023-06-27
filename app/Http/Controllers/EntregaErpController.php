@@ -15,7 +15,7 @@ class EntregaErpController extends Controller
      */
     public function index()
     {
-        //
+        return view('menu.TIC.Entrega_ERP');
     }
 
     /**

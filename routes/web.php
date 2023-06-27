@@ -7,6 +7,7 @@ use App\Http\Controllers\EntregaSstController;
 use App\Http\Controllers\ArticulosSstController;
 use App\Http\Controllers\InformesSstController;
 use App\Http\Controllers\InventariosSstController;
+use App\Http\Controllers\EntregaErpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/inventario_sst/dashboard', 'InventariosSstController@dashboard')->name('sst.dashboard');
         Route::get('/sst/informes', 'InformesSstController@index')->name('sst.informes');
         Route::get('/sst/inventarios', 'InventariosSstController@index')->name('sst.inventarios');
+        Route::get('/erp/entregas', 'EntregaErpController@index')->name('erp.entregas');
+        Route::get('/erp/pendientes', 'EntregaErpController@index')->name('erp.pendientes');
 
 
         /**
@@ -114,6 +117,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         */
         Route::post('/sst/inventarios/guardar', 'InventariosSstController@GuardarInventarioSst')->name('sst.guardar_inventarios');
         Route::get('/sst/inventarios/datatable', 'InventariosSstController@datatable_i')->name('sst.data_i');
+
+        /*
+        * Routes Entregas ERP
+        */
+
 
 
 
