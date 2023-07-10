@@ -17,6 +17,7 @@
 <script src="{{ asset('sitio/js/app_art_sst.js') }}"></script>
 <script src="{{ asset('sitio/js/app_informes_sst.js') }}"></script>
 <script src="{{ asset('sitio/js/app_inventario_sst.js') }}"></script>
+<script src="{{ asset('sitio/js/app_e_erp_tic.js') }}"></script>
 
 
 

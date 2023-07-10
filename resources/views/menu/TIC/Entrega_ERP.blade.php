@@ -51,11 +51,11 @@
                 <br>
 
                 <div class="d-flex justify-content-end" style="width: 90%">
-                    <a type="submit" type="button" id="addRow"class="btn btn-success" style="margin-bottom: 3px">
+                    <a type="submit" type="button" id="addRow_part_erp"class="btn btn-success" style="margin-bottom: 3px">
                         <i class="fa-sharp fa-solid fa-circle-plus fa-lg"></i>
 
                     </a>
-                    <a type="submit" type="button" id="removeRow"class="btn btn-danger" style="margin-bottom: 3px">
+                    <a type="submit" type="button" id="removeRow_part_erp"class="btn btn-danger" style="margin-bottom: 3px">
                         <i class="fa-sharp fa-solid fa-circle-minus fa-lg"></i>
 
                     </a>
@@ -69,7 +69,6 @@
 
                                 <th style="text-align: center">No.</th>
                                 <th style="text-align: center">Nombre</th>
-                                <th style="text-align: center">Cargo</th>
                                 <th style="text-align: center">Firma</th>
 
                             </tr>
@@ -100,18 +99,18 @@
                 <br>
 
                 <div class="d-flex justify-content-end" style="width: 90%">
-                    <a type="submit" type="button" id="addRow"class="btn btn-success" style="margin-bottom: 3px">
+                    <a type="submit" type="button" id="addRow_tareas_erp"class="btn btn-success" style="margin-bottom: 3px">
                         <i class="fa-sharp fa-solid fa-circle-plus fa-lg"></i>
 
                     </a>
-                    <a type="submit" type="button" id="removeRow"class="btn btn-danger" style="margin-bottom: 3px">
+                    <a type="submit" type="button" id="removeRow_tareas_erp"class="btn btn-danger" style="margin-bottom: 3px">
                         <i class="fa-sharp fa-solid fa-circle-minus fa-lg"></i>
 
                     </a>
                 </div>
                 <div class="d-flex justify-content-center">
 
-                    <table id="tabla_participantes_erp" class="table " style="width: 80%">
+                    <table id="tabla_tareas_erp" class="table " style="width: 80%">
                         <thead>
                             <tr>
 

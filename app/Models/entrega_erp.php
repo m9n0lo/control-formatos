@@ -13,8 +13,8 @@ class entrega_erp extends Model
         'usuario',
         'proceso',
         'citada_por',
-        'moderador',
-        'secretario',
+        /* 'moderador', */
+        /* 'secretario', */
         'fecha_inicio',
         'fecha_fin',
         'lugar',

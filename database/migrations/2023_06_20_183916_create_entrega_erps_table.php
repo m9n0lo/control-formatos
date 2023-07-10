@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('usuario'); //persona logeada
             $table->string('proceso')->nullable();
             $table->string('citada_por')->nullable();
-            $table->string('moderador')->nullable();
-            $table->string('secretario')->nullable();
+            /* $table->string('moderador')->nullable(); */
+            /* $table->string('secretario')->nullable(); */
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
             $table->string('lugar')->nullable();
